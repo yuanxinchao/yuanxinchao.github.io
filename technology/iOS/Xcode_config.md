@@ -1,4 +1,4 @@
-####删除Xcode中多余的证书provisioning profile
+####1. 删除Xcode中多余的证书provisioning profile
 >手动删除
 >
 
