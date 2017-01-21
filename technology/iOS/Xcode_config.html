@@ -5,7 +5,7 @@
 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>index</title>
+<title>Xcode_config</title>
 
 
 <style type="text/css">
@@ -328,56 +328,34 @@ kbd {
 
 <body>
 
-<h2 id="toc_0">我的学习笔记</h2>
-
-<h5 id="toc_1">有关github的都在这</h5>
+<h4 id="toc_0">1. 删除Xcode中多余的证书provisioning profile</h4>
 
 <blockquote>
-<ul>
-<li><a href="./technology/git/gitcommandsummary.html">git的命令学习</a></li>
-<li><a href="">fork分支的操作</a></li>
-</ul>
+<p>手动删除</p>
 </blockquote>
 
-<hr>
+<p>xcode5 provisioning profile path： ~/Library/MobileDevice/Provisioning Profiles</p>
 
-<h5 id="toc_2">有关C#的都在这</h5>
+<h4 id="toc_1">2.  LSApplicationQueriesSchemes</h4>
 
 <blockquote>
-<ul>
-<li><a href="">c#截图</a></li>
-</ul>
+<p>iOS9之后对于<strong>canOpenURL</strong>方法会去搜索info.plist里key为LSApplicationQueriesSchemes的可跳转白名单。如果没有声明的话这个方法会返回NO。</p>
 </blockquote>
 
-<hr>
-
-<h5 id="toc_3">有关iOS的都在这</h5>
+<p>Apple官网的说法:</p>
 
 <blockquote>
-<ul>
-<li><a href="./technology/iOS/App_loaderError.html">😅提交Application Loader遇到的错误</a></li>
-<li><a href="">😜Object-C语法相关</a></li>
-<li><a href="./technology/iOS/MacFastKey.html">😱Mac快捷键</a></li>
-<li><a href="./technology/iOS/MarkdownFastKey.html">😉MarkDown快捷键</a></li>
-<li><a href="./technology/iOS/SDK_Applovin.html">😮Applovin的SDK</a></li>
-<li><a href="./technology/iOS/SDK_Gamecenter.html">😖Gamecenter的SDK</a></li>
-<li><a href="./technology/iOS/SDK_Heyzap.html">😑Heyzap的SDK</a></li>
-<li><a href="./technology/iOS/SDK_Inmobi.html">😆Inmobi的SDK</a></li>
-<li><a href="./technology/iOS/SDK_Um_Analyze.html">🤒友盟统计的SDK</a></li>
-<li><a href="./technology/iOS/SDK_XiaoFun.html">🙀评价App获取硬件信息</a></li>
-<li><a href="./technology/iOS/Xcode_config.html">👊🏻Xcode配置相关</a></li>
-</ul>
+<p>If your app is linked on or after iOS 9.0, you must declare the URL schemes you want to pass to this method. Do this by using the LSApplicationQueriesSchemes array in your Xcode project’s Info.plist file. For each URL scheme you want your app to use with this method, add it as a string in this array.</p>
+
+<p><strong>If your (iOS 9.0 or later) app calls this method using a scheme you have not declared, the method returns NO,</strong> whether or not an appropriate app for the scheme is installed on the device.</p>
+
+<p>If your app is linked against an earlier version of iOS but is running in iOS 9.0 or later, you can call this method on <strong>50</strong> distinct URL schemes. After hitting this limit, subsequent calls to this method return NO. If a user reinstalls or upgrades the app, iOS resets the limit.</p>
+
+<p>Unlike this method, <strong>the openURL: method is not constrained by the LSApplicationQueriesSchemes requirement</strong>: If an app that handles a scheme is installed on the device, the openURL: method works, whether or not you have declared the scheme.
+iOS 9 brings some changes regarding of canOpenURL: in UIApplication class.</p>
 </blockquote>
 
-<hr>
-
-<h5 id="toc_4">有关android的都在这</h5>
-
-<hr>
-
-<h5 id="toc_5">有关unity的都在这</h5>
-
-<hr>
+<p>值得一提的事openURL不会受此限制。</p>
 
 
 

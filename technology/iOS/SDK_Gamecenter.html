@@ -5,7 +5,7 @@
 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>index</title>
+<title>SDK_Gamecenter</title>
 
 
 <style type="text/css">
@@ -328,56 +328,33 @@ kbd {
 
 <body>
 
-<h2 id="toc_0">我的学习笔记</h2>
+<h4 id="toc_0">unity里接入GameCenter</h4>
 
-<h5 id="toc_1">有关github的都在这</h5>
-
-<blockquote>
-<ul>
-<li><a href="./technology/git/gitcommandsummary.html">git的命令学习</a></li>
-<li><a href="">fork分支的操作</a></li>
-</ul>
-</blockquote>
-
-<hr>
-
-<h5 id="toc_2">有关C#的都在这</h5>
+<p>unity的API里集成Game Center，所以直接在unity里调用就行了。
+这里说一下后台的申请。  </p>
 
 <blockquote>
-<ul>
-<li><a href="">c#截图</a></li>
-</ul>
+<p>先申请好app，然后到iTunes connect对应App里。<br>
+功能-&gt;Game Center-&gt;排行榜 点击后面的加号。  </p>
 </blockquote>
 
-<hr>
-
-<h5 id="toc_3">有关iOS的都在这</h5>
+<p><img src="./SDK/Gamecenter1.png" alt="Gamecenter"><br>
+需要注意，这里的排行榜ID在游戏中提交分数时需要用到。<br>
+<img src="./SDK/Gamecenter2.png" alt="Gamecenter"><br>
+弄好之后就可以在游戏中添加代码了。  </p>
 
 <blockquote>
-<ul>
-<li><a href="./technology/iOS/App_loaderError.html">😅提交Application Loader遇到的错误</a></li>
-<li><a href="">😜Object-C语法相关</a></li>
-<li><a href="./technology/iOS/MacFastKey.html">😱Mac快捷键</a></li>
-<li><a href="./technology/iOS/MarkdownFastKey.html">😉MarkDown快捷键</a></li>
-<li><a href="./technology/iOS/SDK_Applovin.html">😮Applovin的SDK</a></li>
-<li><a href="./technology/iOS/SDK_Gamecenter.html">😖Gamecenter的SDK</a></li>
-<li><a href="./technology/iOS/SDK_Heyzap.html">😑Heyzap的SDK</a></li>
-<li><a href="./technology/iOS/SDK_Inmobi.html">😆Inmobi的SDK</a></li>
-<li><a href="./technology/iOS/SDK_Um_Analyze.html">🤒友盟统计的SDK</a></li>
-<li><a href="./technology/iOS/SDK_XiaoFun.html">🙀评价App获取硬件信息</a></li>
-<li><a href="./technology/iOS/Xcode_config.html">👊🏻Xcode配置相关</a></li>
-</ul>
+<p>1.初始化Game Center<br>
+<code>GameCenterManager.GetInstance ().Start ();</code><br>
+2.提交分数<br>
+<code>GameCenterManager.GetInstance ().ReportScore (&quot;zongfen&quot;,100);</code><br>
+<strong>到时候记得更改你对应的排行榜ID(zongfen)和分数(100)。</strong><br>
+3.展示排行榜<br>
+<code>GameCenterManager.GetInstance ().ShowLeaderboard ();</code>  </p>
 </blockquote>
 
-<hr>
-
-<h5 id="toc_4">有关android的都在这</h5>
-
-<hr>
-
-<h5 id="toc_5">有关unity的都在这</h5>
-
-<hr>
+<p>是不是非常简单，什么？你找不到GameCenterManager类，这里这里，拿去拿去。<br>
+<a href="./SDK/GameCenterManager.cs">GameCenterManager.cs</a></p>
 
 
 

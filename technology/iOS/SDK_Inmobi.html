@@ -5,7 +5,7 @@
 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>index</title>
+<title>SDK_Inmobi</title>
 
 
 <style type="text/css">
@@ -328,56 +328,50 @@ kbd {
 
 <body>
 
-<h2 id="toc_0">我的学习笔记</h2>
+<h4 id="toc_0">今天需要接入imobi</h4>
 
-<h5 id="toc_1">有关github的都在这</h5>
-
-<blockquote>
-<ul>
-<li><a href="./technology/git/gitcommandsummary.html">git的命令学习</a></li>
-<li><a href="">fork分支的操作</a></li>
-</ul>
-</blockquote>
-
-<hr>
-
-<h5 id="toc_2">有关C#的都在这</h5>
+<p>InMobi于2007年在印度班加罗尔（Bangalore）成立，有提供banner，插屏，视频和原生广告的变现方式。话不多说，现在开始接入。</p>
 
 <blockquote>
-<ul>
-<li><a href="">c#截图</a></li>
-</ul>
+<p>我下的版本是<br>
+<code>InMobiAdsUnityPlugin_SDK6xx.unitypackage</code><br>
+戳<a href="https://www.dropbox.com/s/d8mexrgd11t25j3/InMobiAdsUnityPlugin_SDK6xx.unitypackage?dl=0">这里</a>下载<br>
+<a href="https://support.inmobi.com/monetize/partner-platforms-guidelines/unity/">官网接入指引</a>  </p>
 </blockquote>
 
-<hr>
-
-<h5 id="toc_3">有关iOS的都在这</h5>
+<p>先导包<br>
+<img src="./SDK/inmobi1.png" alt="imobi1"><br>
+可以将android有关的取消勾选再导入，也可以全部导入。<br>
+另外里面有<strong>Editor</strong>和<strong>XCodeEditor</strong>两个文件夹是用来快速打包的，会在build Xcode工程后为xcode工程添加依赖修改配置等。  </p>
 
 <blockquote>
-<ul>
-<li><a href="./technology/iOS/App_loaderError.html">😅提交Application Loader遇到的错误</a></li>
-<li><a href="">😜Object-C语法相关</a></li>
-<li><a href="./technology/iOS/MacFastKey.html">😱Mac快捷键</a></li>
-<li><a href="./technology/iOS/MarkdownFastKey.html">😉MarkDown快捷键</a></li>
-<li><a href="./technology/iOS/SDK_Applovin.html">😮Applovin的SDK</a></li>
-<li><a href="./technology/iOS/SDK_Gamecenter.html">😖Gamecenter的SDK</a></li>
-<li><a href="./technology/iOS/SDK_Heyzap.html">😑Heyzap的SDK</a></li>
-<li><a href="./technology/iOS/SDK_Inmobi.html">😆Inmobi的SDK</a></li>
-<li><a href="./technology/iOS/SDK_Um_Analyze.html">🤒友盟统计的SDK</a></li>
-<li><a href="./technology/iOS/SDK_XiaoFun.html">🙀评价App获取硬件信息</a></li>
-<li><a href="./technology/iOS/Xcode_config.html">👊🏻Xcode配置相关</a></li>
-</ul>
+<p>1.如果没有选择自动导入，需要手动移动一下文件。<br>
+将Editor－&gt;iOS文件夹下的.h文件全部放到Plugins-&gt;iOS文件夹下。</p>
+
+<p>初始化并且请求banner</p>
+
+<div><pre><code class="language-none">  InMobiPlugin inmobiPlugin = new InMobiPlugin (Myparameters.Imobi_ID);
+    RequestBanner ();
+    private void RequestBanner ()
+{
+    // Create a 320x50 banner at the bottom of the screen.
+    BannerAd ban = new BannerAd (Myparameters.Imobi_BannerId, 320, 50, (int)InMobiAdPosition.BottomCenter);
+    // Register for ad events.
+    ban.OnAdLoadSucceeded += HandleOnAdLoadSucceeded;
+    ban.OnAdLoadFailed += HandleAdLoadFailed;
+    ban.OnAdDisplayed += HandleAdDisplayed;
+    ban.OnAdDismissed += HandleAdDismissed;
+    ban.OnAdInteraction += HandleAdInteraction;
+    ban.OnUserLeftApplication += HandleUserLeftApplication;
+    // Load a banner ad.
+    ban.LoadAd ();
+}</code></pre></div>
+
+<p>最后接入失败<br>
+错误代码</p>
+
+<div><pre><code class="language-none">  Error : Error Domain=com.inmobi.ads.requeststatus Code=1 &quot;Server returned a no-fill. Please try again.&quot; UserInfo={NSLocalizedDescription=Server returned a no-fill. Please try again.}</code></pre></div>
 </blockquote>
-
-<hr>
-
-<h5 id="toc_4">有关android的都在这</h5>
-
-<hr>
-
-<h5 id="toc_5">有关unity的都在这</h5>
-
-<hr>
 
 
 
