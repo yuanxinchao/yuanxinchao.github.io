@@ -5,7 +5,7 @@
 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>Xcode_config</title>
+<title>ApplovinSDK</title>
 
 
 <style type="text/css">
@@ -328,13 +328,92 @@ kbd {
 
 <body>
 
-<h4 id="toc_0">删除Xcode中多余的证书provisioning profile</h4>
+<h3 id="toc_0">Applovin广告</h3>
+
+<p>最近游戏要接applovin的广告，这里顺便记一下流程。
+applovin的unity版SDK是十分好接的。这里我用的是</p>
 
 <blockquote>
-<p>手动删除</p>
+<p><strong>AppLovin-Unity-Plugin-3.6.0.unitypackage</strong></p>
 </blockquote>
 
-<p>xcode5 provisioning profile path： ~/Library/MobileDevice/Provisioning Profiles</p>
+<hr>
+
+<p>首先导入unity包
+<img src="./SDK/Applovin1.png" alt="applovin1">
+我们把android版的取消勾选。
+点击import导入。</p>
+
+<blockquote>
+<p>1.先设置key</p>
+
+<div><pre><code class="language-none">  AppLovin.SetSdkKey(&quot;Aprxv6MDpRtG1gNRAO-2Xz4dp_XGmbqxPftInDVZeNqg2C7Cb5E72JlsJH73ty_HbsZM34xiRlNUxUgWawecEO&quot;);</code></pre></div>
+
+<p>这里的key对应于你账号的  </p>
+
+<p>2.初始化</p>
+
+<div><pre><code class="language-none">  AppLovin.InitializeSdk();</code></pre></div>
+
+<p>3.设置监听回调的gameobject</p>
+
+<div><pre><code class="language-none">  AppLovin.SetUnityAdListener (&quot;TJSDK&quot;);</code></pre></div>
+
+<p><img src="./SDK/Applovin2.png" alt="Applovin2"></p>
+
+<p>如图这里的TJSDK是Hierarchy视窗的一个GameObject的名字，可以任意命名，需要保证的是TJSDK物体挂的脚本中有<code>public void onAppLovinEventReceived (string ev)</code>方法才能完成监听。因为applovin回调机制是在ios端使用<code>UnitySendMessage</code>方法发送至unity的Gameobject(TJSDK)的public方法(onAppLovinEventReceived)里且方法名为<code>onAppLovinEventReceived</code>(固定)。</p>
+
+<p>4.设置回调的监听</p>
+
+<div><pre><code class="language-none">  public void onAppLovinEventReceived (string ev)
+{
+    if (ev.Contains (&quot;REWARDAPPROVEDINFO&quot;)) {
+    // The format would be &quot;REWARDAPPROVEDINFO|AMOUNT|CURRENCY&quot; so &quot;REWARDAPPROVEDINFO|10|Coins&quot; for example
+    } else if (ev.Contains (&quot;LOADEDREWARDED&quot;)) {
+        // A rewarded video was successfully loaded.
+    } else if (ev.Contains (&quot;LOADREWARDEDFAILED&quot;)) {
+        // A rewarded video failed to load.
+        Debug.Log (&quot;load applovin fail go to load again&quot;);
+    } else if (ev.Contains (&quot;HIDDENREWARDED&quot;)) {
+        // A rewarded video was closed.  Preload the next rewarded video.
+    }
+}</code></pre></div>
+
+<p>这里如果要求不高的话可以在HIDDENREWARDED(用户播放完成关闭视频)的时候给予玩家奖励。还有一点是REWARDAPPROVEDINFO是在用户点击播放时就会回调，这里踩过坑给大家提个醒。😊</p>
+
+<p>5.获取奖励视频  </p>
+
+<div><pre><code class="language-none">  AppLovin.LoadRewardedInterstitial ();</code></pre></div>
+
+<p>6.判断奖励视频有没有加载好</p>
+
+<div><pre><code class="language-none">  AppLovin.IsIncentInterstitialReady ()</code></pre></div>
+
+<p>7.播放奖励视频</p>
+
+<div><pre><code class="language-none">  AppLovin.ShowRewardedInterstitial ()</code></pre></div>
+
+<p>至此对于奖励视频(激励视频)的处理已经完成。如果还需要对非激励视频作处理可以参考<a href="https://www.applovin.com/integration#iOSUnityPlacements">applovin官网</a>的说明<br>
+另外附上<a href="./SDK/YXC_videoApplo.cs">我的代码</a></p>
+</blockquote>
+
+<p>对了，还要在Xcode里添加依赖库</p>
+
+<blockquote>
+<p>Link the Following Frameworks in Your Project</p>
+
+<ul>
+<li> AdSupport</li>
+<li>AVFoundation</li>
+<li>CoreGraphics</li>
+<li>CoreMedia</li>
+<li>CoreTelephony</li>
+<li>StoreKit (NEW)</li>
+<li>SystemConfiguration</li>
+<li>UIKit</li>
+<li>WebKit (OPTIONAL)</li>
+</ul>
+</blockquote>
 
 
 
