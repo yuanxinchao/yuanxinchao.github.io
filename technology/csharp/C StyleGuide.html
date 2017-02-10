@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>C StyleGuide</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+/* GitHub stylesheet for MarkdownPad (http://markdownpad.com) */
+/* Author: Nicolas Hery - http://nicolashery.com */
+/* Version: b13fe65ca28d2e568c6ed5d7f06581183df8f2ff */
+/* Source: https://github.com/nicolahery/markdownpad-github */
+
+/* RESET
+=============================================================================*/
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* BODY
+=============================================================================*/
+
+body {
+  font-family: Helvetica, arial, freesans, clean, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+  background-color: #fff;
+  padding: 20px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+body>*:first-child {
+  margin-top: 0 !important;
+}
+
+body>*:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* BLOCKS
+=============================================================================*/
+
+p, blockquote, ul, ol, dl, table, pre {
+  margin: 15px 0;
+}
+
+/* HEADERS
+=============================================================================*/
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 tt, h1 code, h2 tt, h2 code, h3 tt, h3 code, h4 tt, h4 code, h5 tt, h5 code, h6 tt, h6 code {
+  font-size: inherit;
+}
+
+h1 {
+  font-size: 28px;
+  color: #000;
+}
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #ccc;
+  color: #000;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+h4 {
+  font-size: 16px;
+}
+
+h5 {
+  font-size: 14px;
+}
+
+h6 {
+  color: #777;
+  font-size: 14px;
+}
+
+body>h2:first-child, body>h1:first-child, body>h1:first-child+h2, body>h3:first-child, body>h4:first-child, body>h5:first-child, body>h6:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+h1+p, h2+p, h3+p, h4+p, h5+p, h6+p {
+  margin-top: 10px;
+}
+
+/* LINKS
+=============================================================================*/
+
+a {
+  color: #4183C4;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* LISTS
+=============================================================================*/
+
+ul, ol {
+  padding-left: 30px;
+}
+
+ul li > :first-child, 
+ol li > :first-child, 
+ul li ul:first-of-type, 
+ol li ol:first-of-type, 
+ul li ol:first-of-type, 
+ol li ul:first-of-type {
+  margin-top: 0px;
+}
+
+ul ul, ul ol, ol ol, ol ul {
+  margin-bottom: 0;
+}
+
+dl {
+  padding: 0;
+}
+
+dl dt {
+  font-size: 14px;
+  font-weight: bold;
+  font-style: italic;
+  padding: 0;
+  margin: 15px 0 5px;
+}
+
+dl dt:first-child {
+  padding: 0;
+}
+
+dl dt>:first-child {
+  margin-top: 0px;
+}
+
+dl dt>:last-child {
+  margin-bottom: 0px;
+}
+
+dl dd {
+  margin: 0 0 15px;
+  padding: 0 15px;
+}
+
+dl dd>:first-child {
+  margin-top: 0px;
+}
+
+dl dd>:last-child {
+  margin-bottom: 0px;
+}
+
+/* CODE
+=============================================================================*/
+
+pre, code, tt {
+  font-size: 12px;
+  font-family: Consolas, "Liberation Mono", Courier, monospace;
+}
+
+code, tt {
+  margin: 0 0px;
+  padding: 0px 0px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px;
+}
+
+pre>code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent;
+}
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px;
+}
+
+pre code, pre tt {
+  background-color: transparent;
+  border: none;
+}
+
+kbd {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #DDDDDD;
+    background-image: linear-gradient(#F1F1F1, #DDDDDD);
+    background-repeat: repeat-x;
+    border-color: #DDDDDD #CCCCCC #CCCCCC #DDDDDD;
+    border-image: none;
+    border-radius: 2px 2px 2px 2px;
+    border-style: solid;
+    border-width: 1px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    line-height: 10px;
+    padding: 1px 4px;
+}
+
+/* QUOTES
+=============================================================================*/
+
+blockquote {
+  border-left: 4px solid #DDD;
+  padding: 0 15px;
+  color: #777;
+}
+
+blockquote>:first-child {
+  margin-top: 0px;
+}
+
+blockquote>:last-child {
+  margin-bottom: 0px;
+}
+
+/* HORIZONTAL RULES
+=============================================================================*/
+
+hr {
+  clear: both;
+  margin: 15px 0;
+  height: 0px;
+  overflow: hidden;
+  border: none;
+  background: transparent;
+  border-bottom: 4px solid #ddd;
+  padding: 0;
+}
+
+/* TABLES
+=============================================================================*/
+
+table th {
+  font-weight: bold;
+}
+
+table th, table td {
+  border: 1px solid #ccc;
+  padding: 6px 13px;
+}
+
+table tr {
+  border-top: 1px solid #ccc;
+  background-color: #fff;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+
+/* IMAGES
+=============================================================================*/
+
+img {
+  max-width: 100%
+}
+</style>
+</head>
+<body>
+<h3>C#编程规范  转自<a href="https://github.com/raywenderlich/c-sharp-style-guide#nomenclature">raywenderlich</a></h3>
+<p><strong>PascalCase(帕斯卡拼写法)。</strong><br />
+即：将描述变量作用所有单词的首字母大写，然后直接连接起来，单词之间没有连接符和下划线。 <br />
+<strong>camelCase(骆驼拼写法)</strong>
+即：第一个词的首字母小写，后面每个词的首字母大写。</p>
+<hr />
+<h4>Namespaces 命名空间</h4>
+<p>对于命名空间一律采用PascalCase(帕斯卡拼写法)。<br />
+即：将描述变量作用所有单词的首字母大写，然后直接连接起来，单词之间没有连接符和下划线。  </p>
+<h5>BAD:</h5>
+<p><code>com.raywenderlich.fpsgame.hud.healthbar</code></p>
+<h5>GOOD:</h5>
+<p><code>RayWenderlich.FPSGame.HUD.Healthbar</code></p>
+<hr />
+<h4>Classes &amp; Interfaces 类和接口</h4>
+<p>PascalCase(帕斯卡拼写法)，例如 <code>RadialSlider</code>。</p>
+<h4>Methods 方法</h4>
+<p>PascalCase(帕斯卡拼写法)，例如 <code>DoSomething()</code>。</p>
+<h4>Fields 变量名</h4>
+<p><strong>非静态变量(私有、公开、保护)</strong>:camelCase(骆驼拼写法)<br />
+例如：  </p>
+<pre><code>public class MyClass 
+{
+    public int publicField;
+    int packagePrivate;
+    private int myPrivate;
+    protected int myProtected;
+}
+</code></pre>
+
+<h5>BAD:</h5>
+<p><code>private int _myPrivateVariable</code></p>
+<h5>GOOD:</h5>
+<p><code>private int myPrivateVariable</code>		 
+<strong>静态变量(私有、公开、保护)</strong>:PascalCase(帕斯卡拼写法)
+例如 <code>public static int TheAnswer = 42;</code></p>
+<hr />
+<h4>Parameters 参数</h4>
+<p>camelCase(骆驼拼写法)  </p>
+<h5>BAD:</h5>
+<p><code>void doSomething(Vector3 Location)</code></p>
+<h5>GOOD:</h5>
+<p><code>void DoSomething(Vector3 location)</code>  </p>
+<p>除非是用于循环的临时变量，否则不要用单字符作为变量名。 </p>
+<hr />
+<h4>Delegates 委托</h4>
+<p>PascalCase(帕斯卡拼写法)。<br />
+用于事件触发的委托要加上<strong>EventHandler</strong>后缀。</p>
+<h5>BAD:</h5>
+<p><code>public delegate void Click()</code></p>
+<h5>GOOD:</h5>
+<p><code>public delegate void ClickEventHandler()</code>   </p>
+<p>其他的则加上<strong>Callback</strong>后缀</p>
+<h5>BAD:</h5>
+<p><code>public delegate void Render()</code></p>
+<h5>GOOD:</h5>
+<p><code>public delegate void RenderCallback()</code> </p>
+<hr />
+<h4>Misc 带有缩略词的变量名</h4>
+<p>缩略词应该看做成一个单词。例如：</p>
+<h5>BAD:</h5>
+<pre><code>XMLHTTPRequest
+String URL
+findPostByID
+</code></pre>
+
+<h5>GOOD:</h5>
+<pre><code>XmlHttpRequest
+String url
+findPostById   
+</code></pre>
+
+<hr />
+<h4>Declarations 声明</h4>
+<h5>Access Level Modifiers  访问修饰符</h5>
+<p>访问修饰符(public,protected,internal,private)修饰类、方法、变量是应该被明确声明。  </p>
+<h5>Fields &amp; Variables  字段和变量</h5>
+<p>一行声明一个。</p>
+<h5>BAD:</h5>
+<p><code>string username, twitterHandle;</code></p>
+<h5>GOOD:</h5>
+<pre><code>string username;
+string twitterHandle;
+</code></pre>
+
+<h5>Classes 类</h5>
+<p>一个文件里面只放一个类。内部类则放在一起。</p>
+<h5>Interfaces 接口</h5>
+<p>所有的接口必须以<strong>I</strong>开头。</p>
+<h5>BAD:</h5>
+<p><code>RadialSlider</code></p>
+<h5>GOOD:</h5>
+<p><code>IRadialSlider</code></p>
+<h5>Indentation 缩进</h5>
+<p>缩进应该使用空格 - 不要使用Tab键。</p>
+<h5>Blocks 块</h5>
+<p>块缩进使用4个空格。  </p>
+<p><em>注:Monodevelop中，解决方案选项-&gt;源代码-&gt;code formatting-&gt;Text file-&gt;Convert tabs to spaces 可以将tab转换为四个空格，Shift＋Tab则是删除四个空格，很方便</em>  </p>
+<h5>BAD:</h5>
+<pre><code>for (int i = 0; i &lt; 10; i++) 
+{
+  Debug.Log(&quot;index=&quot; + i);
+}
+</code></pre>
+
+<h5>GOOD:</h5>
+<pre><code>for (int i = 0; i &lt; 10; i++) 
+{
+    Debug.Log(&quot;index=&quot; + i);
+}
+</code></pre>
+
+<h5>Line Wraps 换行</h5>
+<p>换行使用四个空格。</p>
+<h5>BAD:</h5>
+<pre><code>CoolUiWidget widget =
+        someIncrediblyLongExpression(that, reallyWouldNotFit, on, aSingle, line);
+</code></pre>
+
+<h5>GOOD:</h5>
+<pre><code>CoolUiWidget widget =
+    someIncrediblyLongExpression(that, reallyWouldNotFit, on, aSingle, line);
+</code></pre>
+
+<h5>Line Length 每行的长度</h5>
+<p>每行的长度不应该大于100个字符。</p>
+<h5>Vertical Spacing 行间距</h5>
+<ul>
+<li>方法之间用空白行隔开。</li>
+<li>以功能划分方法。</li>
+<li>如果一个方法包含太多部分你应该分离成多个方法</li>
+</ul>
+<hr />
+<h4>Brace Style 大括号风格</h4>
+<p>一个大括号独占一行</p>
+<h5>BAD:</h5>
+<pre><code>class MyClass {
+    void DoSomething() {
+        if (someTest) {
+          // ...
+        } else {
+          // ...
+        }
+    }
+}
+</code></pre>
+
+<h5>GOOD:</h5>
+<pre><code>class MyClass
+{
+    void DoSomething()
+    {
+        if (someTest)
+        {
+          // ...
+        }
+        else
+        {
+          // ...
+        }
+    }
+}
+</code></pre>
+
+<p>条件语句里的内容不管有几行都要用大括号包起来。  </p>
+<h5>BAD:</h5>
+<pre><code>if (someTest)
+    doSomething();  
+
+if (someTest) doSomethingElse();
+</code></pre>
+
+<h5>GOOD:</h5>
+<pre><code>if (someTest) 
+{
+    DoSomething();
+}  
+
+if (someTest)
+{
+    DoSomethingElse();
+}
+</code></pre>
+
+<p>注：Monodevelop中可以在<em>解决方案选项-&gt;源代码-&gt;code formatting</em>更改大括号的默认设置  </p>
+<hr />
+<h4>Switch Statements 分支语句</h4>
+<p>不要写default case。因为如果你的代码写的正确的话永远也运行不到default case。😂</p>
+<h5>BAD:</h5>
+<pre><code>switch (variable) 
+{
+    case 1:
+        break;
+    case 2:
+        break;
+    default:
+        break;
+}
+</code></pre>
+
+<h5>GOOD:</h5>
+<pre><code>switch (variable) 
+{
+    case 1:
+        break;
+    case 2:
+        break;
+</code></pre>
+
+<h2>	}</h2>
+<h4>Language 语言</h4>
+<p>用美式英语。😂</p>
+<h5>BAD:</h5>
+<pre><code>string colour = &quot;red&quot;;
+</code></pre>
+
+<h5>GOOD:</h5>
+<h2>	string color = &quot;red&quot;;</h2>
+<h4>Copyright Statement</h4>
+<p>The following copyright statement should be included at the top of every source file:  </p>
+<pre><code>/*
+ * Copyright (c) 2017 Razeware LLC
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the &quot;Software&quot;), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+</code></pre>
+
+<h2>	 */</h2>
+<h4>Smiley Face</h4>
+<p>Smiley faces are a very prominent style feature of the raywenderlich.com site! It is very important to have the correct smile signifying the immense amount of happiness and excitement for the coding topic. The closing square bracket ] is used because it represents the largest smile able to be captured using ASCII art. A closing parenthesis (&quot;:)&quot;) creates a half-hearted smile, and thus is not preferred.</p>
+<h5>BAD:</h5>
+<p>:)</p>
+<h5>GOOD:</h5>
+<p>:]  </p>
+<blockquote>
+<blockquote>
+<p>NOTE: Do not use smileys in your scripts.</p>
+</blockquote>
+</blockquote>
+
+</body>
+</html>
+<!-- This document was created with MarkdownPad, the Markdown editor for Windows (http://markdownpad.com) -->
