@@ -16,3 +16,4 @@
 * command + shift + 4 选区域截屏
 * command + shift + 4 +空格 截取的窗口
 * Control+command+空格键 表情😂
+* Enter 重命名

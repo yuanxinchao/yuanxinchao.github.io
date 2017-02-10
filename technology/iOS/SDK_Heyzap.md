@@ -57,7 +57,7 @@ Incentivized为激励视频，Interstitial为插入视频，有静态和动态�
 ![heyzap3](./SDK/heyzap3.png)
 注意⚠️：ios-sdk是他家自己的 必拖。其他的为第三方的  
 搞定了，可以运行试试啦。相信你不会这么一帆风顺😏。
-#####<a id="tips1">最后附上参考代码:</a>  [下载](./SDK.YXC_video.cs)
+#####<a id="tips1">最后附上参考代码:</a>  [下载](./SDK/YXC_video.cs)
 		using UnityEngine;
 		using System.Collections;
 		using Heyzap;
