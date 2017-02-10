@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Mesh Learn</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+/* GitHub stylesheet for MarkdownPad (http://markdownpad.com) */
+/* Author: Nicolas Hery - http://nicolashery.com */
+/* Version: b13fe65ca28d2e568c6ed5d7f06581183df8f2ff */
+/* Source: https://github.com/nicolahery/markdownpad-github */
+
+/* RESET
+=============================================================================*/
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* BODY
+=============================================================================*/
+
+body {
+  font-family: Helvetica, arial, freesans, clean, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+  background-color: #fff;
+  padding: 20px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+body>*:first-child {
+  margin-top: 0 !important;
+}
+
+body>*:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* BLOCKS
+=============================================================================*/
+
+p, blockquote, ul, ol, dl, table, pre {
+  margin: 15px 0;
+}
+
+/* HEADERS
+=============================================================================*/
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 tt, h1 code, h2 tt, h2 code, h3 tt, h3 code, h4 tt, h4 code, h5 tt, h5 code, h6 tt, h6 code {
+  font-size: inherit;
+}
+
+h1 {
+  font-size: 28px;
+  color: #000;
+}
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #ccc;
+  color: #000;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+h4 {
+  font-size: 16px;
+}
+
+h5 {
+  font-size: 14px;
+}
+
+h6 {
+  color: #777;
+  font-size: 14px;
+}
+
+body>h2:first-child, body>h1:first-child, body>h1:first-child+h2, body>h3:first-child, body>h4:first-child, body>h5:first-child, body>h6:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+h1+p, h2+p, h3+p, h4+p, h5+p, h6+p {
+  margin-top: 10px;
+}
+
+/* LINKS
+=============================================================================*/
+
+a {
+  color: #4183C4;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* LISTS
+=============================================================================*/
+
+ul, ol {
+  padding-left: 30px;
+}
+
+ul li > :first-child, 
+ol li > :first-child, 
+ul li ul:first-of-type, 
+ol li ol:first-of-type, 
+ul li ol:first-of-type, 
+ol li ul:first-of-type {
+  margin-top: 0px;
+}
+
+ul ul, ul ol, ol ol, ol ul {
+  margin-bottom: 0;
+}
+
+dl {
+  padding: 0;
+}
+
+dl dt {
+  font-size: 14px;
+  font-weight: bold;
+  font-style: italic;
+  padding: 0;
+  margin: 15px 0 5px;
+}
+
+dl dt:first-child {
+  padding: 0;
+}
+
+dl dt>:first-child {
+  margin-top: 0px;
+}
+
+dl dt>:last-child {
+  margin-bottom: 0px;
+}
+
+dl dd {
+  margin: 0 0 15px;
+  padding: 0 15px;
+}
+
+dl dd>:first-child {
+  margin-top: 0px;
+}
+
+dl dd>:last-child {
+  margin-bottom: 0px;
+}
+
+/* CODE
+=============================================================================*/
+
+pre, code, tt {
+  font-size: 12px;
+  font-family: Consolas, "Liberation Mono", Courier, monospace;
+}
+
+code, tt {
+  margin: 0 0px;
+  padding: 0px 0px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px;
+}
+
+pre>code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent;
+}
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px;
+}
+
+pre code, pre tt {
+  background-color: transparent;
+  border: none;
+}
+
+kbd {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #DDDDDD;
+    background-image: linear-gradient(#F1F1F1, #DDDDDD);
+    background-repeat: repeat-x;
+    border-color: #DDDDDD #CCCCCC #CCCCCC #DDDDDD;
+    border-image: none;
+    border-radius: 2px 2px 2px 2px;
+    border-style: solid;
+    border-width: 1px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    line-height: 10px;
+    padding: 1px 4px;
+}
+
+/* QUOTES
+=============================================================================*/
+
+blockquote {
+  border-left: 4px solid #DDD;
+  padding: 0 15px;
+  color: #777;
+}
+
+blockquote>:first-child {
+  margin-top: 0px;
+}
+
+blockquote>:last-child {
+  margin-bottom: 0px;
+}
+
+/* HORIZONTAL RULES
+=============================================================================*/
+
+hr {
+  clear: both;
+  margin: 15px 0;
+  height: 0px;
+  overflow: hidden;
+  border: none;
+  background: transparent;
+  border-bottom: 4px solid #ddd;
+  padding: 0;
+}
+
+/* TABLES
+=============================================================================*/
+
+table th {
+  font-weight: bold;
+}
+
+table th, table td {
+  border: 1px solid #ccc;
+  padding: 6px 13px;
+}
+
+table tr {
+  border-top: 1px solid #ccc;
+  background-color: #fff;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+
+/* IMAGES
+=============================================================================*/
+
+img {
+  max-width: 100%
+}
+</style>
+</head>
+<body>
+<h2>Mesh Learn</h2>
+<p>Mesh是Unity内的一个组件，称为网格组件。  </p>
+<ul>
+<li>Mesh 网格</li>
+<li>MeshFilter 网格过滤器</li>
+<li>Mesh Renderer 网格渲染器  </li>
+</ul>
+<blockquote>
+<p><strong>Mesh</strong>：是指模型的网格，建模就是建网格。  
+</p>
+<p><strong>Mesh Filter</strong>：<strong>内包含一个Mesh组件</strong>，可以根据MeshFilter获得模型网格的组件，也可以为MeshFilter设置Mesh内容。MeshFilter的作用就是把Mesh扔给MeshRender将模型或者说是几何体绘制显示出来  
+</p>
+<p><strong>Mesh Render</strong>：是用于把网格渲染出来的组件</p>
+</blockquote>
+<p><strong>Mesh</strong>的属性：  </p>
+<ul>
+<li>顶点坐标（vertex）</li>
+<li>法线（normal）</li>
+<li>纹理坐标（uv）</li>
+<li>三角形序列（triangle） </li>
+</ul>
+<blockquote>
+<p><strong>顶点坐标</strong>：顶点坐标数组存放Mesh的每个顶点的空间坐标，假设某mesh有n个顶点，则vertex的size为n  
+</p>
+<p><strong>法线</strong>：法线数组存放mesh每个顶点的法线，大小与顶点坐标对应，normal[i]对应顶点vertex[i]的法线  
+</p>
+<p><strong>纹理坐标</strong>：它定义了图片上每个点的位置的信息. 这些点与3D模型是相互联系的, 以决定表面纹理贴图的位置. UV就是将图像上每一个点精确对应到模型物体的表面. uv[i]对应vertex[i]</p>
+<p>三角形序列：每个mesh都由若干个三角形组成，而三角形的三个点就是顶点坐标里的点，三角形的数组的size = 三角形个数*3.</p>
+</blockquote>
+<h4>Mesh的构造</h4>
+<p>一个Mesh通常由许许多多三角面构成的。如图：<br />
+<img src="./UnityManualPic/Mesh1.png" /><br />
+所以构建Mesh需要以下几步<br />
+1.通过配置顶点坐标确定Mesh的顶点。<code>mesh.vertices</code><br />
+2.通过配置triangle确定Mesh的每个面。<code>mesh.triangles</code><br />
+3.通过配置uv坐标来对应贴图的点。<code>mesh.uv</code></p>
+<h4>现在开始构建一个简单的Mesh</h4>
+<p>要想画个Mesh出来当然要有MeshFilter和MeshRenderer组件啦。  </p>
+<pre><code>[RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
+</code></pre>
+
+<p>新建Mesh</p>
+<pre><code>Mesh mesh=new Mesh();
+</code></pre>
+
+<p>确定<strong>mesh</strong>的顶点坐标</p>
+<pre><code>vertices = new Vector3[4];
+vertices [0] = new Vector3(0, 0, 0);
+vertices [1] = new Vector3(1, 4, 0);
+vertices [2] = new Vector3(1, 0, 0);
+vertices [3] = new Vector3(1, 0, -4);
+mesh.vertices = vertices;
+</code></pre>
+
+<p>确定<strong>triangles</strong>的顺序  </p>
+<pre><code>int[] triangles = new int[12];
+triangles [0] = 0;
+triangles [1] = 1;
+triangles [2] = 3;
+
+triangles [3] = 0;
+triangles [4] = 2;
+triangles [5] = 1;
+
+triangles [6] = 3;
+triangles [7] = 1;
+triangles [8] = 2;
+
+triangles [9] = 3;
+triangles [10] = 2;
+triangles [11] = 0;  
+mesh.triangles = triangles;
+</code></pre>
+
+<p>这里是使用的三点确定一个面👌🏻，总共确定了四个面。上面的0，1，2，3代表的是第0，1，2，3个顶点。即：vertices[0]~vertices[3];对于顺序也是有要求的，如图：<br />
+<img src="./UnityManualPic/Mesh2.png" /> <br />
+顺时针转为正面，逆时针则为背面。  </p>
+<p>经过这样一番步骤就构建好了Mesh，然后还要贴纹理  </p>
+<pre><code>Vector2[] uv = new Vector2[vertices.Length];
+uv [0] = new Vector2(0f, 0f);  
+uv [1] = new Vector2(0f, 1f);  
+uv [2] = new Vector2(1f, 1f);
+uv [3] = new Vector2(1, 0f);
+mesh.uv = uv;
+</code></pre>
+
+<p>这里uv数组的4个元素分别顺序对应mesh.vertices的4个顶点。而Vector2(0f, 0f)里面的参数则贴图的坐标。Vector2(0f, 0f)是贴图的左上角，Vector2(1f, 1f)是贴图的右上角。<br />
+<strong>这个同样解释了为什么Unity自带的Cube用了24个顶点</strong>，这样就可以分别对每个面设置uv了  </p>
+<p>附完整代码：<br />
+	using UnityEngine;
+	using System.Collections;</p>
+<pre><code>[RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
+public class MeshSquare : MonoBehaviour
+{
+
+    public int xSize , ySize;
+    private Vector3[] vertices;
+    private Mesh mesh;
+
+    private void Awake ()
+    {
+        Generate();
+    }
+
+    private void Generate ()
+    {
+        GetComponent&lt;MeshFilter&gt;().mesh = mesh = new Mesh();
+        mesh.name = &quot;Procedural Grid&quot;;
+
+        vertices = new Vector3[4];
+        vertices [0] = new Vector3(0, 0, 0);
+        vertices [1] = new Vector3(1, 4, 0);
+        vertices [2] = new Vector3(1, 0, 0);
+        vertices [3] = new Vector3(1, 0, -4);
+
+        mesh.vertices = vertices;
+
+        int[] triangles = new int[12];
+        triangles [0] = 0;
+        triangles [1] = 1;
+        triangles [2] = 3;
+
+        triangles [3] = 0;
+        triangles [4] = 2;
+        triangles [5] = 1;
+
+        triangles [6] = 3;
+        triangles [7] = 1;
+        triangles [8] = 2;
+
+        triangles [9] = 3;
+        triangles [10] = 2;
+        triangles [11] = 0;
+
+        mesh.triangles = triangles;
+        Vector2[] uv = new Vector2[vertices.Length];
+        uv [0] = new Vector2(0f, 0f);  
+        uv [1] = new Vector2(0f, 1f);  
+        uv [2] = new Vector2(1f, 1f);
+        uv [3] = new Vector2(1, 0f);
+        mesh.uv = uv;
+
+        mesh.RecalculateNormals();
+
+
+
+    }
+
+    private void OnDrawGizmos ()
+    {
+        if (vertices == null)
+        {
+            return;
+        }
+
+        Gizmos.color = Color.black;
+        for (int i = 0; i &lt; vertices.Length; i++)
+        {
+            Gizmos.DrawSphere(vertices [i], 0.1f);
+        }
+    }
+
+}
+</code></pre>
+
+
+</body>
+</html>
+<!-- This document was created with MarkdownPad, the Markdown editor for Windows (http://markdownpad.com) -->
