@@ -71,7 +71,8 @@ PascalCase(帕斯卡拼写法)。
 #####GOOD:
 	XmlHttpRequest
 	String url
-	findPostById  
+	findPostById   
+
 ---
 ####Declarations 声明
 #####Access Level Modifiers  访问修饰符
