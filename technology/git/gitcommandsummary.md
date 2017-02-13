@@ -11,6 +11,9 @@
 >* [git clone](./technology/git/init.html)
 >* [git init](./technology/git/init.html)
 >* [git init](./technology/git/init.html)
+>* git clean -df
+>* git stash drop
+>* git stash save --keep-index
 
 ###<a id="tips1">git init</a>
 >在`learngit`里初始化版本库
