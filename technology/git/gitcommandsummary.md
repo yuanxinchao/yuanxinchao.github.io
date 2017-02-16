@@ -8,9 +8,10 @@
 >* [git commit -m "****"](./technology/git/init.html)
 >* [git log](./technology/git/init.html)
 >* [ssh-keygen -t rsa -C "youremail@example.com"](./technology/git/init.html)
->* [git clone](./technology/git/init.html)
->* [git init](./technology/git/init.html)
->* [git init](./technology/git/init.html)
+>* [git clone](./technology/git/init.html)  
+>
+git clean -df
+git checkout -- .
 
 ###<a id="tips1">git init</a>
 >在`learngit`里初始化版本库

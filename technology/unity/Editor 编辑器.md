@@ -20,4 +20,6 @@
  
 	[SerializeField]
 	private string _textID;
-![Editor1](./UnityEditorPic/Editor1.png)
+![Editor1](./UnityEditorPic/Editor1.png)  
+#### 3. HideInInspector
+与上面一个相反
