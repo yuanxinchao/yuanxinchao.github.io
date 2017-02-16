@@ -2,16 +2,18 @@
 [廖雪峰老师的github使用教程](http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/001373962845513aefd77a99f4145f0a2c7a7ca057e7570000)
 感觉生动有趣，讲的非常棒！但是有好多命令特别容易忘记，这里仅做个笔记记一下常用命令。
 >* <a href="#tips1">git init</a>
+>* <a href="#tips2">git add</a>
+>* [git commit -m "****"](./technology/git/init.html)
 >* [git status](./technology/git/init.html)
 >* [git diff](./technology/git/init.html)
->* [git add](./technology/git/init.html)
->* [git commit -m "****"](./technology/git/init.html)
 >* [git log](./technology/git/init.html)
 >* [ssh-keygen -t rsa -C "youremail@example.com"](./technology/git/init.html)
->* [git clone](./technology/git/init.html)  
->
-git clean -df
-git checkout -- .
+
+>* [git clone](./technology/git/init.html)
+>* git clean -df
+>* git stash drop
+>* git stash save --keep-index
+
 
 ###<a id="tips1">git init</a>
 >在`learngit`里初始化版本库
