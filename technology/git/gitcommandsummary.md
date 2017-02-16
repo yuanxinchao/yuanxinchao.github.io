@@ -11,8 +11,7 @@
 
 >* [git clone](./technology/git/init.html)
 >* git clean -df
->* git stash drop
->* git stash save --keep-index
+>* git checkout -- .
 
 
 ###<a id="tips1">git init</a>
