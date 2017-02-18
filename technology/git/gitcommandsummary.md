@@ -12,7 +12,10 @@
 >* [git clone](./technology/git/init.html)
 >* git clean -df
 >* git checkout -- .
-
+>* git log --graph --pretty=oneline --abbrev-commit
+>* git reflog show
+>* touch .gitignore
+>* git push -u origin master -f 强制push 很危险
 
 ###<a id="tips1">git init</a>
 >在`learngit`里初始化版本库
