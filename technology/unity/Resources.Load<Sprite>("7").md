@@ -1,4 +1,5 @@
-## Resources.Load<Sprite>("7")
+## Resources.Load
+Resources.Load<Sprite>("7")
          GameObject prueba = new GameObject ("prueba");
          SpriteRenderer renderer= prueba.AddComponent<SpriteRenderer> ();
          Object [] sprites;
