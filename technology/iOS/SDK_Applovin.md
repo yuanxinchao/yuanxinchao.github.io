@@ -78,4 +78,6 @@ Xcode 项目中我们可以使用 ARC 和非 ARC 的混合模式。
 打开：你的target -> Build Phases -> Compile Sources.
 双击对应的 *.m 文件  
 在弹出窗口中输入上面提到的标签 -fobjc-arc / -fno-objc-arc
-点击 done 保存
+点击 done 保存  
+
+⚠️：如果接入的是android版，请连接vpn在进行广告测试

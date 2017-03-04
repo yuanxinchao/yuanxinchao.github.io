@@ -55,6 +55,7 @@
 >  
 
 这里的key要记得替换为自己申请的哦。  
+千万万万注意初始化友盟的Key😭不然你的分享面板会一片空白！！！
 >####5.**回调:**  
 >记得还要在`- (BOOL)application:(UIApplication*)application openURL:(NSURL*)url sourceApplication:(NSString*)sourceApplication annotation:(id)annotation`方法中添加如下代码：  
 >`BOOL result = [[UMSocialManager defaultManager] handleOpenURL:url];`  

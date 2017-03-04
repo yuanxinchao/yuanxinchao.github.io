@@ -1,5 +1,5 @@
 ###Mac常用快捷键
-
+Mac man manual 手册很好用
 ###### Mac键盘
 >⌘	Command key  
 >⌃	Control key  
