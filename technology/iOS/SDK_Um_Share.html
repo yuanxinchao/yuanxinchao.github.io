@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>SDK_Um_Share</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+/* GitHub stylesheet for MarkdownPad (http://markdownpad.com) */
+/* Author: Nicolas Hery - http://nicolashery.com */
+/* Version: b13fe65ca28d2e568c6ed5d7f06581183df8f2ff */
+/* Source: https://github.com/nicolahery/markdownpad-github */
+
+/* RESET
+=============================================================================*/
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* BODY
+=============================================================================*/
+
+body {
+  font-family: Helvetica, arial, freesans, clean, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+  background-color: #fff;
+  padding: 20px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+body>*:first-child {
+  margin-top: 0 !important;
+}
+
+body>*:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* BLOCKS
+=============================================================================*/
+
+p, blockquote, ul, ol, dl, table, pre {
+  margin: 15px 0;
+}
+
+/* HEADERS
+=============================================================================*/
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 tt, h1 code, h2 tt, h2 code, h3 tt, h3 code, h4 tt, h4 code, h5 tt, h5 code, h6 tt, h6 code {
+  font-size: inherit;
+}
+
+h1 {
+  font-size: 28px;
+  color: #000;
+}
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #ccc;
+  color: #000;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+h4 {
+  font-size: 16px;
+}
+
+h5 {
+  font-size: 14px;
+}
+
+h6 {
+  color: #777;
+  font-size: 14px;
+}
+
+body>h2:first-child, body>h1:first-child, body>h1:first-child+h2, body>h3:first-child, body>h4:first-child, body>h5:first-child, body>h6:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+h1+p, h2+p, h3+p, h4+p, h5+p, h6+p {
+  margin-top: 10px;
+}
+
+/* LINKS
+=============================================================================*/
+
+a {
+  color: #4183C4;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* LISTS
+=============================================================================*/
+
+ul, ol {
+  padding-left: 30px;
+}
+
+ul li > :first-child, 
+ol li > :first-child, 
+ul li ul:first-of-type, 
+ol li ol:first-of-type, 
+ul li ol:first-of-type, 
+ol li ul:first-of-type {
+  margin-top: 0px;
+}
+
+ul ul, ul ol, ol ol, ol ul {
+  margin-bottom: 0;
+}
+
+dl {
+  padding: 0;
+}
+
+dl dt {
+  font-size: 14px;
+  font-weight: bold;
+  font-style: italic;
+  padding: 0;
+  margin: 15px 0 5px;
+}
+
+dl dt:first-child {
+  padding: 0;
+}
+
+dl dt>:first-child {
+  margin-top: 0px;
+}
+
+dl dt>:last-child {
+  margin-bottom: 0px;
+}
+
+dl dd {
+  margin: 0 0 15px;
+  padding: 0 15px;
+}
+
+dl dd>:first-child {
+  margin-top: 0px;
+}
+
+dl dd>:last-child {
+  margin-bottom: 0px;
+}
+
+/* CODE
+=============================================================================*/
+
+pre, code, tt {
+  font-size: 12px;
+  font-family: Consolas, "Liberation Mono", Courier, monospace;
+}
+
+code, tt {
+  margin: 0 0px;
+  padding: 0px 0px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px;
+}
+
+pre>code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent;
+}
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px;
+}
+
+pre code, pre tt {
+  background-color: transparent;
+  border: none;
+}
+
+kbd {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #DDDDDD;
+    background-image: linear-gradient(#F1F1F1, #DDDDDD);
+    background-repeat: repeat-x;
+    border-color: #DDDDDD #CCCCCC #CCCCCC #DDDDDD;
+    border-image: none;
+    border-radius: 2px 2px 2px 2px;
+    border-style: solid;
+    border-width: 1px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    line-height: 10px;
+    padding: 1px 4px;
+}
+
+/* QUOTES
+=============================================================================*/
+
+blockquote {
+  border-left: 4px solid #DDD;
+  padding: 0 15px;
+  color: #777;
+}
+
+blockquote>:first-child {
+  margin-top: 0px;
+}
+
+blockquote>:last-child {
+  margin-bottom: 0px;
+}
+
+/* HORIZONTAL RULES
+=============================================================================*/
+
+hr {
+  clear: both;
+  margin: 15px 0;
+  height: 0px;
+  overflow: hidden;
+  border: none;
+  background: transparent;
+  border-bottom: 4px solid #ddd;
+  padding: 0;
+}
+
+/* TABLES
+=============================================================================*/
+
+table th {
+  font-weight: bold;
+}
+
+table th, table td {
+  border: 1px solid #ccc;
+  padding: 6px 13px;
+}
+
+table tr {
+  border-top: 1px solid #ccc;
+  background-color: #fff;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+
+/* IMAGES
+=============================================================================*/
+
+img {
+  max-width: 100%
+}
+</style>
+</head>
+<body>
+<h3>友盟分享</h3>
+<p>许多游戏都有分享功能，这里我们来学习一下友盟分享的接入。<br />
+我接入的是友盟<code>Unity3D v6.2.0</code>版本。去<a href="http://dev.umeng.com/social/unity3d/sdk-download">这里</a>下载。下载好后就开始接入吧。其实<a href="http://dev.umeng.com/social/unity3d/integration">官网的接入流程</a>还是挺详细的, 不过我还是要啰嗦一遍😁   
+</p>
+<blockquote>
+<h4>1.首先导入unity包。</h4>
+<p><img src="./SDK/Um_share1.png" alt="Um_share1" />  
+</p>
+</blockquote>
+<p>这里我只需要iOS版里的QQ、Sina和微信的第三方SDK。  
+</p>
+<blockquote>
+<h4>2.开始调用</h4>
+<p>定义分享平台<br />
+<code>Platform[] platforms = { Platform.QQ,Platform.QZONE,Platform.SINA,Platform.WEIXIN,Platform.WEIXIN_CIRCLE};</code><br />
+调用分享面板<br />
+<code>Social.OpenShareWithImagePath (platforms,&quot;Hello World&quot;, Application.persistentDataPath + &quot;/Sceenshot.png&quot;,&quot;umeng&quot;,&quot;http://www.umeng.com/&quot;, sharecallback);</code>  
+</p>
+<h4>注意⚠️：</h4>
+<p>1)这里Sceenshot.png需要预先存储在Application.persistentDataPath路径下。  
+</p>
+<ul>
+<li>例如采用unity自带截屏函数<code>Application.CaptureScreenshot(&quot;Sceenshot.png&quot;);</code>  
+</li>
+<li>
+<p>也可以使用C#里System.IO命名空间下的文件操作函数进行写入</p>
+<pre><code>public Texture2D ShareImage;
+    if (!File.Exists (Application.persistentDataPath + &quot;/Sceenshot.png&quot;)) {
+    File.WriteAllBytes (Application.persistentDataPath + &quot;/Sceenshot.png&quot;, ShareImage.EncodeToPNG ());
+    Debug.Log (&quot;File.WriteAllBytes path =&quot; + Application.persistentDataPath + &quot;/Sceenshot.png&quot;);
+    }
+</code></pre>
+
+</li>
+</ul>
+<p>2) 这里的sharecallback是分享的回调，里面包含有分享的平台与错误代码等信息。例如：  
+</p>
+<pre><code>public void sharecallback (Platform platform, int stCode, string errorMsg)
+{
+    Debug.Log (stCode.ToString () + &quot;-----&quot; + errorMsg);
+    if (stCode == Social.SUCCESS) {
+    ......
+    }
+}
+</code></pre>
+
+</blockquote>
+<p>调用结束后就可以打包到Xcode工程里了,什么，你说Key和secret还没设置，这个是放到Xcode里初始化的，当然原来是在unity里就可以初始化了。这次友盟SDK更新的有点坑。😂  
+</p>
+<blockquote>
+<h4>3.unity5.0以下版本</h4>
+<p>小于unity5.0的版本记得把Plugins-&gt;iOS-&gt;UMSocial文件夹拖到Xcode工程里。</p>
+<h4>4.打包好Xcode工程后找到UnityAppController.mm文件做出如下修改:</h4>
+<p>头文件添加：<br />
+<code>#import &lt;UMSocialCore/UMSocialCore.h&gt;</code><br />
+在<code>- (BOOL)application:(UIApplication*)application didFinishLaunchingWithOptions:(NSDictionary*)launchOptions</code> 方法中添加sdk的初始化代码：（其中<code>[UMSocialGlobal shareInstance].type = @&quot;u3d&quot;</code>;必须要添加，否则无法定位错误）  
+</p>
+<p>[[UMSocialManager defaultManager] openLog:YES];
+	NSLog(@&quot;UMeng social version: %@&quot;, [UMSocialGlobal umSocialSDKVersion]);
+	[UMSocialGlobal shareInstance].type = @&quot;u3d&quot;;
+	//设置友盟appkey
+	[[UMSocialManager defaultManager] 	setUmSocialAppkey:@&quot;57b432afe0f55a9832001a0a&quot;];
+	//设置微信的appKey和appSecret
+	[[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType<em>WechatSession appKey:@&quot;wxdc1e388c3822c80b&quot; appSecret:@&quot;3baf1193c85774b3fd9d18447d76cab0&quot; redirectURL:@&quot;http://mobile.umeng.com/social&quot;];
+	//设置分享到QQ互联的appID
+	[[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType</em>QQ appKey:@&quot;100424468&quot;/<em>设置QQ平台的appID</em>/  appSecret:nil redirectURL:@&quot;http://mobile.umeng.com/social&quot;];
+	//设置新浪的appKey和appSecret
+	[[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_Sina appKey:@&quot;3921700954&quot;  appSecret:@&quot;04b48b094faeb16683c32669824ebdad&quot; redirectURL:@&quot;http://sns.whalecloud.com/sina2/callback&quot;];</p>
+</blockquote>
+<p>这里的key要记得替换为自己申请的哦。<br />
+千万万万注意初始化友盟的Key😭不然你的分享面板会一片空白！！！</p>
+<blockquote>
+<h4>5.<strong>回调:</strong></h4>
+<p>记得还要在<code>- (BOOL)application:(UIApplication*)application openURL:(NSURL*)url sourceApplication:(NSString*)sourceApplication annotation:(id)annotation</code>方法中添加如下代码：<br />
+<code>BOOL result = [[UMSocialManager defaultManager] handleOpenURL:url];</code><br />
+不然回调永远也不会成功。(在这里踩过坑😂)  
+</p>
+<h4>6.还要添加第三方平台依赖库</h4>
+<p>在<strong>General-&gt;Linked Frameworks and Libraries</strong>下添加<br />
+系统库：  
+</p>
+<pre><code>libsqlite3.tbd
+CoreGraphics.framework  
+</code></pre>
+
+<p>微信：</p>
+<pre><code>SystemConfiguration.framework
+CoreTelephony.framework
+libsqlite3.tbd
+libc++.tbd
+libz.tbd  
+</code></pre>
+
+<p>QQ：</p>
+<pre><code>SystemConfiguration.framework
+libc++.tbd  
+</code></pre>
+
+<p>新浪微博：</p>
+<pre><code>SystemConfiguration.framework
+CoreTelephony.framework
+ImageIO.framework
+libsqlite3.tbd
+libz.tbd
+</code></pre>
+
+<h4>7.Build Settings-&gt;Linking-&gt;Other Linker Flags 设置-ObjC</h4>
+<p><img src="./SDK/Um_share2.png" alt="Um_share2" />  
+</p>
+<h4>8.配置SSO白名单</h4>
+<p>如果你的应用使用了如SSO授权登录或跳转到第三方分享功能，在iOS9/10下就需要增加一个可跳转的白名单，即<code>LSApplicationQueriesSchemes</code>(<a href="./Xcode_config.html">详解见Xcode_config第二条</a>.<br />
+)，否则将在SDK判断是否跳转时用到的canOpenURL时返回NO，进而只进行webview授权或授权/分享失败。 在项目中的info.plist中加入应用白名单，右键info.plist选择source code打开(plist具体设置在<code>Build Setting -&gt; Packaging -&gt; Info.plist File</code>可获取plist路径) 请根据选择的平台对以下配置进行裁剪:  
+</p>
+<pre><code>&lt;key&gt;LSApplicationQueriesSchemes&lt;/key&gt;
+&lt;array&gt;
+&lt;!-- 微信 URL Scheme 白名单--&gt;
+&lt;string&gt;wechat&lt;/string&gt;
+&lt;string&gt;weixin&lt;/string&gt;
+&lt;!-- 新浪微博 URL Scheme 白名单--&gt;
+&lt;string&gt;sinaweibohd&lt;/string&gt;
+&lt;string&gt;sinaweibo&lt;/string&gt;
+&lt;string&gt;sinaweibosso&lt;/string&gt;
+&lt;string&gt;weibosdk&lt;/string&gt;
+&lt;string&gt;weibosdk2.5&lt;/string&gt;
+&lt;!-- QQ、Qzone URL Scheme 白名单--&gt;
+&lt;string&gt;mqqapi&lt;/string&gt;
+&lt;string&gt;mqq&lt;/string&gt;
+&lt;string&gt;mqqOpensdkSSoLogin&lt;/string&gt;
+&lt;string&gt;mqqconnect&lt;/string&gt;
+&lt;string&gt;mqqopensdkdataline&lt;/string&gt;
+&lt;string&gt;mqqopensdkgrouptribeshare&lt;/string&gt;
+&lt;string&gt;mqqopensdkfriend&lt;/string&gt;
+&lt;string&gt;mqqopensdkapi&lt;/string&gt;
+&lt;string&gt;mqqopensdkapiV2&lt;/string&gt;
+&lt;string&gt;mqqopensdkapiV3&lt;/string&gt;
+&lt;string&gt;mqqopensdkapiV4&lt;/string&gt;
+&lt;string&gt;mqzoneopensdk&lt;/string&gt;
+&lt;string&gt;wtloginmqq&lt;/string&gt;
+&lt;string&gt;wtloginmqq2&lt;/string&gt;
+&lt;string&gt;mqqwpa&lt;/string&gt;
+&lt;string&gt;mqzone&lt;/string&gt;
+&lt;string&gt;mqzonev2&lt;/string&gt;
+&lt;string&gt;mqzoneshare&lt;/string&gt;
+&lt;string&gt;wtloginqzone&lt;/string&gt;
+&lt;string&gt;mqzonewx&lt;/string&gt;
+&lt;string&gt;mqzoneopensdkapiV2&lt;/string&gt;
+&lt;string&gt;mqzoneopensdkapi19&lt;/string&gt;
+&lt;string&gt;mqzoneopensdkapi&lt;/string&gt;
+&lt;string&gt;mqqbrowser&lt;/string&gt;
+&lt;/array&gt;  
+</code></pre>
+
+</blockquote>
+<p>不添加的话分享面板是不会显示出来对应平台的哦。  
+</p>
+<blockquote>
+<h4>9.URL Scheme</h4>
+<p>URL Scheme是用来跳转APP的<br />
+info-&gt;URL Types-&gt;+
+<img src="./SDK/Um_share3.png" alt="Um_share3" /><br />
+这里设置QQ的key时注意是<strong>“QQ”+腾讯QQ互联应用appID转换成十六进制（不足8位前面补0）</strong>  
+</p>
+<h4>10.Build Setting -&gt; Packaging -&gt; Info.plist添加HTTP传输允许</h4>
+<p><key>NSAppTransportSecurity</key>
+	<dict>
+    <key>NSAllowsArbitraryLoads</key>
+    <true/>
+	</dict>  
+</p>
+<h4>11.额。。差不多了吧</h4>
+<p>如果分享的图片出现如下问题：<br />
+<img src="./SDK/Um_share4.png" alt="Um_share4" /><br />
+可以将检查下<br />
+<img src="./SDK/Um_share5.png" alt="Um_share5" /><br />
+是不是图片的属性没有设置正确。😝</p>
+</blockquote>
+
+</body>
+</html>
+<!-- This document was created with MarkdownPad, the Markdown editor for Windows (http://markdownpad.com) -->

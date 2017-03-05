@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>SDK_阿里妈妈AFP广告 之banner</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+/* GitHub stylesheet for MarkdownPad (http://markdownpad.com) */
+/* Author: Nicolas Hery - http://nicolashery.com */
+/* Version: b13fe65ca28d2e568c6ed5d7f06581183df8f2ff */
+/* Source: https://github.com/nicolahery/markdownpad-github */
+
+/* RESET
+=============================================================================*/
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* BODY
+=============================================================================*/
+
+body {
+  font-family: Helvetica, arial, freesans, clean, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+  background-color: #fff;
+  padding: 20px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+body>*:first-child {
+  margin-top: 0 !important;
+}
+
+body>*:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* BLOCKS
+=============================================================================*/
+
+p, blockquote, ul, ol, dl, table, pre {
+  margin: 15px 0;
+}
+
+/* HEADERS
+=============================================================================*/
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 tt, h1 code, h2 tt, h2 code, h3 tt, h3 code, h4 tt, h4 code, h5 tt, h5 code, h6 tt, h6 code {
+  font-size: inherit;
+}
+
+h1 {
+  font-size: 28px;
+  color: #000;
+}
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #ccc;
+  color: #000;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+h4 {
+  font-size: 16px;
+}
+
+h5 {
+  font-size: 14px;
+}
+
+h6 {
+  color: #777;
+  font-size: 14px;
+}
+
+body>h2:first-child, body>h1:first-child, body>h1:first-child+h2, body>h3:first-child, body>h4:first-child, body>h5:first-child, body>h6:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+h1+p, h2+p, h3+p, h4+p, h5+p, h6+p {
+  margin-top: 10px;
+}
+
+/* LINKS
+=============================================================================*/
+
+a {
+  color: #4183C4;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* LISTS
+=============================================================================*/
+
+ul, ol {
+  padding-left: 30px;
+}
+
+ul li > :first-child, 
+ol li > :first-child, 
+ul li ul:first-of-type, 
+ol li ol:first-of-type, 
+ul li ol:first-of-type, 
+ol li ul:first-of-type {
+  margin-top: 0px;
+}
+
+ul ul, ul ol, ol ol, ol ul {
+  margin-bottom: 0;
+}
+
+dl {
+  padding: 0;
+}
+
+dl dt {
+  font-size: 14px;
+  font-weight: bold;
+  font-style: italic;
+  padding: 0;
+  margin: 15px 0 5px;
+}
+
+dl dt:first-child {
+  padding: 0;
+}
+
+dl dt>:first-child {
+  margin-top: 0px;
+}
+
+dl dt>:last-child {
+  margin-bottom: 0px;
+}
+
+dl dd {
+  margin: 0 0 15px;
+  padding: 0 15px;
+}
+
+dl dd>:first-child {
+  margin-top: 0px;
+}
+
+dl dd>:last-child {
+  margin-bottom: 0px;
+}
+
+/* CODE
+=============================================================================*/
+
+pre, code, tt {
+  font-size: 12px;
+  font-family: Consolas, "Liberation Mono", Courier, monospace;
+}
+
+code, tt {
+  margin: 0 0px;
+  padding: 0px 0px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px;
+}
+
+pre>code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent;
+}
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px;
+}
+
+pre code, pre tt {
+  background-color: transparent;
+  border: none;
+}
+
+kbd {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #DDDDDD;
+    background-image: linear-gradient(#F1F1F1, #DDDDDD);
+    background-repeat: repeat-x;
+    border-color: #DDDDDD #CCCCCC #CCCCCC #DDDDDD;
+    border-image: none;
+    border-radius: 2px 2px 2px 2px;
+    border-style: solid;
+    border-width: 1px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    line-height: 10px;
+    padding: 1px 4px;
+}
+
+/* QUOTES
+=============================================================================*/
+
+blockquote {
+  border-left: 4px solid #DDD;
+  padding: 0 15px;
+  color: #777;
+}
+
+blockquote>:first-child {
+  margin-top: 0px;
+}
+
+blockquote>:last-child {
+  margin-bottom: 0px;
+}
+
+/* HORIZONTAL RULES
+=============================================================================*/
+
+hr {
+  clear: both;
+  margin: 15px 0;
+  height: 0px;
+  overflow: hidden;
+  border: none;
+  background: transparent;
+  border-bottom: 4px solid #ddd;
+  padding: 0;
+}
+
+/* TABLES
+=============================================================================*/
+
+table th {
+  font-weight: bold;
+}
+
+table th, table td {
+  border: 1px solid #ccc;
+  padding: 6px 13px;
+}
+
+table tr {
+  border-top: 1px solid #ccc;
+  background-color: #fff;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+
+/* IMAGES
+=============================================================================*/
+
+img {
+  max-width: 100%
+}
+</style>
+</head>
+<body>
+<h2>阿里妈妈AFP广告 之banner(iOS)</h2>
+<h5>AFP广告banner条的接入</h5>
+<p>阿里妈妈的广告由先前的芒果广告衍生而来，这里仅介绍一下接入方法。  
+</p>
+<h4>1.先去<a href="http://afp.alimama.com/">后台</a>申请推广位Id；⚠️：一个id对应一个包名。不能共用。记得还需要在APP推广位进行设置</h4>
+<h4>2.在unity端写好调用。</h4>
+<p>因为AFP仅提供iOS版和android版的SDK，所以unity和iOS间的交互需要自己完成。</p>
+<pre><code>using UnityEngine;
+using System.Runtime.InteropServices;
+using System;
+using System.Collections.Generic;
+
+public class AliCallAct
+{
+    public static void Init (string key)
+    {
+        #if UNITY_IPHONE
+        Debug.Log (&quot;YXC&quot; + &quot;  Call iOS init key=&quot; + key [0]);
+        InitAlimamaiOS (key);
+        #endif
+    }
+
+    public static void ShowBanner (bool bo)
+    {
+        #if UNITY_IPHONE
+        Debug.Log (&quot;YXC&quot; + &quot;  Call iOS show  show=&quot; + bo);
+        ShowAliBanner (bo);
+        #endif
+    }
+    [DllImport(&quot;__Internal&quot;)]
+    static extern void InitAlimamaiOS (string aliKey);
+    [DllImport(&quot;__Internal&quot;)]
+    static extern void ShowAliBanner (bool bo);
+}
+</code></pre>
+
+<h4>3.在iOS放入导入需要的文件</h4>
+<p><img src="./SDK/Alimama1.png" /><br />
+如图这里有阿里原生的依赖文件<strong>base</strong>，因为我们要接入banner还需要导入<strong>banner文件</strong>。<br />
+这样就集成了阿里自己家的banner广告了。<br />
+<strong>如果想聚合其他家的广告</strong>  
+</p>
+<blockquote>
+<ul>
+<li>先在后台进入 <br />
+媒体资源-&gt;APP推广位-&gt;自己对应app-&gt;对应广告位-&gt;收入优化<br />
+点击开启对应平台并填写id</li>
+<li>在<br />
+媒体资源-&gt;其他平台SDK<br />
+下载对应SDK，添加到Xcode工程里。如上图SDK和MMUAdapter文件夹就是聚合Inmobi家的banner所需要的   
+</li>
+</ul>
+</blockquote>
+<h4>4.在xcode工程里初始化banner</h4>
+<h5>方式1:</h5>
+<blockquote>
+<ul>
+<li><code>UnityAppController.h</code>里添加<code>&lt;MMUBannersDelegate,MMUBrowserDelegate&gt;</code>协议</li>
+<li>在  <code>UnityAppController.m</code>里初始化，写入回调，但是这样代码都集中在UnityAppController.m里，以后添加其他家SDK的时候不方便。  
+</li>
+</ul>
+</blockquote>
+<h5>方式2:</h5>
+<p>优化后的方法就是将阿里的广告单独放到一个文件里。代码如下： <br />
+<strong>Alimama.h</strong>  
+</p>
+<pre><code>//
+//  Alimama_h
+//  Unity-iPhone
+//
+//  Created by Tomato2 on 16/11/7.
+//
+//
+#import &lt;Foundation/Foundation.h&gt;
+#import &quot;MMUBanners.h&quot;
+
+#ifndef Alimama_h
+#define Alimama_h
+@interface Alimama : NSObject&lt;MMUBannersDelegate,MMUBrowserDelegate&gt;
+{
+   MMUBanners *banners;
+}
+-(void)ShowAliBanner: (BOOL )bo;
+-(void)InitAlimamaiOS:(NSString*) aliId;
+@end
+extern &quot;C&quot;{
+void ShowAliBanner(const BOOL bo);
+void InitAlimamaiOS(const char* aliId);
+}
+#endif /* Alimama_h */
+</code></pre>
+
+<p><strong>Alimama.mm</strong></p>
+<pre><code>//
+//  Alimama.m
+//  Unity-iPhone
+//
+//  Created by Tomato2 on 16/11/7.
+//
+//
+#include &quot;Alimama.h&quot;
+@implementation Alimama
+
+-(void)ShowAliBanner: (BOOL )bo{
+    if(bo){
+        [UnityGetGLViewController().view addSubview:banners];
+        NSLog(@&quot;阿里妈妈banner 播放&quot;);
+    }
+    else{
+        [banners removeFromSuperview];
+        NSLog(@&quot;阿里妈妈banner 关闭&quot;);
+    }
+}
+-(void)InitAlimamaiOS:(NSString*) aliId{
+    NSLog(@&quot;初始化阿里妈妈 aliId=%@&quot;,aliId);
+    banners = [[MMUBanners alloc] initWithSlotId:aliId bannersDelegate:self  browserDelegate:self positionType:MMUPositionTypeTop_middle];
+    [UnityGetGLViewController().view addSubview:banners];
+    [banners requestBannerAd];
+}
+// 横幅请求失败的回调
+- (void)bannerAdsAllAdFail:(MMUBanners *)bannerAds withError:(NSError *)err{
+    NSLog(@&quot;阿里妈妈banner初始化失败%@&quot;,err);
+
+}
+// 横幅展现的回调
+- (void)bannerAdsAppear:(MMUBanners *)bannerAds{
+    NSLog(@&quot;展示阿里妈妈banner&quot;);
+
+}
+// 横幅点击的回调
+- (void)bannerClick:(MMUBanners *)bannerAds{
+    NSLog(@&quot;阿里妈妈banner 点击&quot;);
+}
+//返回视图控制器，此代理方法必须实现。
+- (UIViewController *)bannerViewControllerForPresentingModalView{
+    NSLog(@&quot;阿里妈妈 返回视图控制器&quot;);
+    return UnityGetGLViewController();
+}
+// 横幅关闭按钮点击的回调
+- (void)bannerClosed:(MMUBanners *)bannerAds{
+    NSLog(@&quot;阿里妈妈banner 关闭&quot;);
+
+}@end
+Alimama *alimama;
+void InitAlimamaiOS(const char* bo){
+    alimama =[Alimama new];
+    [alimama InitAlimamaiOS:[NSString stringWithUTF8String:bo]];
+}
+
+void ShowAliBanner(const BOOL bo){
+     NSLog(@&quot;阿里妈妈banner %@&quot;,bo?@&quot;展示&quot;:@&quot;隐藏&quot;);
+    [alimama ShowAliBanner:bo];
+}
+</code></pre>
+
+<p>这样在接入阿里的广告时仅需将这两个文件放至library里就ok了。<br />
+<a href="./代码文件夹/Alimama.h">Alimama.h</a> <br />
+<a href="./代码文件夹/Alimama.mm">Alimama.mm</a></p>
+
+</body>
+</html>
+<!-- This document was created with MarkdownPad, the Markdown editor for Windows (http://markdownpad.com) -->
