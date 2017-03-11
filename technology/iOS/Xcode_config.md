@@ -19,4 +19,8 @@ Apple官网的说法:
 iOS 9 brings some changes regarding of canOpenURL: in UIApplication class.
 >
 
-值得一提的事openURL不会受此限制。
+值得一提的事openURL不会受此限制。  
+#### 3.Build Failed: error: make directory File exists 或者是 directory empty  
+记住：沉着冷静，处变不惊，仔细分析。  
+提示路径问题，缺少某个文件，思路：去build path看看是否有多余或不存在路径，去compile file 里看一下有没有重复添加或者未添加，看一下缺少的文件在工程的位置。相信你一定能解决的
+

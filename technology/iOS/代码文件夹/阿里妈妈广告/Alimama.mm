@@ -20,7 +20,7 @@
 }
 -(void)InitAlimamaiOS:(NSString*) aliId{
     NSLog(@"初始化阿里妈妈 aliId=%@",aliId);
-    banners = [[MMUBanners alloc] initWithSlotId:aliId bannersDelegate:self  browserDelegate:self positionType:MMUPositionTypeTop_middle];
+    banners = [[MMUBanners alloc] initWithSlotId:aliId bannersDelegate:self  browserDelegate:self positionType:MMUPositionTypeDown_middle];
     [UnityGetGLViewController().view addSubview:banners];
     [banners requestBannerAd];
 }

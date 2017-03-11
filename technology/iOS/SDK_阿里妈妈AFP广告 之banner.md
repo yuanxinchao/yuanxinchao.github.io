@@ -141,6 +141,7 @@
 	}
 这样在接入阿里的广告时仅需将这两个文件放至library里就ok了。  
 [Alimama.h](./代码文件夹/Alimama.h)   
-[Alimama.mm](./代码文件夹/Alimama.mm)
+[Alimama.mm](./代码文件夹/Alimama.mm)  
+如果在组建的时候报**ld: framework not found UTDID**错误，就是sdk下的UTDIDframework没有添加，添加一下就好了
 
 
