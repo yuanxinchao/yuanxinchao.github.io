@@ -24,4 +24,10 @@
 ![UnityFrame](./UnityFrame/UnityFrame3.png) 
 
 >### 3.SaveManager  
->
+>1.是否要load preference 和achievement  
+>2.除了JSON/XML   
+>3.较好的方案是asset store的一个二进制存储方案Easy Save 2。  
+>优点：存储很快(移动设备也很快)，可以加密Encrypt save data，截屏snap a screen，混淆 Obfuscation data 等  
+
+# StrangeIoC #  
+#### UI和逻辑分开
