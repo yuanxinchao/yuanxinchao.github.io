@@ -31,3 +31,8 @@
 
 # StrangeIoC #  
 #### UI和逻辑分开
+### Binding ###
+IBinder.Bind<key>().To<value>()
+IBinder.Bind<key>().To<value>().ToName(name)  
+![UnityFrame](./UnityFrame/UnityFrame4.png)  
+![UnityFrame](./UnityFrame/UnityFrame5.png) 
