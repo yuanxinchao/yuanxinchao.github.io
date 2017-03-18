@@ -49,10 +49,7 @@ int goodnum;
         
     }
 }
--(void)restore:(int)type
-{
-    [[SKPaymentQueue defaultQueue] restoreCompletedTransactions];
-}
+
 -(void)RequestProductData
 {
     NSLog(@"---------请求对应的产品信息------------");
@@ -177,7 +174,6 @@ int goodnum;
             }break;
             case SKPaymentTransactionStateRestored://已经购买过该商品
                 [self restoreTransaction:transaction];
-                pcb(goodnum,YES);
                 NSLog(@"-----已经购买过该商品 --------");
             case SKPaymentTransactionStatePurchasing:      //商品添加进列表
                 NSLog(@"-----商品添加进列表 --------");
@@ -241,34 +237,7 @@ int goodnum;
     
 }
 -(void) paymentQueueRestoreCompletedTransactionsFinished: (SKPaymentTransaction *)transaction{
-    NSLog(@"恢复购买有回调");
-//    NSString* productIdentifier = @"";
-//    NSLog(@"恢复购买有回调1");
-//    switch (transaction.transactionState)
-//    {
-//            NSLog(@"恢复购买有回调2");
-//
-//        case SKPaymentTransactionStateRestored:
-//        {
-//            NSLog(@"恢复购买有回调3");
-//            if (transaction.originalTransaction) {
-//                productIdentifier = transaction.originalTransaction.payment.productIdentifier;
-//                if([productIdentifier isEqualToString: ProductID_IAP18]){
-//                    pcb(goodnum,YES);
-//                }
-//
-//            }
-//            else {
-//                productIdentifier = transaction.payment.productIdentifier;
-//                if([productIdentifier isEqualToString: ProductID_IAP18]){
-//                    pcb(goodnum,YES);
-//                }
-//            }
-//        }
-//        default:
-//            break;
-//    }
-//    pcb(goodnum,NO);
+    
 }
 
 - (void) restoreTransaction: (SKPaymentTransaction *)transaction
@@ -278,8 +247,7 @@ int goodnum;
 }
 
 -(void) paymentQueue:(SKPaymentQueue *) paymentQueue restoreCompletedTransactionsFailedWithError:(NSError *)error{
-    NSLog(@"恢复购买失败");
-    pcb(goodnum,NO);
+    NSLog(@"-------paymentQueue----");
 }
 
 #pragma mark connection delegate
@@ -330,20 +298,13 @@ extern "C" {
     
     
     void InitAndBuy(int num,Paycallback paycallback){
-        NSLog(@"购买id为%d的物品",num);
         pcb=paycallback;
         goodnum =num;
         [[RechargeVC defaultChargeVC] addTransactionListener];
         [[RechargeVC defaultChargeVC] buy:num];
        
     }
-    void RestoreBuy(int num,Paycallback paycallback){
-        NSLog(@"恢复购买id为%d的物品",num);
-        pcb=paycallback;
-        goodnum =num;
-        [[RechargeVC defaultChargeVC] addTransactionListener];
-        [[RechargeVC defaultChargeVC] restore:num];
-    }
+    
     
     
     

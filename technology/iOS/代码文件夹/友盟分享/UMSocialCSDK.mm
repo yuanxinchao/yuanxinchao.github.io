@@ -373,6 +373,12 @@ void openShareWithImagePath(int platform[], int platformNum, const char* text, c
         
     }
     [UMSocialUIManager showShareMenuViewInWindowWithPlatformSelectionBlock:^(UMSocialPlatformType platformType, NSDictionary *userInfo) {
+        //********新浪添加URL*********//
+        if(platformType==UMSocialPlatformType_Sina){
+            NSString *newContent = [NSString stringWithFormat:@"%@ https://%@",nstext,nstargeturl];
+            NSLog(@"更改后的分享内容为%@",newContent);
+            messageObject.text =  newContent;
+        }
         [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:getCurrentViewController() completion:^(id data, NSError *error) {
             int code;
             NSString* message;
@@ -464,7 +470,12 @@ void directShare(const char* text, const char* imagePath, const char* title,cons
         
         
     }
- 
+    //********新浪添加URL*********//
+    if(platform==UMSocialPlatformType_Sina){
+        NSString *newContent = [NSString stringWithFormat:@"%@ https://%@",nstext,nstargeturl];
+        NSLog(@"更改后的分享内容为%@",newContent);
+        messageObject.text =  newContent;
+    }
     [[UMSocialManager defaultManager] shareToPlatform:getPlatformString(platform) messageObject:messageObject currentViewController:getCurrentViewController() completion:^(id data, NSError *error) {
         int code;
         NSLog(@"dddddd");
