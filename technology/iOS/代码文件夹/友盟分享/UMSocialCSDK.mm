@@ -374,11 +374,21 @@ void openShareWithImagePath(int platform[], int platformNum, const char* text, c
     }
     [UMSocialUIManager showShareMenuViewInWindowWithPlatformSelectionBlock:^(UMSocialPlatformType platformType, NSDictionary *userInfo) {
         //********新浪添加URL*********//
-        if(platformType==UMSocialPlatformType_Sina){
-            NSString *newContent = [NSString stringWithFormat:@"%@ https://%@",nstext,nstargeturl];
-            NSLog(@"更改后的分享内容为%@",newContent);
-            messageObject.text =  newContent;
+        // if(platformType==UMSocialPlatformType_Sina){
+        //     NSString *newContent = [NSString stringWithFormat:@"%@ https://%@",nstext,nstargeturl];
+        //     NSLog(@"更改后的分享内容为%@",newContent);
+        //     messageObject.text =  newContent;
+        // }
+        //********微信需要将title设置为content*********//
+        if(platformType==UMSocialPlatformType_WechatTimeLine){
+            NSString* nstitle = nstext;
+            NSLog(@"更改后的分享title内容为%@",nstitle);
+            UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:nstitle descr:[NSString stringWithUTF8String:text] thumImage:image];
+            //设置网页地址
+            shareObject.webpageUrl =nstargeturl;
+            messageObject.shareObject = shareObject;
         }
+
         [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:getCurrentViewController() completion:^(id data, NSError *error) {
             int code;
             NSString* message;
@@ -471,10 +481,19 @@ void directShare(const char* text, const char* imagePath, const char* title,cons
         
     }
     //********新浪添加URL*********//
-    if(platform==UMSocialPlatformType_Sina){
-        NSString *newContent = [NSString stringWithFormat:@"%@ https://%@",nstext,nstargeturl];
-        NSLog(@"更改后的分享内容为%@",newContent);
-        messageObject.text =  newContent;
+    // if(platform==UMSocialPlatformType_Sina){
+    //     NSString *newContent = [NSString stringWithFormat:@"%@ https://%@",nstext,nstargeturl];
+    //     NSLog(@"更改后的分享内容为%@",newContent);
+    //     messageObject.text =  newContent;
+    // }
+    //********微信需要将title设置为content*********//
+    if(platform==UMSocialPlatformType_WechatTimeLine){
+        NSString* nstitle = nstext;
+        NSLog(@"更改后的分享title内容为%@",nstitle);
+        UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:nstitle descr:[NSString stringWithUTF8String:text] thumImage:image];
+        //设置网页地址
+        shareObject.webpageUrl =nstargeturl;
+        messageObject.shareObject = shareObject;
     }
     [[UMSocialManager defaultManager] shareToPlatform:getPlatformString(platform) messageObject:messageObject currentViewController:getCurrentViewController() completion:^(id data, NSError *error) {
         int code;
