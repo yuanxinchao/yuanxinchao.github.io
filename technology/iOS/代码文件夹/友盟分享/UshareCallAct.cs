@@ -2,7 +2,7 @@
 using System.Runtime.InteropServices;
 using System;
 using System.Collections.Generic;
-public class UshareCallAndroid
+public class UshareCallAct
 {
 	public static void InitUmengKey (string[] key)
 	{
@@ -17,17 +17,20 @@ public class UshareCallAndroid
 		#endif
 	}
 
+	public static bool IsInstall (Platform platform)
+	{
+		#if UNITY_EDITOR
+		return false;
+		#endif
+		#if UNITY_IPHONE
+		return IsInstalliOS (platform);
+		#endif
+
+	}
 
 
-
-
-
-
-
-
-
-
-
+	[DllImport("__Internal")]
+	static extern bool IsInstalliOS (Platform platform);
 
 	[DllImport("__Internal")]
 	static extern void InitUmengKeyiOS (string QqKey, string QqSecret, string WeixinKey, string WeixinSecret, string SinaKey, string SinaSecret, string UmengKey);

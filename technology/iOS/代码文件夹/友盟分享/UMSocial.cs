@@ -163,6 +163,9 @@ public class UMSocial
 #elif UNITY_IPHONE
 		shareDelegate = callback;
 		openShareWithImagePath (platformsInt, length, text, imagePath, title, targeturl, ShareCallback);
+
+#elif UNITY_STANDALONE
+		Application.OpenURL (targeturl);
 #endif
 
 	}

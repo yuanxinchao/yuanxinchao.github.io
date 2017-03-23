@@ -188,9 +188,47 @@ void openShareWithImageOnlyiOS(int platform[],
     
     
 }
+BOOL IsInstalliOS(int platform){
+    NSLog(@"YXC  iOS调用判断平台");
+    BOOL isInstalliOS=false;
+    switch (platform) {
+        case 0:
+            if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"Sinaweibo://"]]) {
+                //新浪微博
+                isInstalliOS=true;
+            }
+            break;
+         case 1:
+            if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"weixin://"]]) {
+                //微信
+                isInstalliOS=true;
+            }
+            break;
+        case 3:
+            if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"mqq://"]]) {
+                //QQ
+                 isInstalliOS=true;
+            }
+            break;
+        case 5:
+            if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"Facebook://"]]) {
+                //facebook
+                isInstalliOS=true;
+            }
+            break;
+        case 6:
+            if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"Twitter://"]]) {
+                //推特
+                isInstalliOS=true;
+            }
+            break;
+        default:
+            break;
+    }
+    return isInstalliOS;
+}
 
-
-
+//-----------------自己加的两个方法-------------------//
 void authorize(int platform, AuthHandler callback){
     	
       [[UMSocialManager defaultManager]  getUserInfoWithPlatform: getPlatformString(platform) currentViewController:getCurrentViewController() completion:^(id result, NSError *error) {
@@ -374,11 +412,11 @@ void openShareWithImagePath(int platform[], int platformNum, const char* text, c
     }
     [UMSocialUIManager showShareMenuViewInWindowWithPlatformSelectionBlock:^(UMSocialPlatformType platformType, NSDictionary *userInfo) {
         //********新浪添加URL*********//
-        // if(platformType==UMSocialPlatformType_Sina){
-        //     NSString *newContent = [NSString stringWithFormat:@"%@ https://%@",nstext,nstargeturl];
-        //     NSLog(@"更改后的分享内容为%@",newContent);
-        //     messageObject.text =  newContent;
-        // }
+         if(platformType==UMSocialPlatformType_Sina){
+             NSString *newContent = [NSString stringWithFormat:@"%@  %@",nstext,nstargeturl];
+             NSLog(@"更改后的分享内容为%@",newContent);
+             messageObject.text =  newContent;
+         }
         //********微信需要将title设置为content*********//
         if(platformType==UMSocialPlatformType_WechatTimeLine){
             NSString* nstitle = nstext;
@@ -481,11 +519,11 @@ void directShare(const char* text, const char* imagePath, const char* title,cons
         
     }
     //********新浪添加URL*********//
-    // if(platform==UMSocialPlatformType_Sina){
-    //     NSString *newContent = [NSString stringWithFormat:@"%@ https://%@",nstext,nstargeturl];
-    //     NSLog(@"更改后的分享内容为%@",newContent);
-    //     messageObject.text =  newContent;
-    // }
+     if(platform==UMSocialPlatformType_Sina){
+         NSString *newContent = [NSString stringWithFormat:@"%@  %@",nstext,nstargeturl];
+         NSLog(@"更改后的分享内容为%@",newContent);
+         messageObject.text =  newContent;
+     }
     //********微信需要将title设置为content*********//
     if(platform==UMSocialPlatformType_WechatTimeLine){
         NSString* nstitle = nstext;

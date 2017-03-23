@@ -53,5 +53,9 @@ void openShareWithImageOnlyiOS(int platform[],
                                ShareDelegate callback);
 //------------------------------------------------//
     
+
+//是否安装某应用
+BOOL IsInstalliOS(int platformNum);
+
 }
 #endif /* defined(__UmengGame__UMSocialCSDK__) */

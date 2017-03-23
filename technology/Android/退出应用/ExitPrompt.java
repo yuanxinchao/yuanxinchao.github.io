@@ -13,7 +13,7 @@ public class ExitPrompt{
 		mActivity = UnityPlayer.currentActivity;
 		checkActivity();
 	}
-	public static void ExitPromptGame(String title,String note,String confirm,String back){
+	public static void ExitPromptGame(String title,String note,String confirm,String back,final ExitListener listener){
 		new  AlertDialog.Builder(mActivity)  
 		.setTitle(title)  
 		.setMessage(note)  
@@ -23,6 +23,7 @@ public class ExitPrompt{
 			public void onClick(DialogInterface dialog, int which) {
 				// TODO Auto-generated method stub
 				Log.i("ExitPrompt","YXC   用户点击了确定退出按钮");
+				listener.onExit(true);
 				exitGameProcess(mActivity);
 			}
 		})                  
@@ -32,7 +33,7 @@ public class ExitPrompt{
 			public void onClick(DialogInterface dialog, int which) {
 				// TODO Auto-generated method stub
 				Log.i("ExitPrompt","YXC   用户点击了取消退出按钮");
-				
+				listener.onExit(false);
 			}
 		}) 
 		.show();
