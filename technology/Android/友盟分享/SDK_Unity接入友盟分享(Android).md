@@ -18,6 +18,7 @@
 * 友盟Key的更改(iOS端写在了代码里,而android写在了配置文件里)  
 * 屏幕方向的更改 portrait 还是 landscape 等
 * 微信的回调入口activity，改为  自己包名.wxapi.WXEntryActivity (当然这个需要导出对应jar包)
+* **AndroidMainfest 里配置的QQkey 要对应初始化的key**
 * 检查一遍  
 
 #### 4.在MainActivity里加入回调，导出对应jar  

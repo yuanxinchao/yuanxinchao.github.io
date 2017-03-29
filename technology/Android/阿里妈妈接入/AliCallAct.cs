@@ -5,48 +5,56 @@ using System.Collections.Generic;
 
 public class AliCallAct
 {
-    public static void Init (string[] key)
-    {
-        #if UNITY_IPHONE
+	public static void Init (string[] key)
+	{
+		#if UNITY_EDITOR
+		return;
+		#endif
+		#if UNITY_IPHONE
 		Debug.Log ("YXC" + "  Call iOS init key=" + key [0]);
 		InitAlimamaiOS (key[0]);
-        #endif
+		#endif
 
-        #if UNITY_ANDROID
+		#if UNITY_ANDROID
         Debug.Log("YXC" + "  Call android init banner key=" + key [0] + "inter key=" + key [1]);
 
         InitAlimamaAndroid(key);
-        #endif
-    }
+		#endif
+	}
 
-    public static void ShowBanner (bool bo)
-    {
-        #if UNITY_IPHONE
+	public static void ShowBanner (bool bo)
+	{
+		#if UNITY_EDITOR
+		return;
+		#endif
+		#if UNITY_IPHONE
 		Debug.Log ("YXC" + "  Call iOS show  show=" + bo);
 		ShowAliBanner (bo);
-        #endif
+		#endif
 
-        #if UNITY_ANDROID
+		#if UNITY_ANDROID
         Debug.Log("YXC" + "  Call android show  show=" + bo);
         ShowAliBannerAndroid(bo);
-        #endif
-    }
+		#endif
+	}
 
-    public static void ShowInterstitial ()
-    {
+	public static void ShowInterstitial ()
+	{
 
-
-        #if UNITY_ANDROID
+		#if UNITY_EDITOR
+		return;
+		#endif
+		#if UNITY_ANDROID
         Debug.Log("YXC" + "  Call android show  show=");
         ShowAliInterstitialAndroid();
-        #endif
-    }
+		#endif
+	}
 
-    [DllImport("__Internal")]
-    static extern void InitAlimamaiOS (string aliKey);
+	[DllImport("__Internal")]
+	static extern void InitAlimamaiOS (string aliKey);
 
-    [DllImport("__Internal")]
-    static extern void ShowAliBanner (bool bo);
+	[DllImport("__Internal")]
+	static extern void ShowAliBanner (bool bo);
 
 
     #if UNITY_ANDROID

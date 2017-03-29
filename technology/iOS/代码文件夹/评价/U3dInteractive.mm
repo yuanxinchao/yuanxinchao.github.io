@@ -13,38 +13,81 @@
 //获取imsi
 #import <CoreTelephony/CTCarrier.h>
 #import <CoreTelephony/CTTelephonyNetworkInfo.h>
+#import <UIKit/UIKit.h>
 //获取网络类型
 RateCB Global_rateCB;
 @implementation U3dInteractive
 
 @synthesize appid = _appid;
 //评价框的回调
--(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    //    NSLog(@" button index=%ld is clicked.....", (long)buttonIndex);
-    //     NSLog(@" alertView tag=%ld is clicked.....", (long)alertView.tag);
-    if(buttonIndex==1&&alertView.tag==0){
+//-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+//    //    NSLog(@" button index=%ld is clicked.....", (long)buttonIndex);
+//    //     NSLog(@" alertView tag=%ld is clicked.....", (long)alertView.tag);
+//    if(buttonIndex==1&&alertView.tag==0){
+//        Global_rateCB(true);
+//        NSString *str = [NSString stringWithFormat:@"itms-apps://itunes.apple.com/app/id%@",self.appid];
+//        
+//        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
+//    }else{
+//        Global_rateCB(false);
+//    }
+//}
+-(void)GotoRate:(bool )bo{
+    if(bo){
         Global_rateCB(true);
         NSString *str = [NSString stringWithFormat:@"itms-apps://itunes.apple.com/app/id%@",self.appid];
         
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
+
+        
     }else{
         Global_rateCB(false);
     }
 }
+////评价的方法
+//-(void)RateApp:(NSString *)appleid{
+//    self.appid=appleid;
+//    NSString *appName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];
+//    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"去给'%@'打分吧！",appName]
+//                                                        message:@"您的评价对我们很重要"
+//                                                       delegate:self
+//                                              cancelButtonTitle:nil
+//                                              otherButtonTitles:@"稍后评价",@"去评价",nil];
+//    
+//    [alertView show];
+//}
+
 //评价的方法
 -(void)RateApp:(NSString *)appleid{
     self.appid=appleid;
     NSString *appName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"去给'%@'打分吧！",appName]
-                                                        message:@"您的评价对我们很重要"
-                                                       delegate:self
-                                              cancelButtonTitle:nil
-                                              otherButtonTitles:@"稍后评价",@"去评价",nil];
+    UIAlertController *alertController =[UIAlertController
+                                   alertControllerWithTitle:[NSString stringWithFormat:@"去给'%@'打分吧！",appName]
+                                   message:@"您的评价对我们很重要"
+                                   preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *cancelAction = [UIAlertAction
+                                   actionWithTitle:NSLocalizedString(@"稍后评价", @"Cancel action")
+                                   style:UIAlertActionStyleCancel
+                                   handler:^(UIAlertAction *action)
+                                   {
+                                       NSLog(@"Cancel action");
+                                       [self GotoRate:false];
+                                   }];
     
-    [alertView show];
-    
-}
+    UIAlertAction *okAction = [UIAlertAction
+                               actionWithTitle:NSLocalizedString(@"去评价", @"OK action")
+                               style:UIAlertActionStyleDefault
+                               handler:^(UIAlertAction *action)
+                               {
+                                   NSLog(@"OK action");
+                                   [self GotoRate:true];
+                               }];
 
+    [alertController addAction:cancelAction];
+    [alertController addAction:okAction];
+    
+    [UnityGetGLViewController() presentViewController:alertController animated:YES completion:nil];
+}
 
 - (void)dealloc{
     [[NSNotificationCenter defaultCenter] removeObserver:self];

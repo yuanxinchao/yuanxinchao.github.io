@@ -13,7 +13,6 @@
     NSString*			_appid;
 }
 @property (copy, nonatomic) NSString*			appid;
-
 -(void)RateApp: (NSString *)appleid;
 @end
 extern "C"{
