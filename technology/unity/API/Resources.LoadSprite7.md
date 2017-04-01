@@ -1,7 +1,19 @@
 ## Resources.Load
-Resources.Load<Sprite>("7")
-         GameObject prueba = new GameObject ("prueba");
-         SpriteRenderer renderer= prueba.AddComponent<SpriteRenderer> ();
-         Object [] sprites;
-         sprites = Resources.LoadAll ("Tiles/Castillo");
-         renderer.sprite = (Sprite)sprites [3];
+	using UnityEngine;
+	using System.Collections;
+	
+	public class ResourceManager
+	{
+	    static Sprite[] sprites;
+	
+	    public static Sprite LoadSinglePic (string path)
+	    {
+	        return Resources.Load<Sprite>(path);
+	    }
+	
+	    public static Sprite LoadMultiPic (string path , int index)
+	    {
+	        sprites = Resources.LoadAll<Sprite>(path);
+	        return sprites [index];
+	    }
+	}
