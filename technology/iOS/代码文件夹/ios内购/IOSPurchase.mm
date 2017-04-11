@@ -9,9 +9,9 @@
 
 //在内购项目中创的商品单号
 #define ProductID_IAP18 @"com.pepper.ljsp.rmads"//18
-#define ProductID_IAP30 @"com.fanqie.niukou.thirtycharge" //30
-#define ProductID_IAP68 @"com.fanqie.niukou.sixtycharge" //68
-//#define ProductID_IAP9p1000 @"Nada.JPYF04" //1000
+#define ProductID_IAP30 @"com.pepper.elsfk.SkinTetris" //30
+#define ProductID_IAP68 @"com.pepper.elsfk.SkinFresh1" //68
+#define ProductID_IAP69 @"com.pepper.elsfk.SkinDay" //1000
 //#define ProductID_IAP24p6000 @"Nada.JPYF05" //6000
 
 @interface RechargeVC ()
@@ -67,7 +67,9 @@ int goodnum;
         case IAP68:
             product=[[NSArray alloc] initWithObjects:ProductID_IAP68,nil];
             break;
-            
+        case IAP69:
+            product=[[NSArray alloc] initWithObjects:ProductID_IAP69,nil];
+            break;
         default:
             break;
     }
@@ -105,12 +107,51 @@ int goodnum;
         case IAP68:
             payment  = [SKPayment paymentWithProductIdentifier:ProductID_IAP68];    //支付68
             break;
+        case IAP69:
+            payment  = [SKPayment paymentWithProductIdentifier:ProductID_IAP69];    //支付68
+            break;
         default:
             break;
     }
     NSLog(@"---------发送购买请求------------");
     [[SKPaymentQueue defaultQueue] addPayment:payment];
     
+}
+-(int)TranslateProductId:(NSString *) productId
+{
+    if([productId  isEqual:@"com.pepper.ljsp.rmads"]){
+        return 1;
+    }
+    if([productId  isEqual:@"com.pepper.elsfk.SkinTetris"]){
+        return 2;
+    }
+    if([productId  isEqual:@"com.pepper.elsfk.SkinFresh1"]){
+        return 3;
+    }
+    if([productId  isEqual:@"com.pepper.elsfk.SkinDay"]){
+        return 4;
+    }
+//    if([productId  isEqual:@"com.pepper.flow.xts10c"]){
+//        return 6;
+//    }
+//    if([productId  isEqual:@"com.pepper.flow.ts25c1"]){
+//        return 7;
+//    }
+//    if([productId  isEqual:@"com.pepper.flow.ts40c1"]){
+//        return 8;
+//    }
+//    if([productId  isEqual:@"com.pepper.flow.fsgkb"]){
+//        return 9;
+//    }
+//    if([productId  isEqual:@"com.pepper.flow.zsgkb"]){
+//        return 10;
+//    }
+//    if([productId  isEqual:@"com.pepper.flowlsgkb"]){
+//        return 11;
+//    }
+//    if([productId  isEqual:@"com.pepper.flow.lsggk"]){
+//        return 12;
+//    }
 }
 - (void)requestProUpgradeProductData
 {
@@ -176,9 +217,9 @@ int goodnum;
                 
             }break;
             case SKPaymentTransactionStateRestored://已经购买过该商品
-                [self restoreTransaction:transaction];
+                goodnum = [self TranslateProductId:transaction.payment.productIdentifier];
                 pcb(goodnum,YES);
-                NSLog(@"-----已经购买过该商品 --------");
+                NSLog(@"-----已经购买过该商品 ----%d",goodnum);
             case SKPaymentTransactionStatePurchasing:      //商品添加进列表
                 NSLog(@"-----商品添加进列表 --------");
                 break;
@@ -241,7 +282,8 @@ int goodnum;
     
 }
 -(void) paymentQueueRestoreCompletedTransactionsFinished: (SKPaymentTransaction *)transaction{
-    NSLog(@"恢复购买有回调");
+    NSLog(@"恢复购买完成");
+     pcb(-1,YES);
 //    NSString* productIdentifier = @"";
 //    NSLog(@"恢复购买有回调1");
 //    switch (transaction.transactionState)
@@ -279,7 +321,7 @@ int goodnum;
 
 -(void) paymentQueue:(SKPaymentQueue *) paymentQueue restoreCompletedTransactionsFailedWithError:(NSError *)error{
     NSLog(@"恢复购买失败");
-    pcb(goodnum,NO);
+    pcb(-1,NO);
 }
 
 #pragma mark connection delegate
@@ -344,9 +386,6 @@ extern "C" {
         [[RechargeVC defaultChargeVC] addTransactionListener];
         [[RechargeVC defaultChargeVC] restore:num];
     }
-    
-    
-    
 }
 
 
