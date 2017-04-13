@@ -21,11 +21,11 @@ public class HeyZapAds: BaseAds<HeyZapAds>
         HeyzapAds.Start(key [0], HeyzapAds.FLAG_NO_OPTIONS);
         HZIncentivizedAd.SetDisplayListener(ReceiveHZ);
         HZInterstitialAd.SetDisplayListener(ReceiveHZ);
-        HeyzapAds.ShowMediationTestSuite();
+
         HZBannerAd.ShowWithOptions(null);
         HZBannerAd.SetDisplayListener(ReceiveHZ);
         GetIncentivizedVideo();
-
+        GetInterstitial();
     }
 
     #region  展示banner 视屏 插屏
@@ -35,9 +35,11 @@ public class HeyZapAds: BaseAds<HeyZapAds>
         showBanner = show;
         if (show)
         {
+            Debug.Log("YXC" + this.GetType() + "  展示banner");
             HZBannerAd.ShowWithOptions(null);
         } else
         {
+            Debug.Log("YXC" + this.GetType() + "  隐藏banner");
             HZBannerAd.Hide();
         }
         //      AdsYuMiBannerUnity.setAdsYuMiViewHidden (!show);
@@ -85,11 +87,11 @@ public class HeyZapAds: BaseAds<HeyZapAds>
 
     public void ReceiveHZ (string state , string tag)
     {
-        Debug.Log("YXC" + this.GetType() + "ReceiveHZ");
-        if (state.Equals("incentivized_result_complete"))
-        {
-            AdsCallback("HIDDENREWARDED");
-        }
+        Debug.Log("YXC" + this.GetType() + "获取广告回调信息:" + state);
+//        if (state.Equals("incentivized_result_complete"))
+//        {
+//            AdsCallback("HIDDENREWARDED");
+//        }
         if (state.Equals("hide"))
         {
             AdsCallback("HIDDENREWARDED");
@@ -123,22 +125,21 @@ public class HeyZapAds: BaseAds<HeyZapAds>
         {
             Debug.Log("YXC" + this.GetType() + "load inter video fail go to load again");
             GetInterstitial();
-        } else if (ev.Contains("HIDDENREWARDED"))
+        } else if (ev.Contains("HIDDENREWARDED") || ev.Contains("HIDDENINTER"))
         {
             // A rewarded video was closed.  Preload the next rewarded video.
-            Debug.Log("YXC" + this.GetType() + "视频播放完成，现在取下次视频");
+            Debug.Log("YXC" + this.GetType() + "视频或插屏播放完成，现在取下次视频");
             if (finishtodo != null)
                 finishtodo();
 
-            GetIncentivizedVideo();
-        } else if (ev.Contains("HIDDENINTER"))
-        {
-            // A rewarded video was closed.  Preload the next rewarded video.
-            Debug.Log("YXC" + this.GetType() + "视频播放完成，现在取下次视频");
-            if (finishtodo != null)
-                finishtodo();
-
-            GetInterstitial();
+            if (!IsIncentivizedAvailable())
+            {
+                GetIncentivizedVideo();
+            }
+            if (!IsInterstitialAvailable())
+            {
+                GetInterstitial();
+            }
         }
     }
 
@@ -146,13 +147,14 @@ public class HeyZapAds: BaseAds<HeyZapAds>
 
     public override void GetIncentivizedVideo ()
     {
+
         Debug.Log("YXC" + this.GetType() + "获取视频");
         HZIncentivizedAd.Fetch();
-
     }
 
     public override void GetInterstitial ()
     {
+
         Debug.Log("YXC" + this.GetType() + "获取插频");
         HZInterstitialAd.Fetch();
     }
@@ -208,8 +210,36 @@ public class HeyZapAds: BaseAds<HeyZapAds>
         #endif
     }
 
+    public void ChangeResource (GetResourceCallback getResourceCB = null)
+    {
+        #if UNITY_IPHONE
+        ChangeNaviteAds(GetResCallback);
+        #endif
+        #if UNITY_ANDROID
+
+
+        #endif
+    }
+
+    public void ClickAds ()
+    {
+
+        ClickTheAds();
+    }
+
+
+    public delegate void GetResourceCallback(bool bo,string iconUrl,string bgPicUrl,string title,string content);
+
+    static GetResourceCallback getCallback;
+
     [DllImport("__Internal")]
     static extern void GetiOSAdsResource (GetResourceCallback getCB);
+
+    [DllImport("__Internal")]
+    static extern void ChangeNaviteAds (GetResourceCallback getCB);
+
+    [DllImport("__Internal")]
+    static extern void ClickTheAds ();
 
     [AOT.MonoPInvokeCallback(typeof(GetResourceCallback))]
     static void GetResCallback (bool bo , string iconUrl , string bgPicUrl , string title , string content)
@@ -221,18 +251,8 @@ public class HeyZapAds: BaseAds<HeyZapAds>
     }
 
 
-    public delegate void GetResourceCallback(bool bo,string iconUrl,string bgPicUrl,string title,string content);
-
-    static GetResourceCallback getCallback;
 
 
-    public void ClickAds ()
-    {
 
-        ClickTheAds();
-    }
-
-    [DllImport("__Internal")]
-    static extern void ClickTheAds ();
 
 }

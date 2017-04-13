@@ -482,24 +482,25 @@ typedef void (*GetResourceCallback)(BOOL success, const char * iconUrl, const ch
         }
     }
     HZNativeAd *ad;
+    NSMutableArray *ads = [[NSMutableArray alloc] init];
     void GetiOSAdsResource(GetResourceCallback getCB){
-        [HZNativeAdController fetchAds:20 tag:nil completion:^(NSError *error, HZNativeAdCollection *collection) {
+        [HZNativeAdController fetchAds:30 tag:nil completion:^(NSError *error, HZNativeAdCollection *collection) {
             if (error) {
                 NSLog(@"hz_native_fetchAds error = %@",error);
-                getCB(false,"","","","");
             } else {
                 int i=0;
                 // Use the `collection` to display ads
                 for (i=0; i<collection.ads.count; i++) {
                     ad=[collection.ads objectAtIndex:i];
                     if(ad.portraitCreative.url!=nil&&ad.iconImage.url!=nil){
-                        break;
+                        [ads addObject:ad];
                     }
                 }
-                if(i==collection.ads.count){
+                if(ads.count == 0){
                     getCB(false,"","","","");
                 }
                 else{
+                    ad = [ads objectAtIndex:0];
                     getCB(true,
                           [[ad.iconImage.url absoluteString] UTF8String],
                           [[ad.portraitCreative.url absoluteString] UTF8String],
@@ -510,6 +511,26 @@ typedef void (*GetResourceCallback)(BOOL success, const char * iconUrl, const ch
                 }
             }
         }];
+    }
+    int NativeAdsIndex=0;
+    void ChangeNaviteAds(GetResourceCallback getCB){
+        if(ads.count!=0){
+            NativeAdsIndex++;
+            NativeAdsIndex= NativeAdsIndex % ads.count;
+            
+        ad = [ads objectAtIndex:NativeAdsIndex];
+            getCB(true,
+                  [[ad.iconImage.url absoluteString] UTF8String],
+                  [[ad.portraitCreative.url absoluteString] UTF8String],
+                  [ad.appName UTF8String],
+                  [ad.appDescription UTF8String]);
+            
+            [ad reportImpression];
+        }
+        else{
+        getCB(false,"","","","");
+        }
+        NSLog(@"NativeAdsIndex =%d ads.count= %lu",NativeAdsIndex,(unsigned long)ads.count);
     }
     void ClickTheAds(){
          NSLog(@"kaishi0");
@@ -534,7 +555,5 @@ typedef void (*GetResourceCallback)(BOOL success, const char * iconUrl, const ch
                                        [UnityGetGLViewController()dismissViewControllerAnimated:YES completion:nil];
                                        
                                    }];
-
-       
     }
 }
