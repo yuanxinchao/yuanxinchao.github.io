@@ -19,10 +19,10 @@ public class YxcIap
 
     public static void iosBuy (int numid , PayCallback ac)
     {
+        Debug.Log("YXC" + "添加numid为" + numid + "的Buy callback");
         #if UNITY_EDITOR
         return;
         #endif
-        Debug.Log("YXC" + "添加numid为" + numid + "的Buy callback");
 //        actDic [numid] = ac;
         BuyOrRestoreCb = ac;
         InitAndBuy(numid, PayResult);
