@@ -23,3 +23,25 @@
 ![Editor1](./UnityEditorPic/Editor1.png)  
 #### 3. HideInInspector
 与上面一个相反
+#### 4.Editor.target ####
+The object being inspected.  
+For editors that support multi-object editing, the target property should not be used inside OnInspectorGUI since it only refers to the first of the edited objects. It should still be used in OnSceneGUI and OnPreviewGUI, which will be called once for each of the selected objects with the target property referring to each of them in turn.  
+such as:  
+
+	void OnSceneGUI ()
+	    {
+	        //得到test脚本的对象
+	        DebuggingGui test = (DebuggingGui)target;
+	
+	        //开始绘制GUI
+	        Handles.BeginGUI();
+	        GUILayout.BeginArea(new Rect(0, 0, Screen.width, Screen.height));
+	        GUILayout.BeginVertical("box");
+	        if (GUILayout.Button("死掉", GUILayout.Width(Screen.width / 10), GUILayout.Height(Screen.height / 20)))
+	        {
+	            Debug.Log("死掉");
+	        }
+	        GUILayout.BeginVertical();
+	        GUILayout.EndArea();
+	        Handles.EndGUI();
+	    }
