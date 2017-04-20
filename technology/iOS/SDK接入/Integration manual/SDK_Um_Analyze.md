@@ -1,6 +1,6 @@
 ###友盟统计SDK
 ######虽然很简单，但还是要说一波
->去官网下载unity版友盟game统计，我下的是  
+>去[官网](http://dev.umeng.com/game_analytics/game-unity/integration#2_2)下载unity版友盟game统计，我下的是  
 >**UmengGameAnalytics_v2.1_with_IDFA.unitypackage**
 >
 

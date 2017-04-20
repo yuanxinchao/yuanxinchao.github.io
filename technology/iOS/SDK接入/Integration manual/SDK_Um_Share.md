@@ -134,6 +134,52 @@ QQ：
 >info->URL Types->+
 ![Um_share3](./SDK/Um_share3.png)  
 这里设置QQ的key时注意是**“QQ”+腾讯QQ互联应用appID转换成十六进制（不足8位前面补0）**  
+也可已在info.plist里设置
+
+	<key>CFBundleURLTypes</key>
+	  <array>
+	      <dict>
+	          <key>CFBundleTypeRole</key>
+	          <string>Editor</string>
+	          <key>CFBundleURLName</key>
+	          <string>QQ分享</string>
+	          <key>CFBundleURLSchemes</key>
+	          <array>
+	              <string>QQ41ecb0ca</string>
+	          </array>
+	      </dict>
+	      <dict>
+	          <key>CFBundleTypeRole</key>
+	          <string>Editor</string>
+	          <key>CFBundleURLName</key>
+	          <string>QQ空间</string>
+	          <key>CFBundleURLSchemes</key>
+	          <array>
+	              <string>tencent1106030794</string>
+	          </array>
+	      </dict>
+	      <dict>
+	          <key>CFBundleTypeRole</key>
+	          <string>Editor</string>
+	          <key>CFBundleURLName</key>
+	          <string>微信</string>
+	          <key>CFBundleURLSchemes</key>
+	          <array>
+	              <string>wxd48f07b4b4bad42a</string>
+	          </array>
+	      </dict>
+	      <dict>
+	          <key>CFBundleTypeRole</key>
+	          <string>Editor</string>
+	          <key>CFBundleURLName</key>
+	          <string>新浪微博</string>
+	          <key>CFBundleURLSchemes</key>
+	          <array>
+	              <string>wb667496208</string>
+	          </array>
+	      </dict>
+	  </array>
+
 >####10.Build Setting -> Packaging -> Info.plist添加HTTP传输允许 
 > 
 >	  <key>NSAppTransportSecurity</key>

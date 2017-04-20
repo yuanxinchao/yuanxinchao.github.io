@@ -16,5 +16,5 @@ unity的API里集成Game Center，所以直接在unity里调用就行了。
 >3.展示排行榜  
 >`GameCenterManager.GetInstance ().ShowLeaderboard ();`  
 
-是不是非常简单，什么？你找不到GameCenterManager类，这里这里，拿去拿去。  
+GameCenterManager类
 [GameCenterManager.cs](./SDK/GameCenterManager.cs)

@@ -1,7 +1,8 @@
 ###Applovin广告
-最近游戏要接applovin的广告，这里顺便记一下流程。
+最近游戏要接applovin的广告，这里顺便记一下流程。[官网](https://www.applovin.com/integration#iosUnity3dIntegration)  
 applovin的unity版SDK是十分好接的。这里我用的是
 >**AppLovin-Unity-Plugin-3.6.0.unitypackage**  
+版本  
 
 Applovin是共用安卓和iOS平台的Key的
 

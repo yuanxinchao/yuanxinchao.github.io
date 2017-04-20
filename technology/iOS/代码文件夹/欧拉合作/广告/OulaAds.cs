@@ -1,15 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
-using Heyzap;
 using System.Runtime.InteropServices;
 
-public class HeyZapAds: BaseAds<HeyZapAds>
+public class OulaAds: BaseAds<OulaAds>
 {
     public static bool showBanner = false;
     static Action finishtodo = null;
+    static string placementId;
 
-    public HeyZapAds ()
+    public OulaAds ()
     {
 
     }
@@ -18,15 +18,8 @@ public class HeyZapAds: BaseAds<HeyZapAds>
     {
 
         Debug.Log("YXC" + this.GetType() + " Init key" + string.Join("-", key));
-        HeyzapAds.Start(key [0], HeyzapAds.FLAG_NO_OPTIONS);
-        HZIncentivizedAd.SetDisplayListener(ReceiveHZ);
-        HZInterstitialAd.SetDisplayListener(ReceiveHZ);
-//        HeyzapAds.ShowMediationTestSuite();
-//        HZBannerShowOptions hzBannerShowOptions = new HZBannerShowOptions();
-//        hzBannerShowOptions.Position = HZBannerShowOptions.POSITION_BOTTOM;
-        HZBannerAd.ShowWithOptions(null);
-        HZBannerAd.SetDisplayListener(ReceiveHZ);
-
+        OulaAdsCallPlatform.Init(key [0]);
+        placementId = key [0];
         GetIncentivizedVideo();
         GetInterstitial();
     }
@@ -39,75 +32,41 @@ public class HeyZapAds: BaseAds<HeyZapAds>
         if (show)
         {
             Debug.Log("YXC" + this.GetType() + "  展示banner");
-            HZBannerAd.ShowWithOptions(null);
+            OulaAdsCallPlatform.ShowBanner(show);
         } else
         {
             Debug.Log("YXC" + this.GetType() + "  隐藏banner");
-            HZBannerAd.Hide();
+            OulaAdsCallPlatform.ShowBanner(show);
         }
         //      AdsYuMiBannerUnity.setAdsYuMiViewHidden (!show);
     }
 
     public override void ShowIncentVideo (Action ac = null)
     {
-
-        if (ac != null)
-        {
-            finishtodo = ac;
-        } else
-        {
-            finishtodo = null;
-        }
+        Debug.Log("YXC" + this.GetType() + "展示激励视频");
+        finishtodo = ac;
         ShowRewardedInterstitial();
     }
 
     public override void ShowInterVideo (Action ac = null)
     {
-
-        if (ac != null)
-        {
-            finishtodo = ac;
-        } else
-        {
-            finishtodo = null;
-        }
+        Debug.Log("YXC" + this.GetType() + "展示插屏视频");
+        finishtodo = ac;
         ShowInterstitial();
     }
 
     public override void ShowInterstitial ()
     {
-        Debug.Log("YXC" + this.GetType() + "展示插屏视频");
-        HZInterstitialAd.Show();
+        OulaAdsCallPlatform.ShowInterstitial(AdsCallback);
     }
 
     public override void ShowRewardedInterstitial ()
     {
-        Debug.Log("YXC" + this.GetType() + "展示激励视频");
-        HZIncentivizedAd.Show();
+        OulaAdsCallPlatform.ShowRewardVideo(placementId, AdsCallback);
     }
 
     #endregion
 
-    public void ReceiveHZ (string state , string tag)
-    {
-        Debug.Log("YXC  " + this.GetType() + "  获取广告回调信息state=" + state + "tag=" + tag);
-//        if (state.Equals("incentivized_result_complete"))
-//        {
-//            AdsCallback("HIDDENREWARDED");
-//        }
-        if (state.Equals("hide"))
-        {
-            AdsCallback("HIDDENREWARDED");
-        }
-        if (state.Equals("loaded"))
-        {
-            AdsCallback("ReceiveBanner");
-            if (GlobalVar.RemoveAd)
-            {
-                HZBannerAd.Hide();
-            }
-        }
-    }
 
 
     public override void AdsCallback (string ev)
@@ -154,16 +113,14 @@ public class HeyZapAds: BaseAds<HeyZapAds>
 
     public override void GetIncentivizedVideo ()
     {
-
         Debug.Log("YXC" + this.GetType() + "获取视频");
-        HZIncentivizedAd.Fetch();
+        OulaAdsCallPlatform.LoadIncent();
     }
 
     public override void GetInterstitial ()
     {
-
         Debug.Log("YXC" + this.GetType() + "获取插频");
-        HZInterstitialAd.Fetch();
+        OulaAdsCallPlatform.LoadInterstitial();
     }
 
     #endregion
@@ -172,8 +129,7 @@ public class HeyZapAds: BaseAds<HeyZapAds>
 
     public override bool IsIncentivizedAvailable ()
     {
-
-        if (HZIncentivizedAd.IsAvailable())
+        if (OulaAdsCallPlatform.IsInterstitialReady())
         {
             Debug.Log("YXC" + this.GetType() + " 视频加载好啦");
             return true;
@@ -188,7 +144,7 @@ public class HeyZapAds: BaseAds<HeyZapAds>
 
     public override bool IsInterstitialAvailable ()
     {
-        if (HZInterstitialAd.IsAvailable())
+        if (OulaAdsCallPlatform.IsInterstitialReady())
         {
             Debug.Log("YXC" + this.GetType() + " 插频加载好啦");
             return true;
@@ -202,60 +158,7 @@ public class HeyZapAds: BaseAds<HeyZapAds>
 
     #endregion
 
-    public void GetResource (GetResourceCallback getResourceCB = null)
-    {
-        #if UNITY_IPHONE
-        if (getResourceCB != null)
-        {
-            getCallback = getResourceCB;
-        }
-        GetiOSAdsResource(GetResCallback);
-        #endif
-        #if UNITY_ANDROID
-
-
-        #endif
-    }
-
-    public void ChangeResource (GetResourceCallback getResourceCB = null)
-    {
-        #if UNITY_IPHONE
-        ChangeNaviteAds(GetResCallback);
-        #endif
-        #if UNITY_ANDROID
-
-
-        #endif
-    }
-
-    public void ClickAds ()
-    {
-
-        ClickTheAds();
-    }
-
-
-    public delegate void GetResourceCallback(bool bo,string iconUrl,string bgPicUrl,string title,string content);
-
-    static GetResourceCallback getCallback;
-
-    [DllImport("__Internal")]
-    static extern void GetiOSAdsResource (GetResourceCallback getCB);
-
-    [DllImport("__Internal")]
-    static extern void ChangeNaviteAds (GetResourceCallback getCB);
-
-    [DllImport("__Internal")]
-    static extern void ClickTheAds ();
-
-    [AOT.MonoPInvokeCallback(typeof(GetResourceCallback))]
-    static void GetResCallback (bool bo , string iconUrl , string bgPicUrl , string title , string content)
-    {
-        if (getCallback != null)
-        {
-            getCallback(bo, iconUrl, bgPicUrl, title, content);
-        }
-    }
+   
 
 
 

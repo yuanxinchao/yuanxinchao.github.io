@@ -1,5 +1,5 @@
 ####今天需要接入imobi
-InMobi于2007年在印度班加罗尔（Bangalore）成立，有提供banner，插屏，视频和原生广告的变现方式。话不多说，现在开始接入。
+InMobi于2007年在印度班加罗尔（Bangalore）成立，有提供banner，插屏，视频和原生广告的变现方式。
 >我下的版本是  
 >`InMobiAdsUnityPlugin_SDK6xx.unitypackage`  
 >戳[这里](https://www.dropbox.com/s/d8mexrgd11t25j3/InMobiAdsUnityPlugin_SDK6xx.unitypackage?dl=0)下载  
@@ -32,7 +32,7 @@ InMobi于2007年在印度班加罗尔（Bangalore）成立，有提供banner，�
 		// Load a banner ad.
 		ban.LoadAd ();
 	}
->最后接入失败  
+>最后接入显示广告没有填充  
 >错误代码
 >
 >		Error : Error Domain=com.inmobi.ads.requeststatus Code=1 "Server returned a no-fill. Please try again." UserInfo={NSLocalizedDescription=Server returned a no-fill. Please try again.}
