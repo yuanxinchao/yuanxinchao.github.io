@@ -79,6 +79,11 @@ public class OulaAds: BaseAds<OulaAds>
         {
             // A rewarded video was successfully loaded.
             Debug.Log("YXC" + this.GetType() + "load reward video success");
+        } else if (ev.Contains("LOADEDBANNER"))
+        {
+            // A rewarded video was successfully loaded.
+            Debug.Log("YXC" + this.GetType() + "load banner video success");
+            PlayBanner(showBanner);
         } else if (ev.Contains("LOADEDINTER"))
         {
             Debug.Log("YXC" + this.GetType() + "load inter video success");

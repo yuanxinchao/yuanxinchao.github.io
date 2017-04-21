@@ -50,26 +50,37 @@ HolaCallback holaCallback;
 //*********insterstitial**********
 
 //*********banner**********
+BOOL loaded=false;
 -(void)initBanner{
-    [AvidlyInterstitialSDK initSDK];
+     NSLog(@"初始化横幅广告");
+    [AvidlyBannerSDK initSDK];
 }
 -(void)setBannerDelegate{
-    NSLog(@"载入横幅广告");
     bannerView.delegate = self;
+    [self performSelector:@selector(createBannerView) withObject:nil/*可传任意类型参数*/ afterDelay:10.0];
 }
 -(void)loadBanner{
+    NSLog(@"载入横幅广告");
     [bannerView loadAd];
 }
 -(void)showBanner{
+       NSLog(@"展示横幅广告");
     [UnityGetGLViewController().view addSubview:bannerView];
 }
 -(void)hideBanner{
+    NSLog(@"隐藏横幅广告");
     [bannerView removeFromSuperview];
 }
 AvidlyBannerView *bannerView;
 -(void)createBannerView{
-     bannerView= [[AvidlyBannerView alloc] initWithOrigin:CGPointMake(0,100) vc:UnityGetGLViewController()];
+    NSLog(@"创建横幅广告");
+//    NSLog(@"UIScreen hight=%f", [UIScreen mainScreen ].bounds.size.height);
+//    NSLog(@"bannerView.bounds.size.height=%f", bannerView.bounds.size.height);
+     bannerView= [[AvidlyBannerView alloc] initWithOrigin:CGPointMake(0,[UIScreen mainScreen ].bounds.size.height-50) vc:UnityGetGLViewController()];
+    [self loadBanner];
+    loaded = true;
 }
+
 //*********banner**********
 
 //*******banner回调*********
@@ -77,6 +88,9 @@ AvidlyBannerView *bannerView;
 - (void)AvidlyBannerLoadSucceed:(AvidlyBannerView *)bannerView
 {
     NSLog(@"横幅广告加载成功");
+    if(holaCallback!=NULL){
+        holaCallback("LOADEDBANNER");
+    }
 }
 
 - (void)AvidlyBannerloadError:(AvidlyBannerView *)bannerView error:(NSError *)error
@@ -96,11 +110,17 @@ AvidlyBannerView *bannerView;
 - (void)interstitialAdDidLoad:(id)interstitialAd
 {
     NSLog(@"插屏广告加载成功");
+    if(holaCallback!=NULL){
+        holaCallback("LOADEDINTER");
+    }
 }
 
 - (void)interstitialAd:(id)interstitialAd didFailWithError:(NSError *)error
 {
     NSLog(@"插屏广告加载失败:%@",error);
+    if(holaCallback!=NULL){
+        holaCallback("LOADINTERFAILED");
+    }
 }
 
 //广告将要展示
@@ -161,11 +181,17 @@ AvidlyBannerView *bannerView;
 - (void)AvidlyRewardVideoAdDidRewardUserWithReward:(STAvidlyReward *)reward
 {
     NSLog(@"激励视频发放奖励");
+    if(holaCallback!=NULL){
+        holaCallback("HIDDENREWARDED");
+    }
 }
 
 - (void)AvidlyRewardVideoAdDontReward:(NSError *)error
 {
     NSLog(@"激励视频未达到发放奖励条件");
+    if(holaCallback!=NULL){
+        holaCallback("REWARDEDNOTCOMPLETE");
+    }
 }
 //*******激励视频回调*********
 @end
@@ -179,10 +205,11 @@ void InitHola(){
     [holaAdsController setBannerDelegate];
     [holaAdsController setInterstitialDelegate];
     [holaAdsController setRewardDelegate];
-    [holaAdsController loadBanner];
+
+    
 }
 void ShowHolaBanner(BOOL bo){
-    if(bo){
+    if(bo && loaded){
         [holaAdsController showBanner];
     }else{
         [holaAdsController hideBanner];
