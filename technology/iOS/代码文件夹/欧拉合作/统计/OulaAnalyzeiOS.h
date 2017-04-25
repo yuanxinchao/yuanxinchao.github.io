@@ -14,6 +14,8 @@ extern "C"
     void InitWithProductIdOula(const char* productId,const char* channelId,const char* AppId);
     void LogWithKeyOula(const char* eventKey,const char* eventValue);
     void LogWithOnlyKeyOula(const char* eventKey);
+    void LogWithKeyAndDicOula(const char* eventKey,const char* jsondic);
+
     void CountWithKeyOula(const char* eventKey);
     void GAPLogOula();
     void CustomLogWithKeyOula(const char* eventKey,const char* eventValue);
@@ -21,6 +23,8 @@ extern "C"
     void LogPaymentWithPlayerIdOula(const char* playerId,const char* receiptDataString);
     void FacebookLoginWithGameIdOula(const char* playerId,const char* openId,const char* openToken);
     void guestLoginWithGameIdOula(const char* playerId);
+    char* getStaTokenOula();
+    char* _getIDFA();
 }
 
 

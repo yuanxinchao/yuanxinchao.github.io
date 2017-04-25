@@ -10,18 +10,10 @@
 #define IOSPurchase_h
 #import <StoreKit/StoreKit.h>
 enum{
-    IAP2=2,
-    IAP3,
-    IAP4,
-    IAP5,
-    IAP6,
-    IAP7,
-    IAP8,
-    IAP9,
-    IAP10,
-    IAP11,
-    IAP12,
-    IAP13
+    IAP18=1,
+    IAP30,
+    IAP68,
+    IAP69
 }buyCoinsTag;
 extern "C"{
     typedef  void(*Paycallback)(int num,BOOL bo);

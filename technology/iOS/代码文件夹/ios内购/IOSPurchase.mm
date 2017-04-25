@@ -13,6 +13,13 @@
 #define ProductID_IAP68 @"com.pepper.elsfk.SkinFresh1" //68
 #define ProductID_IAP69 @"com.pepper.elsfk.SkinDay" //1000
 //#define ProductID_IAP24p6000 @"Nada.JPYF05" //6000
+NSString *note1 = @"提示";
+NSString *note2 = @"您的手机没有打开程序内付费购买";
+NSString *note3 = @"关闭";
+NSString *note4 = @"购买成功";
+NSString *note5 = @"购买失败，请重新尝试购买";
+
+
 
 @interface RechargeVC ()
 
@@ -27,7 +34,13 @@ int goodnum;
                   );
     return RechargeVCInstance;
 }
-
+-(void)SetBuyLocalization:(NSString *)setnote1 Note2:(NSString *)setnote2 Note3:(NSString *)setnote3 Note4:(NSString *)setnote4 Note5:(NSString *)setnote5{
+    note1 =setnote1;
+    note2 =setnote2;
+    note3 = setnote3;
+    note4 = setnote4;
+    note5 =setnote5;
+}
 -(void)addTransactionListener{
     [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
 }
@@ -41,9 +54,9 @@ int goodnum;
     else
     {
         NSLog(@"不允许程序内付费购买");
-        UIAlertView *alerView =  [[UIAlertView alloc] initWithTitle:@"提示"
-                                                            message:@"您的手机没有打开程序内付费购买"
-                                                           delegate:nil cancelButtonTitle:NSLocalizedString(@"关闭",nil) otherButtonTitles:nil];
+        UIAlertView *alerView =  [[UIAlertView alloc] initWithTitle:note1
+                                                            message:note2
+                                                           delegate:nil cancelButtonTitle:NSLocalizedString(note3,nil) otherButtonTitles:nil];
         
         [alerView show];
         
@@ -119,16 +132,16 @@ int goodnum;
 }
 -(int)TranslateProductId:(NSString *) productId
 {
-    if([productId  isEqual:@"com.pepper.ljsp.rmads"]){
+    if([productId  isEqual:ProductID_IAP18]){
         return 1;
     }
-    if([productId  isEqual:@"com.pepper.elsfk.SkinTetris"]){
+    if([productId  isEqual:ProductID_IAP30]){
         return 2;
     }
-    if([productId  isEqual:@"com.pepper.elsfk.SkinFresh1"]){
+    if([productId  isEqual:ProductID_IAP68]){
         return 3;
     }
-    if([productId  isEqual:@"com.pepper.elsfk.SkinDay"]){
+    if([productId  isEqual:ProductID_IAP69]){
         return 4;
     }
 //    if([productId  isEqual:@"com.pepper.flow.xts10c"]){
@@ -199,8 +212,8 @@ int goodnum;
                 NSLog(@"-----交易完成 --------");
                 
                 UIAlertView *alerView =  [[UIAlertView alloc] initWithTitle:@""
-                                                                    message:@"购买成功"
-                                                                   delegate:self cancelButtonTitle:NSLocalizedString(@"关闭",nil) otherButtonTitles:nil];
+                                                                    message:note4
+                                                                   delegate:self cancelButtonTitle:NSLocalizedString(note3,nil) otherButtonTitles:nil];
                 [alerView setTag:1];
                 [alerView show];
                 
@@ -208,9 +221,9 @@ int goodnum;
             case SKPaymentTransactionStateFailed://交易失败
             { [self failedTransaction:transaction];
                 NSLog(@"-----交易失败 --------");
-                UIAlertView *alerView2 =  [[UIAlertView alloc] initWithTitle:@"提示"
-                                                                     message:@"购买失败，请重新尝试购买"
-                                                                    delegate:self cancelButtonTitle:NSLocalizedString(@"关闭",nil) otherButtonTitles:nil];
+                UIAlertView *alerView2 =  [[UIAlertView alloc] initWithTitle:note1
+                                                                     message:note5
+                                                                    delegate:self cancelButtonTitle:NSLocalizedString(note3,nil) otherButtonTitles:nil];
                 
                 [alerView2 setTag:2];
                 [alerView2 show];
@@ -370,7 +383,9 @@ int goodnum;
 
 extern "C" {
     
-    
+    NSString *BuyToNs(const char* key){
+        return [NSString stringWithUTF8String:key];
+    }
     void InitAndBuy(int num,Paycallback paycallback){
         NSLog(@"购买id为%d的物品",num);
         pcb=paycallback;
@@ -385,6 +400,14 @@ extern "C" {
         goodnum =num;
         [[RechargeVC defaultChargeVC] addTransactionListener];
         [[RechargeVC defaultChargeVC] restore:num];
+    }
+    void SetBuyLocalization(const char* note1,const char* note2,const char* note3,const char* note4,const char* note5){
+        [[RechargeVC defaultChargeVC] SetBuyLocalization:BuyToNs(note1)
+                                                   Note2:BuyToNs(note2)
+                                                   Note3:BuyToNs(note3)
+                                                   Note4:BuyToNs(note4)
+                                                   Note5:BuyToNs(note5)];
+        
     }
 }
 

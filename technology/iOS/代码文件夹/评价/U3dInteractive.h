@@ -14,6 +14,7 @@
 }
 @property (copy, nonatomic) NSString*			appid;
 -(void)RateApp: (NSString *)appleid;
+
 @end
 extern "C"{
     typedef void (*RateCB)(bool bo);
@@ -22,11 +23,11 @@ void _RateApp1(const char* Appid,RateCB rateCB);
 void _CopyURL (const char* url);
 void _OpenWX ();
 //void _GetUserInfo(UserInfoCB callback);
-char* _getIDFA(); //需添加adsupport.Framework
 char* _getResolution();
 char* _getPhoneVersion();
 char* _getPhoneModel();
 char* _getIMSI();
 char*  _getNetType();
+    void _SetLocalization(const char* localTitle,const char* localMessage,const char* localCancel,const char* localRate);
 }
 #endif /* U3dInteractive_h */

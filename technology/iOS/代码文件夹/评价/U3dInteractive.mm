@@ -16,9 +16,16 @@
 #import <UIKit/UIKit.h>
 //获取网络类型
 RateCB Global_rateCB;
+NSString *appName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];
+NSString *title =[NSString stringWithFormat:@"去给'%@'打分吧！",appName];
+NSString *message = @"您的评价对我们很重要";
+NSString *cancel =  @"稍后评价";
+NSString *goRate = @"去评价";
+
 @implementation U3dInteractive
 
 @synthesize appid = _appid;
+
 //评价框的回调
 //-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
 //    //    NSLog(@" button index=%ld is clicked.....", (long)buttonIndex);
@@ -32,6 +39,24 @@ RateCB Global_rateCB;
 //        Global_rateCB(false);
 //    }
 //}
++ (U3dInteractive *)defaultManager
+{
+    static U3dInteractive *instance = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        if (!instance) {
+            instance = [[self alloc] init];
+        }
+    });
+    return instance;
+}
+
+-(void)SetLocalization:(NSString *)setTitle Message:(NSString *)setMessage CancelBtn:(NSString *)setCancelBtn GoRateBtn:(NSString *)setGoRate{
+    title =setTitle;
+    message =setMessage;
+    cancel = setCancelBtn;
+    goRate = setGoRate;
+}
 -(void)GotoRate:(bool )bo{
     if(bo){
         Global_rateCB(true);
@@ -44,29 +69,16 @@ RateCB Global_rateCB;
         Global_rateCB(false);
     }
 }
-////评价的方法
-//-(void)RateApp:(NSString *)appleid{
-//    self.appid=appleid;
-//    NSString *appName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];
-//    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"去给'%@'打分吧！",appName]
-//                                                        message:@"您的评价对我们很重要"
-//                                                       delegate:self
-//                                              cancelButtonTitle:nil
-//                                              otherButtonTitles:@"稍后评价",@"去评价",nil];
-//    
-//    [alertView show];
-//}
-
 //评价的方法
 -(void)RateApp:(NSString *)appleid{
     self.appid=appleid;
-    NSString *appName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];
+    
     UIAlertController *alertController =[UIAlertController
-                                   alertControllerWithTitle:[NSString stringWithFormat:@"去给'%@'打分吧！",appName]
-                                   message:@"您的评价对我们很重要"
+                                   alertControllerWithTitle:title
+                                   message:message
                                    preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *cancelAction = [UIAlertAction
-                                   actionWithTitle:NSLocalizedString(@"稍后评价", @"Cancel action")
+                                   actionWithTitle:NSLocalizedString(cancel, @"Cancel action")
                                    style:UIAlertActionStyleCancel
                                    handler:^(UIAlertAction *action)
                                    {
@@ -75,7 +87,7 @@ RateCB Global_rateCB;
                                    }];
     
     UIAlertAction *okAction = [UIAlertAction
-                               actionWithTitle:NSLocalizedString(@"去评价", @"OK action")
+                               actionWithTitle:NSLocalizedString(goRate, @"OK action")
                                style:UIAlertActionStyleDefault
                                handler:^(UIAlertAction *action)
                                {
@@ -210,11 +222,20 @@ char* MakeStringCopy (const char* string)
 }
 //评价app
 void _RateApp1(const char* Appid,RateCB rateCB){
-     NSLog(@"caonimabi");
+     NSLog(@"rateApp");
     Global_rateCB=rateCB;
      NSString *appid = [NSString stringWithUTF8String: Appid] ;
-    U3dInteractive *rateapp = [[U3dInteractive alloc]init];
-    [rateapp RateApp:appid];
+    [[U3dInteractive defaultManager] RateApp:appid];
+}
+NSString *RateToNs(const char* key){
+    return [NSString stringWithUTF8String:key];
+}
+void _SetLocalization(const char* localTitle,const char* localMessage,const char* localCancel,const char* localRate){
+    [[U3dInteractive defaultManager] SetLocalization:RateToNs(localTitle)
+                                             Message:RateToNs(localMessage)
+                                           CancelBtn:RateToNs(localCancel)
+                                           GoRateBtn:RateToNs(localRate)];
+    
 }
 
 //将内容复制到剪贴板
@@ -240,11 +261,7 @@ void _OpenWX (){
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:strIdentifier]];
     }
 }
-//获取IDFA
-char* _getIDFA(){
-    NSString *adId = [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
-    return MakeStringCopy([adId UTF8String]);
-}
+
 //获取分辨率
 char* _getResolution(){
 

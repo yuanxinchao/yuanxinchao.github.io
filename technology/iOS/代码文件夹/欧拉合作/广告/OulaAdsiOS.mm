@@ -101,6 +101,9 @@ AvidlyBannerView *bannerView;
 - (void)AvidlyBannerClick:(AvidlyBannerView *)bannerView
 {
     NSLog(@"横幅广告被点击");
+    if(holaCallback!=NULL){
+        holaCallback("BANNERCLICK");
+    }
 }
 //*******banner回调*********
 
@@ -133,6 +136,7 @@ AvidlyBannerView *bannerView;
 - (void)interstitialAdDidShow:(id)interstitialAd
 {
     NSLog(@"广告展示");
+
 }
 
 //广告显示失败
@@ -182,7 +186,7 @@ AvidlyBannerView *bannerView;
 {
     NSLog(@"激励视频发放奖励");
     if(holaCallback!=NULL){
-        holaCallback("HIDDENREWARDED");
+        holaCallback("GiveReward");
     }
 }
 
@@ -190,7 +194,7 @@ AvidlyBannerView *bannerView;
 {
     NSLog(@"激励视频未达到发放奖励条件");
     if(holaCallback!=NULL){
-        holaCallback("REWARDEDNOTCOMPLETE");
+        holaCallback("NoReward");
     }
 }
 //*******激励视频回调*********
