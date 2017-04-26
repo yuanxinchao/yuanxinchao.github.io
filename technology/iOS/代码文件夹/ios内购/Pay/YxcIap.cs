@@ -10,7 +10,7 @@ public class YxcIap
 
 
 
-    public delegate void PayCallback(int numid,bool result);
+    public delegate void PayCallback(int numid,bool result,string receipt);
 
     public static PayCallback BuyOrRestoreCb;
 
@@ -40,12 +40,22 @@ public class YxcIap
         RestoreBuy(numid, PayResult);
     }
 
+    public static void iapSetBuyLocalization (string note1 , string note2 , string note3 , string note4 , string note5)
+    {
+        #if UNITY_EDITOR
+        return;
+        #endif
+        SetBuyLocalization(note1, note2, note3, note4, note5);
+    }
+
+    [DllImport("__Internal")]
+    static extern void SetBuyLocalization (string note1 , string note2 , string note3 , string note4 , string note5);
 
     [DllImport("__Internal")]
     static extern void InitAndBuy (int numid , PayCallback payCb);
 
     [AOT.MonoPInvokeCallback(typeof(PayCallback))]
-    static void PayResult (int numId , bool result)
+    static void PayResult (int numId , bool result , string receipt)
     {
 
 //        if (actDic.ContainsKey(numId))
@@ -55,7 +65,7 @@ public class YxcIap
 //        actDic.Remove(numId);
         if (BuyOrRestoreCb != null)
         {
-            BuyOrRestoreCb(numId, result);
+            BuyOrRestoreCb(numId, result, receipt);
         }
 //        }
 //        if (payCallback != null)

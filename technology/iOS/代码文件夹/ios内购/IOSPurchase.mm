@@ -8,17 +8,21 @@
 #import "IOSPurchase.h"
 
 //在内购项目中创的商品单号
-#define ProductID_IAP18 @"com.pepper.ljsp.rmads"//18
-#define ProductID_IAP30 @"com.pepper.elsfk.SkinTetris" //30
-#define ProductID_IAP68 @"com.pepper.elsfk.SkinFresh1" //68
-#define ProductID_IAP69 @"com.pepper.elsfk.SkinDay" //1000
+//#define ProductID_IAP18 @"com.pepper.ljsp.rmads"//18
+//#define ProductID_IAP30 @"com.pepper.elsfk.SkinTetris" //30
+//#define ProductID_IAP68 @"com.pepper.elsfk.SkinFresh1" //68
+//#define ProductID_IAP69 @"com.pepper.elsfk.SkinDay" //1000
+#define ProductID_IAP18 @"com.avidly.hexapuzzlego.remove"//18
+#define ProductID_IAP30 @"com.avidly.hexapuzzlego.elszt" //30
+#define ProductID_IAP68 @"com.avidly.hexapuzzlego.xqxzt" //68
+#define ProductID_IAP69 @"com.avidly.hexapuzzlego.btzt" //1000
 //#define ProductID_IAP24p6000 @"Nada.JPYF05" //6000
 NSString *note1 = @"提示";
 NSString *note2 = @"您的手机没有打开程序内付费购买";
 NSString *note3 = @"关闭";
 NSString *note4 = @"购买成功";
 NSString *note5 = @"购买失败，请重新尝试购买";
-
+NSString *Receipt = @"this is a base64Receipt";
 
 
 @interface RechargeVC ()
@@ -99,6 +103,7 @@ int goodnum;
     
     NSLog(@"-----------收到产品反馈信息--------------");
     NSArray *myProduct = response.products;
+    
     NSLog(@"产品Product ID:%@",response.invalidProductIdentifiers);
     NSLog(@"产品付费数量: %d", (int)[myProduct count]);
     // populate UI
@@ -210,7 +215,8 @@ int goodnum;
             case SKPaymentTransactionStatePurchased:{//交易完成
                 [self completeTransaction:transaction];
                 NSLog(@"-----交易完成 --------");
-                
+               NSString *baseReceipt= [transaction.transactionReceipt base64EncodedStringWithOptions:0];
+                Receipt = baseReceipt;
                 UIAlertView *alerView =  [[UIAlertView alloc] initWithTitle:@""
                                                                     message:note4
                                                                    delegate:self cancelButtonTitle:NSLocalizedString(note3,nil) otherButtonTitles:nil];
@@ -227,11 +233,12 @@ int goodnum;
                 
                 [alerView2 setTag:2];
                 [alerView2 show];
-                
+                NSString *baseReceipt= [transaction.transactionReceipt base64EncodedStringWithOptions:0];
+                Receipt = baseReceipt;
             }break;
             case SKPaymentTransactionStateRestored://已经购买过该商品
                 goodnum = [self TranslateProductId:transaction.payment.productIdentifier];
-                pcb(goodnum,YES);
+                pcb(goodnum,YES,[Receipt UTF8String]);
                 NSLog(@"-----已经购买过该商品 ----%d",goodnum);
             case SKPaymentTransactionStatePurchasing:      //商品添加进列表
                 NSLog(@"-----商品添加进列表 --------");
@@ -247,10 +254,10 @@ int goodnum;
     //    NSLog(@" button index=%ld is clicked.....", (long)buttonIndex);
     //     NSLog(@" alertView tag=%ld is clicked.....", (long)alertView.tag);
     if(buttonIndex==0&&alertView.tag==1){
-        pcb(goodnum,YES);
+        pcb(goodnum,YES,[Receipt UTF8String]);
     }
     if(buttonIndex==0&&alertView.tag==2){
-        pcb(goodnum,NO);
+        pcb(goodnum,NO,[Receipt UTF8String]);
     }
 }
 - (void) completeTransaction: (SKPaymentTransaction *)transaction
@@ -289,14 +296,17 @@ int goodnum;
     NSLog(@"失败");
     if (transaction.error.code != SKErrorPaymentCancelled)
     {
+        NSLog(@"----失败原因%@",transaction.error.domain);
+          NSLog(@"----失败原因%ld",transaction.error.code);
         
+        NSLog(@"----失败原因%@",transaction.error.userInfo);
     }
     [[SKPaymentQueue defaultQueue] finishTransaction: transaction];
     
 }
 -(void) paymentQueueRestoreCompletedTransactionsFinished: (SKPaymentTransaction *)transaction{
     NSLog(@"恢复购买完成");
-     pcb(-1,YES);
+     pcb(-1,YES,[Receipt UTF8String]);
 //    NSString* productIdentifier = @"";
 //    NSLog(@"恢复购买有回调1");
 //    switch (transaction.transactionState)
@@ -334,7 +344,7 @@ int goodnum;
 
 -(void) paymentQueue:(SKPaymentQueue *) paymentQueue restoreCompletedTransactionsFailedWithError:(NSError *)error{
     NSLog(@"恢复购买失败");
-    pcb(-1,NO);
+    pcb(-1,NO,[Receipt UTF8String]);
 }
 
 #pragma mark connection delegate

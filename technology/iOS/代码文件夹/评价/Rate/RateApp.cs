@@ -10,7 +10,7 @@ public class RateApp
         get { return long.Parse(PlayerPrefs.GetString("OriginTime", "0")); }
     }
 
-    private static bool HasRate
+    public static bool HasRate
     {
         set{ PlayerPrefs.SetInt("HasRate", Convert.ToInt32(value)); }
         get{ return Convert.ToBoolean(PlayerPrefs.GetInt("HasRate", 0)); }
@@ -44,6 +44,7 @@ public class RateApp
             #endif
 
             #if UNITY_IPHONE
+
             IOSFunction.RateApp(Myparameters.AppStoreId,
                 (bool bo) =>
                 {

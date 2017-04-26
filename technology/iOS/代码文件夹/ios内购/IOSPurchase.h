@@ -16,7 +16,7 @@ enum{
     IAP69
 }buyCoinsTag;
 extern "C"{
-    typedef  void(*Paycallback)(int num,BOOL bo);
+    typedef  void(*Paycallback)(int num,BOOL bo,const char *receipt);
 }
 @interface RechargeVC :NSObject <SKPaymentTransactionObserver,SKProductsRequestDelegate >
 
