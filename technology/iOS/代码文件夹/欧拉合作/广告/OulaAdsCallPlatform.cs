@@ -5,6 +5,8 @@ using System.Collections.Generic;
 
 public class OulaAdsCallPlatform
 {
+    static AndroidJavaClass jc = null;
+
     public static void Init (params string[] key)
     {
         #if UNITY_EDITOR
@@ -15,9 +17,15 @@ public class OulaAdsCallPlatform
         #endif
 
         #if UNITY_ANDROID
-        Debug.Log("YXC" + "  Call android init banner key=" + key [0] + "inter key=" + key [1]);
+        Debug.Log("YXC" + "   init banner key=" + string.Join(",", key));
+        jc = new AndroidJavaClass("com.holaads.Main");
 
-        InitAlimamaAndroid(key);
+        jc.CallStatic("initBanner");
+        jc.CallStatic("initInsert");
+        jc.CallStatic("initVideo");
+
+        jc.CallStatic("setCallBack", "TjSdk");
+        jc.CallStatic("setCallBack", "TjSdk", "OnOulaADCallBack");
         #endif
     }
 
@@ -31,8 +39,11 @@ public class OulaAdsCallPlatform
         #endif
 
         #if UNITY_ANDROID
-        Debug.Log("YXC" + "  Call android show  show=" + bo);
-        ShowAliBannerAndroid(bo);
+        Debug.Log("YXC" + "  Call android ShowBanner  show=" + bo);
+        if (bo)
+            jc.CallStatic("showBanner");
+        else
+            jc.CallStatic("closeBanner");
         #endif
     }
 
@@ -47,8 +58,8 @@ public class OulaAdsCallPlatform
         ShowHolaInterstitial(HolaiOSCallback);
         #endif
         #if UNITY_ANDROID
-        Debug.Log("YXC" + "  Call android show  show=");
-        ShowAliInterstitialAndroid();
+        Debug.Log("YXC" + "  Call android showInsert");
+        jc.CallStatic("showInsert");
         #endif
     }
 
@@ -63,8 +74,8 @@ public class OulaAdsCallPlatform
         ShowHolaRewardVideo(placementId, HolaiOSCallback);
         #endif
         #if UNITY_ANDROID
-        Debug.Log("YXC" + "  Call android show  show=");
-        ShowAliInterstitialAndroid();
+        Debug.Log("YXC" + "  Call android showVideo ");
+        jc.CallStatic("showVideo");
         #endif
     }
 
@@ -79,9 +90,10 @@ public class OulaAdsCallPlatform
         return IsHolaRewardVideoReady();
         #endif
         #if UNITY_ANDROID
-        Debug.Log("YXC" + "  Call android show  show=");
-        ShowAliInterstitialAndroid();
+        Debug.Log("YXC" + "  Call android IsRewardVideoReady");
+        return  jc.CallStatic<bool>("isVideoReady");
         #endif
+        return false;
     }
 
     public static bool IsInterstitialReady ()
@@ -94,46 +106,68 @@ public class OulaAdsCallPlatform
         return IsHolaInterstitialReady();
         #endif
         #if UNITY_ANDROID
-        Debug.Log("YXC" + "  Call android show  show=");
-        ShowAliInterstitialAndroid();
+        Debug.Log("YXC" + "  Call android IsInterstitialReady");
+        return  jc.CallStatic<bool>("isInsertReady");
+        return false;
         #endif
+        return false;
     }
 
 
 
     public static void LoadInterstitial ()
     {
+        #if UNITY_EDITOR
+        return;
+        #endif
+        #if UNITY_IPHONE
         LoadHolaInterstitial();
+        #endif
+        #if UNITY_ANDROID
+        Debug.Log("YXC" + "  Call android LoadInterstitial");
+        jc.CallStatic("loadInsert");
+        #endif
+ 
     }
 
     public static void LoadIncent ()
     {
+        #if UNITY_EDITOR
+        return;
+        #endif
+        #if UNITY_IPHONE
         LoadHolaIncent();
-    }
-    #if UNITY_ANDROID
-    static AndroidJavaObject AlimamaAndroidClass;
+        #endif
+        #if UNITY_ANDROID
+        Debug.Log("YXC" + "  pretent to Call android LoadIncent");
+        #endif
 
-    static void InitAlimamaAndroid (string[] key)
+    }
+
+    public static void IsInterstitialReadyCb ()
     {
 
-    AlimamaAndroidClass = new AndroidJavaObject("com.tj.Alimama");
-    AlimamaAndroidClass.Call("initYYB", key [0], key [1]);
+        #if UNITY_EDITOR
+        return;
+        #endif
+        #if UNITY_ANDROID
+        Debug.Log("YXC" + "  Call android IsInterstitialReadyCb");
+        jc.CallStatic("isInsertReady");
+        #endif
     }
 
-    public static void ShowAliBannerAndroid (bool show)
+    public static void IsIncentAvailableCb ()
     {
 
-    AlimamaAndroidClass.Call("ShowBanner", show);
+        #if UNITY_EDITOR
+        return;
+        #endif
+        #if UNITY_ANDROID
+        Debug.Log("YXC" + "  Call android IsIncentAvailableCb");
+        jc.CallStatic("isVideoReady");
+        #endif
     }
 
-    public static void ShowAliInterstitialAndroid ()
-    {
-    AlimamaAndroidClass.Call("ShowInterstitial");
-    }
-    #endif
-
-
-   
 
 
 

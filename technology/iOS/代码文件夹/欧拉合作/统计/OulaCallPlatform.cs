@@ -1,10 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Runtime.InteropServices;
+using System.Collections.Generic;
+using System.Linq;
+using MiniJSON;
 
 public class OulaCallPlatform
 {
     static AndroidJavaClass jc = null;
+    //jar包log标签
+    private string jarLogTag = "Unity_Hola_Analysis";
+    //Hola的log标签
+    private string HolaLogTag = "Channel_";
 
     public static void InitWithProductId (string productId , string channelId , string Appid)
     {
@@ -49,6 +56,34 @@ public class OulaCallPlatform
         #endif
     }
 
+    public static string getStaToken ()
+    {
+        Debug.Log("YXC" + "  getStaToken");
+        #if UNITY_EDITOR
+        return "unity editor";
+        #endif
+        #if UNITY_IPHONE
+        return getStaTokenOula();
+        #endif
+        #if UNITY_ANDROID
+        return jc.CallStatic<string>("getStaToken");
+        #endif
+    }
+
+    public static string getAndroidID ()
+    {
+        Debug.Log("YXC" + "  getAndroidID");
+        #if UNITY_EDITOR
+        return "unity editor";
+        #endif
+        #if UNITY_IPHONE
+        return _getIDFA();
+        #endif
+        #if UNITY_ANDROID
+        return jc.CallStatic<string>("getAndroidID");
+        #endif
+    }
+
     public static void CountWithKey (string eventKey)
     {
         Debug.Log("YXC" + "  自动计数打点 key=" + eventKey);
@@ -63,6 +98,26 @@ public class OulaCallPlatform
         #endif
     }
 
+    public static void LogWithKeyAndDic (string eventKey , Dictionary<string,string> dic)
+    {
+        Debug.Log("YXC" + "  自动计数打点 key=" + eventKey);
+        #if UNITY_EDITOR
+        return;
+        #endif
+        #if UNITY_IPHONE
+        string jsonDic = MiniJSON.Json.Serialize(dic);
+        Debug.Log("YXC" + "  统计打点的dic为" + jsonDic);
+        string ob = (string)MiniJSON.Json.Serialize(dic);
+        LogWithKeyAndDicOula(eventKey, ob);
+        #endif
+        #if UNITY_ANDROID
+        string jsonDic = MiniJSON.Json.Serialize(dic);
+        Debug.Log("YXC" + "  统计打点的dic为" + jsonDic);
+        object ob = (object)MiniJSON.Json.Serialize(dic);
+        jc.CallStatic("log", "myEvent3", (object)ob);
+        #endif
+    }
+
     /// <summary>
     /// 用于统计游戏活跃用户，游戏接入时必须调用该接口。该段代码添加于CP方认可的第一个用户活跃行为的位置，如：进入游戏大厅，连接服务器等。
     /// </summary>
@@ -72,7 +127,12 @@ public class OulaCallPlatform
         #if UNITY_EDITOR
         return;
         #endif
+        #if UNITY_IPHONE
         GAPLogOula();
+        #endif
+        #if UNITY_ANDROID
+        #endif
+
     }
 
     /// <summary>
@@ -226,4 +286,12 @@ public class OulaCallPlatform
     [DllImport("__Internal")]
     static extern void guestLoginWithGameIdOula (string playerId);
 
+    [DllImport("__Internal")]
+    static extern void LogWithKeyAndDicOula (string eventKey , string dic);
+
+    [DllImport("__Internal")]
+    static extern string getStaTokenOula ();
+
+    [DllImport("__Internal")]
+    static extern string _getIDFA ();
 }
