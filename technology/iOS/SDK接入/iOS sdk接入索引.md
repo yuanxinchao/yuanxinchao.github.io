@@ -2,6 +2,7 @@
 ###  [检查项]
 #####  1.所有的SDK接入后都需要在other link flag 加入[-ObjC](../Xcode工程配置/Unity Build xcode工程注意点.md) 标志
 #####  2.所有的SDK接入后都需要添加对应的framework
+##### 3.添加对应的info.plist需要的东西
 ###  [可选项]
 #####  1.如打包失败可尝试将BuildSetting Search Path 里含有的引号去掉
 #####  2.接入applovin时需要compile source里applovin对应文件添加在 [-fno-objc-arc](../Xcode工程配置/Unity Build xcode工程注意点.md) 标志  

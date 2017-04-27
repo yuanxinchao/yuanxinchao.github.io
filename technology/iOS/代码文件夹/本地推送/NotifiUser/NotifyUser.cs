@@ -4,11 +4,9 @@ using System.Runtime.InteropServices;
 
 public class NotifyUser
 {
-    private static string Message = "扎心了老铁:您已经好久没超越自己了，赶快回来玩一局吧！";
     private static int NotifyTime = 2 * 24 * 60 * 60;
 
-
-    public static void RegisterLocalNotification ()
+    public static void RegisterLocalNotification (string message)
     {
 
         #if UNITY_EDITOR
@@ -17,7 +15,10 @@ public class NotifyUser
 
         #if  UNITY_IPHONE
         Debug.Log("YXC" + "  unity  调用 开启本地推送");
-        registerLocalNotification(NotifyTime, Message);
+
+
+
+        registerLocalNotification(NotifyTime, message);
         #endif
     }
 
@@ -31,6 +32,14 @@ public class NotifyUser
         Debug.Log("YXC" + "  unity  调用 取消本地推送");
         cancelLocalNotification();
         #endif
+    }
+
+    /// <summary>
+    /// 调整广告出现时间，避免夜间推送
+    /// </summary>
+    private void JudgeTime ()
+    {
+      
     }
 
 

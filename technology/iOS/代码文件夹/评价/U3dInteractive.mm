@@ -19,7 +19,7 @@ RateCB Global_rateCB;
 NSString *appName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];
 NSString *title =[NSString stringWithFormat:@"去给'%@'打分吧！",appName];
 NSString *message = @"您的评价对我们很重要";
-NSString *cancel =  @"稍后评价";
+NSString *cancelBtn =  @"稍后评价";
 NSString *goRate = @"去评价";
 
 @implementation U3dInteractive
@@ -54,7 +54,7 @@ NSString *goRate = @"去评价";
 -(void)SetLocalization:(NSString *)setTitle Message:(NSString *)setMessage CancelBtn:(NSString *)setCancelBtn GoRateBtn:(NSString *)setGoRate{
     title =setTitle;
     message =setMessage;
-    cancel = setCancelBtn;
+    cancelBtn = setCancelBtn;
     goRate = setGoRate;
 }
 -(void)GotoRate:(bool )bo{
@@ -78,7 +78,7 @@ NSString *goRate = @"去评价";
                                    message:message
                                    preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *cancelAction = [UIAlertAction
-                                   actionWithTitle:NSLocalizedString(cancel, @"Cancel action")
+                                   actionWithTitle:NSLocalizedString(cancelBtn, @"Cancel action")
                                    style:UIAlertActionStyleCancel
                                    handler:^(UIAlertAction *action)
                                    {
