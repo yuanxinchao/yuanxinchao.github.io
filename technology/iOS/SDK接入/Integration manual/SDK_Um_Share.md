@@ -41,7 +41,8 @@
 >`#import <UMSocialCore/UMSocialCore.h>`  
 >在`- (BOOL)application:(UIApplication*)application didFinishLaunchingWithOptions:(NSDictionary*)launchOptions` 方法中添加sdk的初始化代码：（其中`[UMSocialGlobal shareInstance].type = @"u3d"`;必须要添加，否则无法定位错误）  
 >
->	  [[UMSocialManager defaultManager] openLog:YES];
+>	  
+	[[UMSocialManager defaultManager] openLog:YES];
 	NSLog(@"UMeng social version: %@", [UMSocialGlobal umSocialSDKVersion]);
 	[UMSocialGlobal shareInstance].type = @"u3d";
 	//设置友盟appkey
