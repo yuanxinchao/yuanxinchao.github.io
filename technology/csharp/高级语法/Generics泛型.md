@@ -23,3 +23,11 @@
 一条有用的规则是，应用尽可能最多的约束，但仍使您能够处理必须处理的类型。 例如，如果您知道您的泛型类仅用于引用类型，则应用类约束。 这可以防止您的类被意外地用于值类型，并允许您对 T 使用 as 运算符以及检查空值。
 ##### default 关键字
 无法确定**T**为引用类型，值类型，结构类型时，想赋null或0时可以使用`T temp = default(T);`
+
+##### Count和Capacity  
+这里对Count和Capacity 进行下区分。  
+
+	List<Student> students = new List<Student>(8);
+    Debug.Log("haha"+students.Count);
+    Debug.Log("haha" + students.Capacity);
+这里Count就是0，而Capacity就是8。
