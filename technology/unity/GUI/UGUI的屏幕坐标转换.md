@@ -35,4 +35,14 @@
 **附带世界坐标转屏幕坐标**
 
 	Vector3 transPos = transCamera.WorldToScreenPoint(itemPos);
-    transPos = TransformToRelativePos(transPos);
+    transPos = TransformToRelativePos(transPos);  
+
+最后：上述的两个坐标转换应对其他情况多多少少都会有一些偏差。所以还是用unity自带的api比较保险。  
+
+    private Vector3 TransformToRelativePos(Vector3 originPos)
+    {
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(_root as RectTransform,originPos, canvas.worldCamera, out _pos);
+        return _pos;
+    }
+_root是canvas的大小，canvas.worldCamera当时的渲染相机  
+原来这么简单，笑哭。
