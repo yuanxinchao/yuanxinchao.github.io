@@ -9,4 +9,7 @@ unity里的每个文件都伴随着一个meta文件，里面会有一个guid，�
 ##### meta文件 
 打开个一个meta文件，你会发现里面存有guid，创建时间等，如果打开的是个对应图片的meta，你会看到对应的TextureImporter，这个与你在unity此图片的import setting有关。里面有一些 Texture Type, Wrap Mode, Filter Mode and Aniso Level的参数。如果打开的是个对应脚本的meta，就会看到对应的MonoImporter里面的参数。
 ![](UnityManualPic/4.png)  
-![](UnityManualPic/5.png)  
+![](UnityManualPic/5.png)   
+
+对了，有人问那个licenseType是什么  
+If you buy a Unity licence this changes to pro. 
