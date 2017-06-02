@@ -10,3 +10,15 @@
             TotalScoreText.text = tempScore.ToString();
         }
     }
+
+更好的实现：
+
+    private void DoEffectAddNum(Text text, long originNum, long nowNum)
+    {
+        text.transform.DOPause();
+        text.transform.DOScale(new Vector3(1.5f, 1.5f, 0), 0.2f).OnComplete(() =>
+        {
+            text.transform.DOScale(new Vector3(1, 1, 0), 0.3f);
+        });
+        DOTween.To(() => originNum, x => { originNum = x; text.text = originNum.Tostring(); }, nowNum, 0.5f);
+    }
