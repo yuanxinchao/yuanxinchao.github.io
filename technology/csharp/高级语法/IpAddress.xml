@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Socket>
+  <!--记录网络通讯地址-->
+  <net Type="外网"  Cp="阿里云">
+    <PublicIp>106.15.185.64</PublicIp>
+    <PrivateIp>172.19.119.4</PrivateIp>
+    <Position>华东 2 可用区 B</Position>
+	<Port>13389</Port>
+  </net>
+  <net Type="外网"  Cp="腾讯云">
+    <PublicIp>106.88.23.64</PublicIp>
+    <PrivateIp>163.23.43.4</PrivateIp>
+    <Position>华东电信1</Position>
+	<Port>11000</Port>
+  </net>
+  <net Type="内网"  Cp="本地">
+    <PublicIp>192.168.3.138</PublicIp>
+    <PrivateIp>255.255.252.0</PrivateIp>
+    <Position>本地ip地址</Position>
+	<Port>13389</Port>
+  </net>
+</Socket>
