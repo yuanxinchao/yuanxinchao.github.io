@@ -8,7 +8,7 @@ public class console: MonoBehaviour
 	
     int iMetaHeight;
     int iMetaWidth;
-    string message;
+    string message = string.Empty;
 
     public static console Getinstance ()
     {
