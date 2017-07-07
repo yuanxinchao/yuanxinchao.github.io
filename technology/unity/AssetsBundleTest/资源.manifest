@@ -1,0 +1,39 @@
+ManifestFileVersion: 0
+CRC: 624760441
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: c310a5063dd48c21a78d3b6f15e71fce
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 14de2938b6f72cda26120743d8934d8f
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 49
+  Script: {instanceID: 0}
+- Class: 83
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: dcee9bebb8826354585271a8ded75e29, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: b35096d19d5f6094a8f3598fd1b74953, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+- Class: 222
+  Script: {instanceID: 0}
+- Class: 224
+  Script: {instanceID: 0}
+Assets:
+- "Assets/Model/\u56FE\u7247\u4E5F\u53EF\u4EE5.jpg"
+- Assets/Model/pfb.prefab
+- "Assets/Model/\u6587\u672C\u4E5F\u53EF\u4EE5.txt"
+- "Assets/Model/\u58F0\u97F3\u4E5F\u53EF\u4EE5.wav"
+Dependencies: []
