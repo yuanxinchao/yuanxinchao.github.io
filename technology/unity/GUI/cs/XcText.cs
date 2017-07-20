@@ -99,7 +99,7 @@ public class XcText : MaskableGraphic
                 m_TempVerts[tempVertsIndex] = verts[i];
                 m_TempVerts[tempVertsIndex].position *= unitsPerPixel;
 
-                m_TempVerts[tempVertsIndex].position += new Vector3(0, i/4 * -10, 0);//倾斜
+                m_TempVerts[tempVertsIndex].position += new Vector3(0, i/4 * -10, 0);//倾斜 oblique
                
                 if (tempVertsIndex == 3)
                     toFill.AddUIVertexQuad(m_TempVerts);
