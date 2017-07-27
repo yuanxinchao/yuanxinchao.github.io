@@ -3,6 +3,15 @@
 ![](pic/1.png)  
 
 
+* Ctrl + -   向后导航
+* Ctrl + Shift + -  向前导航
+* Ctrl + U  或 Alt + Home 找到类/方法 的父方法/类
+* Alt + F7 查找所有引用
+* Ctrl + [  光标所在的方法或类即外扩一层
+* Ctrl + Shift + BackSpace 回到上次修改
+* Ctrl + Shift + Alt + BackSpace 查看最近的改动
+* Ctrl +Alt + B 找 此类/方法 的子类/方法实现(重写)
+* Ctrl + Alt + F7 查找此类/方法 的所有引用
 * ######查看是 引用或者修改
   ![](pic/2.png)
 	
