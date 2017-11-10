@@ -71,8 +71,8 @@ Mesh是Unity内的一个组件，称为网格组件。
     mesh.triangles = triangles;
 这里是使用的三点确定一个面👌🏻，总共确定了四个面。上面的0，1，2，3代表的是第0，1，2，3个顶点。即：vertices[0]~vertices[3];对于顺序也是有要求的，如图：  
 ![](./UnityManualPic/Mesh2.png)   
-顺时针转为正面，逆时针则为背面。  
-
+**逆时针转为正面，顺时针则为背面。**
+![](./pic/3.png)  
 经过这样一番步骤就构建好了Mesh，然后还要贴纹理  
 
 	Vector2[] uv = new Vector2[vertices.Length];
@@ -85,6 +85,7 @@ Mesh是Unity内的一个组件，称为网格组件。
 **这个同样解释了为什么Unity自带的Cube用了24个顶点**，这样就可以分别对每个面设置uv了  
 
 附完整代码：  
+
 	using UnityEngine;
 	using System.Collections;
 	
