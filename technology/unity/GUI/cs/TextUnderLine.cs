@@ -61,7 +61,7 @@ public class TextUnderLine : Text, IPointerClickHandler
         m_Text = orignText;
 
         UIVertex vert = new UIVertex();
-        Vector3 refPos;
+//        Vector3 refPos;
         // 处理坐标文本包围框
         foreach (var coordInfo in m_CoordInfos)
         {
@@ -72,7 +72,7 @@ public class TextUnderLine : Text, IPointerClickHandler
             // 将坐标文本顶点索引坐标加入到包围框
             toFill.PopulateUIVertex(ref vert, coordInfo.startIndex);
             var pos = vert.position;
-            refPos = pos;
+//            refPos = pos;
            
             var bounds = new Bounds(pos, Vector3.zero);
 
@@ -164,6 +164,8 @@ public class TextUnderLine : Text, IPointerClickHandler
             //            var y = Convert.ToInt32(match.Groups[2].Value);
             //            if (x >= 500 || y >= 500)
             //                continue;
+            //试试取坐标
+            Vector2 pos = GetCoord(match.Groups[2].Value);
 
             s_TextBuilder.Append(outputText.Substring(indexText, match.Index - indexText));
             //类似于<i>的顶点的数据会在列表中,但是不会被渲染
@@ -174,7 +176,7 @@ public class TextUnderLine : Text, IPointerClickHandler
                 startIndex = s_TextBuilder.Length * 4,
                 endIndex = (s_TextBuilder.Length + match.Groups[0].Length) * 4 - 1,
                 color = match.Groups[1].Value,
-               
+                coord = pos,
                 //                coord = new Vector2(x, y),
             };
             m_CoordInfos.Add(coordinfo);
@@ -224,5 +226,23 @@ public class TextUnderLine : Text, IPointerClickHandler
         public readonly List<Rect> boxes = new List<Rect>();
 
         public string color;
+    }
+
+    private Vector2 GetCoord(string content)
+    {
+        Vector2 scoutV = Vector2.zero;
+        Regex regex = new Regex(@"\[([0-9]+),([0-9]+)\]", RegexOptions.Singleline);
+        MatchCollection matchCollection = regex.Matches(content);
+        if (matchCollection.Count > 0)
+        {
+            foreach (Match match in regex.Matches(content))
+            {
+                scoutV.x = Convert.ToSingle(match.Groups[1].Value);
+                scoutV.y = Convert.ToSingle(match.Groups[2].Value);
+            }
+            if (scoutV.x >= 0 && scoutV.x < 500 && scoutV.y >= 0 && scoutV.y < 500)
+                return scoutV;
+        }
+        return new Vector2(0,0);
     }
 }
