@@ -23,4 +23,5 @@ iOS 9 brings some changes regarding of canOpenURL: in UIApplication class.
 #### 3.Build Failed: error: make directory File exists 或者是 directory empty  
 记住：沉着冷静，处变不惊，仔细分析。  
 提示路径问题，缺少某个文件，思路：去build path看看是否有多余或不存在路径，去compile file 里看一下有没有重复添加或者未添加，看一下缺少的文件在工程的位置。相信你一定能解决的
-
+####  4.could not locate device support files
+xcode未找到ios对应系统支持库所致。解决方案，更新xcode或者库[https://www.jianshu.com/p/a11ac42f75c3](https://www.jianshu.com/p/a11ac42f75c3)
