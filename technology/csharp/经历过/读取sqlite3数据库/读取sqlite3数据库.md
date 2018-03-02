@@ -20,5 +20,5 @@ GitHub大神多，unity读取sqlite3:[戳链接](https://github.com/codecoding/S
 
 * db放在StreamingAssets里
 * 类的命名要与数据库的对应
-* 变量要用{get;set;}方法  (**重点**)
+* 变量要用{get;set;}方法  (**重点重点重点**) 两次栽坑
 * ![](pic/3.png)这里要小写。(虽然大写的话在window平台不报错，但打包到Android平台时会读取不到，因为Android是基于Linux内核的操作系统，Linux环境下严格区分大小写的,这里踩过坑)
