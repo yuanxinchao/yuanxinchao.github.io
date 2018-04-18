@@ -1,8 +1,12 @@
 ##生成dll
 #### 方式1 ####
 使用visual studio生成dll文件是十分简单的，将工程新建好后点击生成  
-![](./picture/pic1.png)  
-这时在工程文件夹下的bin/Debug目录下就会出现用整个工程生成的dll文件。将这个dll文件放入其他需要的工程中就可以使用了。  
+![](pic/1.png)  
+这时在工程文件夹下的bin/Debug目录下就会出现用整个工程生成的dll文件。将这个dll文件放入其他需要的工程中就可以使用了。
+
+* 如果需要设置引用的话比如UnityEngine.dll，可以在解决方案框右击添加引用。如下图   
+![](pic/2.png)  
+
 #### 方式2 ####
 如果想要单独对一个文件生成dll，可以使用csc.exe命令，如果安装了visual studio的话 csc.exe 文件一般在vs的安装路径下一搜就能搜到。我的csc.exe在D:\Program Files\VisualStudio2017\MSBuild\15.0\Bin\Roslyn里。 这文件是微软基于.net的用于组建各式各样windows平台文件的命令(我猜的)。
 参考：[https://msdn.microsoft.com/en-us/library/78f4aasd.aspx](https://msdn.microsoft.com/en-us/library/78f4aasd.aspx)
