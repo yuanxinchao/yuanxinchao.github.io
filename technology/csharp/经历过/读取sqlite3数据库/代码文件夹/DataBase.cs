@@ -11,7 +11,6 @@ public static class DataBase
 {
     public static SQLiteConnection _connection = null;
     private const string DatabaseName = "test.db";
-    private const string Key = "jedi@p16s"; //加密密码
     public static void Clear()
     {
         Close();
