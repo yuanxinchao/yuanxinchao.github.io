@@ -64,31 +64,71 @@ public abstract class SwichContent
     {
         StopScroll();
         FinishTween();
+
+        if (!CanScroll())
+            return;
+        var prePos = GetPrePos();
+        var begin = ContentBeginPos();
+        if (ExceedBeginBound(prePos, begin))
+        {
+            prePos = begin;
+        }
+        ShowPos(prePos, true);
+        SetBtnState(prePos);
     }
 
     public virtual void MoveNext()
     {
         StopScroll();
         FinishTween();
+
+        if (!CanScroll())
+            return;
+        var nextPos = GetNextPos();
+        var end = ContentEndPos();
+        if (ExceedEndBound(nextPos, end))
+        {
+            nextPos = end;
+        }
+        ShowPos(nextPos, true);
+        SetBtnState(nextPos);
     }
 
-    private Tween _tween;
-    public virtual void Show(int index,bool anim = false)
+    protected Tween _tween;
+
+    public virtual void Show(int index, bool anim = false)
     {
         Index = index;
         GetChildRectChilds();
-        Vector2 v = IndexToPos(index);
+        float v = IndexToPos(index);
+
+        LayoutRebuilder.ForceRebuildLayoutImmediate(_content);//强制刷新一次
         SetPos(v, anim);
     }
-    public virtual void ShowPos(Vector2 v,bool anim = false)
+    public virtual void ShowPos(float pos,bool anim = false)
     {
         GetChildRectChilds();
-        Index = PosToIndex(v);
-        SetPos(v, anim);
+        Index = PosToIndex(pos);
+        SetPos(pos, anim);
     }
 
-    private void SetPos(Vector2 v, bool anim)
+    protected virtual void SetPos(float pos, bool anim)
     {
+
+        if (CanScroll())
+        {
+            var end = ContentEndPos();
+            if (ExceedEndBound(pos, end))
+            {
+                pos = end;
+            }
+        }
+        else
+        {
+            pos = ContentBeginPos();
+        }
+
+        Vector2 v = GetPos(pos);
         if (anim)
         {
             _tween = _content.DOAnchorPos(v, MvTime).SetEase(Ease.OutCubic);
@@ -96,8 +136,8 @@ public abstract class SwichContent
         else
         {
             _content.anchoredPosition = v;
-            SetBtnState(v.y);
         }
+        SetBtnState(pos);
     }
 
     protected void FinishTween()
@@ -106,31 +146,42 @@ public abstract class SwichContent
             _tween.Complete(true);
     }
 
-    protected abstract void SetBtnState(float refPos);
-    protected void SetButtonState(bool pre, bool next)
+    protected virtual void SetBtnState(float pos)
     {
-        SetPre(pre);
-        SetNext(next);
+        if (!_hideBtn)
+            return;
+        if (!_hasButton)
+            return;
+        var end = ContentEndPos();
+        var begin = ContentBeginPos();
+        if (ExceedEndBound(pos, end))
+        {
+            SetNext(false);
+        }
+        else
+        {
+            SetNext(true);
+        }
+        if (ExceedBeginBound(pos, begin))
+        {
+            SetPre(false);
+        }
+        else
+        {
+            SetPre(true);
+        }
     }
 
     protected void SetPre(bool pre)
     {
-        if (!_hideBtn)
-            return;
-        if (!_hasButton)
-            return;
         _previous.gameObject.SetActive(pre);
     }
     protected void SetNext(bool next)
     {
-        if (!_hideBtn)
-            return;
-        if (!_hasButton)
-            return;
         _next.gameObject.SetActive(next);
     }
-    protected abstract Vector2 IndexToPos(int index);
-    protected abstract int PosToIndex(Vector2 v);
+    protected abstract float IndexToPos(int index);
+    protected abstract int PosToIndex(float v);
 
     protected abstract float ContentEndPos();
     protected abstract float ContentBeginPos();
@@ -139,6 +190,11 @@ public abstract class SwichContent
     protected abstract float GetIndexRelativePos(int index);
     protected abstract float GetContentLength();
     protected abstract bool CanScroll();
+    protected abstract bool ExceedBeginBound(float pre,float begin);
+    protected abstract bool ExceedEndBound(float next,float end);
+    protected abstract float GetNextPos();
+    protected abstract float GetPrePos();
+    protected abstract Vector2 GetPos(float pos);
     protected void StopScroll()
     {
         if(_scroll!=null)

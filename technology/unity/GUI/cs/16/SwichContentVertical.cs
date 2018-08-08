@@ -33,77 +33,7 @@ public class SwichContentVertical : SwichContent
     }
 
 
-    public override void MovePrevious()
-    {
-        base.MovePrevious();
-        if (!CanScroll())
-            return;
-
-        var prePos = _content.anchoredPosition.y - SkipLength;
-        var origin = ContentBeginPos();
-        float aimY = 0;
-        if (prePos <= origin + 1)
-        {
-            aimY = origin;
-        }
-        else
-        {
-            aimY = prePos;
-        }
-        ShowPos(new Vector2(_content.anchoredPosition.x, aimY), true);
-        SetBtnState(aimY);
-    }
-
-    public override void MoveNext()
-    {
-        base.MoveNext();
-        if (!CanScroll())
-            return;
-
-        var nextPos = _content.anchoredPosition.y + SkipLength;
-        var end = ContentEndPos();
-        float aimY = 0;
-        if (nextPos >= end - 1)
-        {
-            aimY = end;
-        }
-        else
-        {
-            aimY = nextPos;
-        }
-
-        ShowPos(new Vector2(_content.anchoredPosition.x, aimY), true);
-        SetBtnState(aimY);
-    }
-
-    public override void Show(int index, bool anim = false)
-    {
-        base.Show(index,anim);
-    }
-
-    protected override void SetBtnState(float pos)
-    {
-        var end = ContentEndPos();
-        var origin = ContentBeginPos();
-        if (pos >= end - 1)
-        {
-            SetNext(false);
-        }
-        else
-        {
-            SetNext(true);
-        }
-        if (pos <= origin + 1)
-        {
-            SetPre(false);
-        }
-        else
-        {
-            SetPre(true);
-        }
-    }
-
-    protected override Vector2 IndexToPos(int index)
+    protected override float IndexToPos(int index)
     {
         float relative = GetIndexRelativePos(index);
 
@@ -113,10 +43,10 @@ public class SwichContentVertical : SwichContent
 
         float origin = ContentBeginPos();
         float final = origin - relative;
-        return new Vector2(_content.anchoredPosition.x, final);
+        return final;
     }
 
-    protected override int PosToIndex(Vector2 v)
+    protected override int PosToIndex(float v)
     {
         return 0;
     }
@@ -183,5 +113,30 @@ public class SwichContentVertical : SwichContent
     protected override bool CanScroll()
     {
         return  GetContentLength() > _view.rect.height;
+    }
+
+    protected override bool ExceedBeginBound(float pre, float begin)
+    {
+        return pre <= begin + 1;
+    }
+
+    protected override bool ExceedEndBound(float next, float end)
+    {
+        return next >= end - 1;
+    }
+
+    protected override float GetNextPos()
+    {
+        return _content.anchoredPosition.y + SkipLength;
+    }
+
+    protected override float GetPrePos()
+    {
+        return _content.anchoredPosition.y - SkipLength;
+    }
+
+    protected override Vector2 GetPos(float pos)
+    {
+        return new Vector2(_content.anchoredPosition.x, pos);
     }
 }

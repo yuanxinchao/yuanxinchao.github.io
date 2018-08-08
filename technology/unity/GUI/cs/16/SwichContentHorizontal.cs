@@ -4,7 +4,6 @@ using UnityEngine.UI;
 
 public class SwichContentHorizontal : SwichContent
 {
-
     protected HorizontalLayoutGroup _layout;
     public SwichContentHorizontal(RectTransform content, Button previous, Button next,bool hideBtn = false)
         : base(content, previous, next, hideBtn)
@@ -13,7 +12,6 @@ public class SwichContentHorizontal : SwichContent
         SkipLength = _view.rect.width;
         if (_layout == null)
             throw new Exception("_content should add component LayoutGroup");
-
 
         if (_scroll != null && _hideBtn)
             _scroll.onValueChanged.AddListener(data =>
@@ -32,80 +30,7 @@ public class SwichContentHorizontal : SwichContent
     }
 
 
-    public override void MovePrevious()
-    {
-        base.MovePrevious();
-        if (!CanScroll())
-            return;
-
-        var prePos = _content.anchoredPosition.x + SkipLength;
-        var origin = ContentBeginPos();
-        float aimX = 0;
-        if (prePos >= origin - 1)
-        {
-            aimX = origin;
-        }
-        else
-        {
-            aimX = prePos;
-        }
-
-        ShowPos(new Vector2(aimX, _content.anchoredPosition.y), true);
-        SetBtnState(aimX);
-    }
-
-    public override void MoveNext()
-    {       
-        base.MoveNext();
-        if(!CanScroll())
-            return;
-
-        var nextPos = _content.anchoredPosition.x - SkipLength;
-        var end = ContentEndPos();
-        float aimX = 0;
-        if (nextPos <= end + 1)
-        {
-            aimX = end;
-            ShowPos(new Vector2(end, _content.anchoredPosition.y), true);
-        }
-        else
-        {
-            aimX = nextPos;
-        }
-
-        ShowPos(new Vector2(aimX, _content.anchoredPosition.y), true);
-        SetBtnState(aimX);
-    }
-
-    public override void Show(int index, bool anim = false)
-    {
-        base.Show(index,anim);
-    }
-
-
-    protected override void SetBtnState(float pos)
-    {
-        var end = ContentEndPos();
-        var origin = ContentBeginPos();
-        if (pos <= end + 1)
-        {
-            SetNext(false);
-        }
-        else
-        {
-            SetNext(true);
-        }
-        if (pos >= origin - 1)
-        {
-            SetPre(false);
-        }
-        else
-        {
-            SetPre(true);
-        }
-    }
-
-    protected override Vector2 IndexToPos(int index)
+    protected override float IndexToPos(int index)
     {
         float relative = GetIndexRelativePos(index);
 
@@ -115,10 +40,10 @@ public class SwichContentHorizontal : SwichContent
 
         float origin = ContentBeginPos();
         float final = origin - relative;
-        return new Vector2(final, _content.anchoredPosition.y);
+        return final;
     }
 
-    protected override int PosToIndex(Vector2 v)
+    protected override int PosToIndex(float v)
     {
         return 0;
     }
@@ -186,5 +111,30 @@ public class SwichContentHorizontal : SwichContent
     protected override bool CanScroll()
     {
         return GetContentLength() > _view.rect.width;
+    }
+
+    protected override bool ExceedBeginBound(float pre, float begin)
+    {
+        return pre >= begin - 1;
+    }
+
+    protected override bool ExceedEndBound(float next, float end)
+    {
+        return next <= end + 1;
+    }
+
+    protected override float GetNextPos()
+    {
+        return _content.anchoredPosition.x - SkipLength;
+    }
+
+    protected override float GetPrePos()
+    {
+        return _content.anchoredPosition.x + SkipLength;
+    }
+
+    protected override Vector2 GetPos(float pos)
+    {
+        return new Vector2(pos,_content.anchoredPosition.y);
     }
 }
