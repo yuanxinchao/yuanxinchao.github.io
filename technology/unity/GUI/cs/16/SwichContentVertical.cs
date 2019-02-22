@@ -86,7 +86,7 @@ public class SwichContentVertical : SwichContent
             throw new Exception("index out of range");
 
         float pos = 0;
-        pos += _layout.padding.top;
+        pos -= _layout.padding.top;
         for (int i = 0; i < _list.Count; i++)
         {
             if (index > i)

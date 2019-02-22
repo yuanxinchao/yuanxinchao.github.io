@@ -31,17 +31,23 @@ public class TabHelper
     }
     public void ClearCurrentSpId()
     {
+        UnselectIfExsit(_currentSpId);
         _currentSpId = -1;
+    }
+
+    private void UnselectIfExsit(int spId)
+    {
+        var tab = GetTabBySpId(spId, true);
+        if (tab != null)
+        {
+            tab.Unselect();
+        }
     }
     public void ClickBySpId(int spId)
     {
         if (_currentSpId != -1 && _currentSpId != spId)
         {
-            var lastTab = GetTabBySpId(_currentSpId, true);
-            if (lastTab != null)
-            {
-                lastTab.Unselect();
-            }
+            UnselectIfExsit(_currentSpId);
         }
 
         if (_currentSpId != spId)
@@ -67,7 +73,7 @@ public class TabHelper
     {
         Insert(_tabs.Count, tab);
     }
-    public void AddTab(ITab tab,int spId)
+    public void AddTab(ITab tab, int spId)
     {
         tab.SpId = spId;
         AddTab(tab);
@@ -146,7 +152,10 @@ public class TabBtnHelper
     private TabHelper _tabHelper;
     private TabBtnPool _createTab;
 
-    public Action<int, int> OnTabSwitch {get { return _tabHelper.OnTabSwitch; }set { _tabHelper.OnTabSwitch = value; }
+    public Action<int, int> OnTabSwitch
+    {
+        get { return _tabHelper.OnTabSwitch; }
+        set { _tabHelper.OnTabSwitch = value; }
     }
     public TabBtnHelper(RectTransform root, GameObject model)
     {
@@ -154,7 +163,7 @@ public class TabBtnHelper
         _createTab = new TabBtnPool(root, model);
     }
 
-    public T AddTab<T>(int spId) where T : Behaviour, ITab
+    public T AddTab<T>(int spId) where T : JDBehaviour, ITab
     {
         T tab = _createTab.Get<T>(spId);
         _tabHelper.AddTab(tab, spId);
@@ -186,8 +195,16 @@ public class TabBtnHelper
     {
         return _tabHelper.GetTabList();
     }
+    public ITab GetTabBySpId(int spId, bool canBeNull = false)
+    {
+        return _tabHelper.GetTabBySpId(spId, canBeNull);
+    }
+    public void ClickBySpId(int spId)
+    {
+        _tabHelper.ClickBySpId(spId);
+    }
 }
-public abstract class TabViewBase2 : Behaviour, ITab
+public abstract class TabViewBase2 : JDBehaviour, ITab
 {
     public int SpId { get; set; }
     public int Index { get; set; }
@@ -225,19 +242,19 @@ public class TabBtnPool
         _model = model;
         _model.gameObject.SetActive(false);
     }
-    public T Create<T>() where T : Behaviour, ITab
+    public T Create<T>() where T : JDBehaviour, ITab
     {
         var tab = Object.Instantiate(_model, _root);
         T t = tab.AddBehaviour<T>();
         return t;
     }
-    public void Put(ITab tab) 
+    public void Put(ITab tab)
     {
-        ((Behaviour)tab).transform.gameObject.SetActive(false);
+        ((JDBehaviour)tab).transform.gameObject.SetActive(false);
         _tabFreeList.Push(tab);
     }
 
-    public T Get<T>(int spId) where T : Behaviour, ITab
+    public T Get<T>(int spId) where T : JDBehaviour, ITab
     {
         T ret = null;
         int count = _tabFreeList.Count;
