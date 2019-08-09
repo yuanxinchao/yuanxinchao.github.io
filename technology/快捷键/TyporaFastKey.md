@@ -13,7 +13,7 @@
   - [ ] a task list item
   - [x] completed
 
-- 插入图片，直接将图片拖曳到行内
+- 插入图片，直接将图片拖曳到行内 ctrl+shift + i
 
 - 插入公式,使用 1.行内公式 ：\$这里\$    2.行间公式：右击插入公式(Ctrl + Shift + M)
 
