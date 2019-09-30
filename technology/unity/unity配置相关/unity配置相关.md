@@ -14,4 +14,4 @@
 最后效果：  
 ![](pic/1.jpg)  
 打开即可。  
-注意：`mklink /J "C:\Link To Folder" "C:\Users\Name\Original Folder"`中Link To Folder这个文件夹应该是不存在然后执行命令后创建的。
+注意： 一定要用命令行创建，不然无效。`mklink /J "C:\Link To Folder" "C:\Users\Name\Original Folder"`中Link To Folder这个文件夹应该是不存在然后执行命令后创建的。
