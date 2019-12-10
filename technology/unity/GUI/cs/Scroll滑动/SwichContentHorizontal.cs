@@ -43,13 +43,21 @@ public class SwichContentHorizontal : SwichContent
         return final;
     }
 
+    protected override float IndexToPosMiddle(int index)
+    {
+        float pos = IndexToPos(index);
+        //-item 一半宽 +_view 一半宽
+        pos = pos - _list[index].rect.width / 2 + _view.rect.width / 2;
+        return pos;
+    }
+
     protected override int PosToIndex(float v)
     {
         return 0;
     }
 
 
-    protected override float ContentEndPos()
+    public override float ContentEndPos()
     {
         var end = ContentBeginPos() - GetContentLength() + _view.rect.width;
         return end;

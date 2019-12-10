@@ -4,14 +4,23 @@
 
 
 * Ctrl + -   向后导航
+
 * Ctrl + Shift + -  向前导航
+
 * Ctrl + U  或 Alt + Home 找到类/方法 的父方法/类
+
 * Alt + F7 查找所有引用
+
 * Ctrl + [  光标所在的方法或类即外扩一层
+
 * Ctrl + Shift + BackSpace 回到上次修改
+
 * Ctrl + Shift + Alt + BackSpace 查看最近的改动
+
 * Ctrl +Alt + B 找 此类/方法 的子类/方法实现(重写)
+
 * Ctrl + Alt + F7 查找此类/方法 的所有引用
+
 * ######查看是 引用或者修改
   ![](pic/2.png)
 	
@@ -23,4 +32,8 @@
   修改局部变量名时, 所有对这个局部变量的引用同时得到修改。  
 
 * ######代码模板, 环绕代码
-你写下一段代码, 突然想对它加上try/catch/finally的保护, 或者觉得它只应该在满足某个条件时才被执行, 你需要一个if, 或者你已经写了if + statement, 但由于一开始以为这个statement永远只是一个单独的语句所以没有{}, 但随后又意识到最好还是保持风格的一致, 那只需要在当前的statement行上(对于单行代码不需要先选中), 或选中这段代码, 按Ctrl + Alt + J, 点击其中列出来的模板即可.
+  你写下一段代码, 突然想对它加上try/catch/finally的保护, 或者觉得它只应该在满足某个条件时才被执行, 你需要一个if, 或者你已经写了if + statement, 但由于一开始以为这个statement永远只是一个单独的语句所以没有{}, 但随后又意识到最好还是保持风格的一致, 那只需要在当前的statement行上(对于单行代码不需要先选中), 或选中这段代码, 按Ctrl + Alt + J, 点击其中列出来的模板即可.
+
+* ctrl + b ，go to next usage 需要设置smart 跳转。 https://www.jetbrains.com/help/resharper/Navigation_and_Search__Go_to_Declaration.html#smart  
+
+  resharper -> option -> Environment | Search & Navigation  ->Iterate usages 

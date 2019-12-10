@@ -10,11 +10,11 @@ import re
 
 def SetIconPath():
     # print "id=" + str(row[0]) + " icon"+str(row[1])
-    trajectory_filename = r"C:\working\p16s\devel\client\u3dprj_oversea\Assets\UI\ResourcesAB\Skill"
+    trajectory_filename = r"C:\working\xx"
     for file1 in os.listdir(trajectory_filename):
         path = os.path.join(trajectory_filename, file1)
         if os.path.isfile(path):
-            trajectory_filename2 = r"C:\working\p16s\devel\client\u3dprj\Assets\UI\ResourcesAB\Skill"
+            trajectory_filename2 = r"C:\working\xx"
             for root, dirs, files in os.walk(trajectory_filename2):
                 for name in files:
                     path2 = os.path.join(root, name)

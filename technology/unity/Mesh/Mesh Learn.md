@@ -36,7 +36,7 @@ Mesh是Unity内的一个组件，称为网格组件。
 3.通过配置uv坐标来对应贴图的点。`mesh.uv`
 
 #### 现在开始构建一个简单的Mesh
-要想画个Mesh出来当然要有MeshFilter和MeshRenderer组件啦。  
+要想画个Mesh出来需要有MeshFilter和MeshRenderer组件。  
 
 	[RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
 新建Mesh
@@ -56,22 +56,22 @@ Mesh是Unity内的一个组件，称为网格组件。
     triangles [0] = 0;
     triangles [1] = 1;
     triangles [2] = 3;
-
+    
     triangles [3] = 0;
     triangles [4] = 2;
     triangles [5] = 1;
-
+    
     triangles [6] = 3;
     triangles [7] = 1;
     triangles [8] = 2;
-
+    
     triangles [9] = 3;
     triangles [10] = 2;
     triangles [11] = 0;  
     mesh.triangles = triangles;
 这里是使用的三点确定一个面👌🏻，总共确定了四个面。上面的0，1，2，3代表的是第0，1，2，3个顶点。即：vertices[0]~vertices[3];对于顺序也是有要求的，如图：  
 ![](./UnityManualPic/Mesh2.png)   
-**逆时针转为正面，顺时针则为背面。**
+**顺时针转为正面，逆时针则为背面。**
 ![](./pic/3.png)  
 经过这样一番步骤就构建好了Mesh，然后还要贴纹理  
 
@@ -86,78 +86,78 @@ Mesh是Unity内的一个组件，称为网格组件。
 
 附完整代码：  
 
-	using UnityEngine;
-	using System.Collections;
-	
-	[RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
-	public class MeshSquare : MonoBehaviour
-	{
-	
-	    public int xSize , ySize;
-	    private Vector3[] vertices;
-	    private Mesh mesh;
-	
-	    private void Awake ()
-	    {
-	        Generate();
-	    }
-	
-	    private void Generate ()
-	    {
-	        GetComponent<MeshFilter>().mesh = mesh = new Mesh();
-	        mesh.name = "Procedural Grid";
-	
-	        vertices = new Vector3[4];
-	        vertices [0] = new Vector3(0, 0, 0);
-	        vertices [1] = new Vector3(1, 4, 0);
-	        vertices [2] = new Vector3(1, 0, 0);
-	        vertices [3] = new Vector3(1, 0, -4);
-	       
-	        mesh.vertices = vertices;
-	
-	        int[] triangles = new int[12];
-	        triangles [0] = 0;
-	        triangles [1] = 1;
-	        triangles [2] = 3;
-	
-	        triangles [3] = 0;
-	        triangles [4] = 2;
-	        triangles [5] = 1;
-	
-	        triangles [6] = 3;
-	        triangles [7] = 1;
-	        triangles [8] = 2;
-	
-	        triangles [9] = 3;
-	        triangles [10] = 2;
-	        triangles [11] = 0;
-	
-	        mesh.triangles = triangles;
-	        Vector2[] uv = new Vector2[vertices.Length];
-	        uv [0] = new Vector2(0f, 0f);  
-	        uv [1] = new Vector2(0f, 1f);  
-	        uv [2] = new Vector2(1f, 1f);
-	        uv [3] = new Vector2(1, 0f);
-	        mesh.uv = uv;
-	
-	        mesh.RecalculateNormals();
-	
-	
-	       
-	    }
-	
-	    private void OnDrawGizmos ()
-	    {
-	        if (vertices == null)
-	        {
-	            return;
-	        }
-	
-	        Gizmos.color = Color.black;
-	        for (int i = 0; i < vertices.Length; i++)
-	        {
-	            Gizmos.DrawSphere(vertices [i], 0.1f);
-	        }
-	    }
-	
-	}
+```c#
+using UnityEngine;
+using System.Collections;
+
+[RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
+public class MeshSquare : MonoBehaviour
+{
+
+    public int xSize , ySize;
+    private Vector3[] vertices;
+    private Mesh mesh;
+
+    private void Awake ()
+    {
+        Generate();
+    }
+
+    private void Generate ()
+    {
+        GetComponent<MeshFilter>().mesh = mesh = new Mesh();
+        mesh.name = "Procedural Grid";
+
+        vertices = new Vector3[4];
+        vertices [0] = new Vector3(0, 0, 0);
+        vertices [1] = new Vector3(1, 4, 0);
+        vertices [2] = new Vector3(1, 0, 0);
+        vertices [3] = new Vector3(1, 0, -4);
+       
+        mesh.vertices = vertices;
+
+        int[] triangles = new int[12];
+        triangles [0] = 0;
+        triangles [1] = 1;
+        triangles [2] = 3;
+
+        triangles [3] = 0;
+        triangles [4] = 2;
+        triangles [5] = 1;
+
+        triangles [6] = 3;
+        triangles [7] = 1;
+        triangles [8] = 2;
+
+        triangles [9] = 3;
+        triangles [10] = 2;
+        triangles [11] = 0;
+
+        mesh.triangles = triangles;
+        Vector2[] uv = new Vector2[vertices.Length];
+        uv [0] = new Vector2(0f, 0f);  
+        uv [1] = new Vector2(0f, 1f);  
+        uv [2] = new Vector2(1f, 1f);
+        uv [3] = new Vector2(1, 0f);
+        mesh.uv = uv;
+
+        mesh.RecalculateNormals();
+    }
+
+    private void OnDrawGizmos ()
+    {
+        if (vertices == null)
+        {
+            return;
+        }
+
+        Gizmos.color = Color.black;
+        for (int i = 0; i < vertices.Length; i++)
+        {
+            Gizmos.DrawSphere(vertices [i], 0.1f);
+        }
+    }
+
+}
+```
+

@@ -8,22 +8,24 @@ import sqlite3
 import os
 import re
 
-DB_FILE = "p16.db"
+DB_FILE = "E:\xxx\xxx.db"
 
 def DeleTalentIcon(cu_sqlite):
-    cu_sqlite.execute("select id,icon from cfg_xxx_talent")
+    cu_sqlite.execute("select xxx from cfg_xx_xx")
     results = cu_sqlite.fetchall()
     for row in results:
-        # print "id=" + str(row[0]) + " icon"+str(row[1])
-        trajectory_filename = r"C:\xx\xx"
-        for root, dirs, files in os.walk(trajectory_filename):
-            for name in files:
-                path = os.path.join(root, name)
-                if name == str(row[1]) + ".jpg" or name == str(row[1]) + ".jpg.meta":
-                    print(path)
-                    # os.remove(path)
+        trajectory_filename = r"E:\xxx\ShipIcons"
+        if not HasThisPic(trajectory_filename,"ship_" + str(row[0])+".png"):
+            print "not has this pic " + "ship_" + str(row[0])+".png"
 
 
+def HasThisPic(pathName,picName):
+    for root, dirs, files in os.walk(pathName):
+        for name in files:
+            if name == picName:
+                return True
+
+    return False
 
 
 def CheckDB():

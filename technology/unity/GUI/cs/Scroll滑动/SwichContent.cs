@@ -56,6 +56,9 @@ public abstract class SwichContent
     protected SwichContent(RectTransform content)
     {
         _content = content;
+        _view = content.parent.GetComponent<RectTransform>();
+        if (_view == null)
+            throw new Exception("content parent should have a RectTransform component");
         _list = new List<RectTransform>();
         _hasButton = false;
     }
@@ -105,6 +108,15 @@ public abstract class SwichContent
         LayoutRebuilder.ForceRebuildLayoutImmediate(_content);//强制刷新一次
         SetPos(v, anim);
     }
+    public virtual void ShowIndexToMiddle(int index, bool anim = false)
+    {
+        Index = index;
+        GetChildRectChilds();
+        float v = IndexToPosMiddle(index);
+
+        LayoutRebuilder.ForceRebuildLayoutImmediate(_content);//强制刷新一次
+        SetPos(v, anim);
+    }
     public virtual void ShowPos(float pos,bool anim = false)
     {
         GetChildRectChilds();
@@ -114,18 +126,15 @@ public abstract class SwichContent
 
     protected virtual void SetPos(float pos, bool anim)
     {
-
-        if (CanScroll())
+        var end = ContentEndPos();
+        if (ExceedEndBound(pos, end))
         {
-            var end = ContentEndPos();
-            if (ExceedEndBound(pos, end))
-            {
-                pos = end;
-            }
+            pos = end;
         }
-        else
+        var begin = ContentBeginPos();
+        if (ExceedBeginBound(pos, begin))
         {
-            pos = ContentBeginPos();
+            pos = begin;
         }
 
         Vector2 v = GetPos(pos);
@@ -181,9 +190,10 @@ public abstract class SwichContent
         _next.gameObject.SetActive(next);
     }
     protected abstract float IndexToPos(int index);
+    protected abstract float IndexToPosMiddle(int index);
     protected abstract int PosToIndex(float v);
 
-    protected abstract float ContentEndPos();
+    public abstract float ContentEndPos();
     protected abstract float ContentBeginPos();
     protected abstract int CalculateLastIndex();
     //相对位置
