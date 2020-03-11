@@ -1,7 +1,7 @@
 ﻿#if UNITY_EDITOR
 using UnityEngine;
 using System.Collections;
-using UnityEngine.UI;
+using UnityEngine.UI2;
 
 public class DebugUILine : MonoBehaviour
 {
