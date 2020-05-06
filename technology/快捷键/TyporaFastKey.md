@@ -15,7 +15,7 @@
 
 - 插入图片，直接将图片拖曳到行内 ctrl+shift + i
 
-- 插入公式,使用 1.行内公式 ：\$这里\$    2.行间公式：右击插入公式(Ctrl + Shift + M)
+- 插入公式,使用 1.行内公式 ：$x+y=z$\$这里\$    2.行间公式$$x+y =z$$：右击插入公式(Ctrl + Shift + M)
 
 - 插入表情 :happy:
 
@@ -47,8 +47,14 @@
   <summary>折叠</summary>
   折叠区域
   </details>
+  
+* 在折叠区域里添加的内容只能使用html标签而不能再使用markdown的语法了。例
 
-
+  <details>
+  <summary>点击查看流程图</summary>
+      <code>代码</code>
+      <img src = "pic/65.png">
+  </details>
 
 [][2]
 

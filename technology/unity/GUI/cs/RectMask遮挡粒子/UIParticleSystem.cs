@@ -55,7 +55,7 @@ public class UIParticleSystem : MaskableGraphic
             if (material.name != "Copy")
             {
                 var render = _particleSystem.GetComponent<ParticleSystemRenderer>(); 
-                var modelMat = JDResources.Load<Material>("UIpar-Material");
+                var modelMat = Resources.Load<Material>("UIpar-Material");
                 var mat = new Material(modelMat) {name = "Copy"};
                 material = mat;
                 material.mainTexture = render.sharedMaterial.mainTexture;
