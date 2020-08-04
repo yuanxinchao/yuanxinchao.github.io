@@ -26,6 +26,14 @@ namespace ConsoleApplication1
                 g.Accept(spVisitor);
             }
 
+
+
+            //**************----------------**************
+            TextView textView = new TextView();
+            Window w = new Window();
+            w.SetContents(textView);
+            w.SetContents(new BorderDecorator(new ScrollDecorator(textView), 2));
+
         }
     }
 

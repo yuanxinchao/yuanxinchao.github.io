@@ -13,5 +13,14 @@ namespace ConsoleApplication1.GlyphSpace
     {
         public abstract void DeviceRaise();
         public abstract void DeviceRect(Rect rect);
+
+        public abstract void DeviceSetOrigin(Point at);
+        public abstract void DeviceSetExtent(Point extent);
+        public abstract void DeviceLower();
+        public abstract void DeviceDrawLine(Point start, Point end);
+        public abstract void DeviceDrawRect(Point min, Point max);
+        public abstract void DeviceDrawPolygon(Point[] points);
+        public abstract void DeviceDrawText(string s, Point point);
+        public abstract void DeviceBitMap(string bitMapName, Point point1,Point point2);
     }
 }

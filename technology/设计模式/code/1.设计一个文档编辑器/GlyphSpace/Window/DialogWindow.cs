@@ -14,5 +14,9 @@ namespace ConsoleApplication1.GlyphSpace
             base.Lower();
             _w.Lower();
         }
+
+        public DialogWindow(VisualComponent contents) : base(contents)
+        {
+        }
     }
 }

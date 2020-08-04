@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ConsoleApplication1.IteratorSpace;
-using ConsoleApplication1.SpellingCheckSpace;
 using ConsoleApplication1.VisitorSpace;
 
 namespace ConsoleApplication1.GlyphSpace

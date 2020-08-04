@@ -8,5 +8,18 @@ namespace ConsoleApplication1.GlyphSpace
 {
     public class IconWindow:Window
     {
+        private string _bitmapName;
+        public IconWindow(VisualComponent contents) : base(contents)
+        {
+        }
+
+        public override void DrawContents()
+        {
+            WindowImp imp = GetWindowImp();
+            if (imp != null)
+            {
+                imp.DeviceBitMap(_bitmapName,new Point(), new Point());
+            }
+        }
     }
 }

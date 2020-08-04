@@ -11,7 +11,7 @@ namespace ConsoleApplication1.GlyphSpace
         private Rect r;
         public override void Draw(Window w)
         {
-            w.DrawRect(r);
+            w.DrawRect(r.point1, r.point2);
         }
 
         public override Rect Bounds()

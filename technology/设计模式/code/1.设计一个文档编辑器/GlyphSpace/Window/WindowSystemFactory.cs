@@ -10,6 +10,7 @@ namespace ConsoleApplication1.GlyphSpace
     {
         public abstract WindowImp CreateWindowImp();
         public abstract ColorImp CreateColorImp();
+
     }
 
     public class PMWindowSystemFactory:WindowSystemFactory

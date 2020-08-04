@@ -8,5 +8,15 @@ namespace ConsoleApplication1.GlyphSpace
 {
     public class ApplicationWindow :Window
     {
+        public ApplicationWindow(VisualComponent contents) : base(contents)
+        {
+            
+
+        }
+
+        public override void DrawContents()
+        {
+            GetView().Draw();
+        }
     }
 }
