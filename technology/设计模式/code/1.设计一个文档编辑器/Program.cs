@@ -34,6 +34,12 @@ namespace ConsoleApplication1
             w.SetContents(textView);
             w.SetContents(new BorderDecorator(new ScrollDecorator(textView), 2));
 
+
+
+            //**************-------------------************
+            var row = new Row();
+            row.Insert(new ImageProxy("path"),0);
+
         }
     }
 

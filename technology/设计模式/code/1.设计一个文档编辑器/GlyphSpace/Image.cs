@@ -15,6 +15,10 @@ namespace ConsoleApplication1.GlyphSpace
             w.DrawImg(path);
         }
 
+        public Image(string path)
+        {
+            this.path = path;
+        }
         public override Rect Bounds()
         {
             return null;
