@@ -29,6 +29,7 @@ double hit_sphere(const point3& center, double radius, const ray& r)
 	//else
 	//{
 	//	//(-b±√xx)/2a  舍弃+sqrt(discriminant) 的根 因为要离相机距离最近的解
+	////因为t求解的是射线的长短，射线是从相机发出的当然越小越近，-sqrt(discriminant)自然是离相机最短的解
 	//	return (-b - sqrt(discriminant))/(2.0 * a);
 	//}
 
