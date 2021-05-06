@@ -32,6 +32,7 @@ namespace ConsoleApplication1
         public override void HandleMouse(MouseEvent mouseEvent)
         {
             selectIndex = 1;
+            Change();
         }
     }
 }
