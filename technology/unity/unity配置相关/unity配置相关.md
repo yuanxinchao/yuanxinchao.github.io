@@ -10,7 +10,7 @@
 方法是创建一个快捷连接然后打开。  
 打开cmd ，命令为：  
 
-	mklink /J "C:\Link To Folder" "C:\Users\Name\Original Folder"  
+	mklink /J "E:\MainMaster\v1.7.0双开\Assets" "E:\MainMaster\v1.7.0\Assets"
 最后效果：  
 ![](pic/1.jpg)  
 打开即可。  
