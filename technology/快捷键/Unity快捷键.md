@@ -1,6 +1,7 @@
 - 创建新游戏对象：Cmd/Ctrl + Shift + N
 - 启用游戏对象：Alt + Shift + A
 - 添加组件：Cmd/Ctrl + Shift + A
+- 展开/合上 hierarchy ： Alt+→/←
 
 了解完整的快捷键列表：https://docs.unity3d.com/Manual/UnityHotkeys.html
 
