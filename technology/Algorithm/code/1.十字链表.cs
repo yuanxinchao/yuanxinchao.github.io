@@ -77,6 +77,8 @@ namespace ConsoleApplication1
                     }
                 }
             }
+
+            //node2结构存储了 自己的节点id  自己指向别人的边 和 别人指向自己的边   向右找指向别人的边们  向左找指向自己的边们
             //            0->0-1->0-2
             //            1->1-3->1-4
             //            2->2-0
@@ -174,7 +176,7 @@ namespace ConsoleApplication1
                 Node item;
                 if (!itemUse.ContainsKey(id))
                 {
-                    item = new Node {id = id};
+                    item = new Node {id = id}; //创建节点 "0,1|2" 中的0
                     itemUse.Add(id, item);
                 }
                 else
@@ -189,7 +191,7 @@ namespace ConsoleApplication1
                     {
                         int getId = int.Parse(s[j]);
 
-                        if (!itemUse.ContainsKey(getId))
+                        if (!itemUse.ContainsKey(getId))// 逗号","后面的节点，如果itemUse没有则添加
                         {
                             var n = new Node { id = getId };
                             itemUse.Add(getId, n);
@@ -232,6 +234,9 @@ namespace ConsoleApplication1
                     }
                 }
             }
+
+            //主支向右找可以找到节点指向的所有节点
+            //主支向左找可以找到所有指向该节点的节点
             //     2<-0->2->1
             //     0<-1->3->4
             //  3<-0<-2->0
